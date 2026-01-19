@@ -1,0 +1,21 @@
+# Godot 4+ specific ignores
+.godot/
+/android/
+
+#This code was suggested by ChatGPT
+# Godot
+.import/
+.export/
+.export_presets.cfg
+
+# Mono / C#
+.mono/
+bin/
+obj/
+
+# OS junk
+.DS_Store
+Thumbs.db
+
+# VS Code
+.vscode/
