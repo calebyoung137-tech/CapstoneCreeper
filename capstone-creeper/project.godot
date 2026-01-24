@@ -10,13 +10,13 @@ config_version=5
 
 [application]
 
-config/name="CapsetoneCreeper"
+config/name="CapstoneCreeper"
 config/features=PackedStringArray("4.5", "Mobile")
 config/icon="res://icon.svg"
 
 [dotnet]
 
-project/assembly_name="CapsetoneCreeper"
+project/assembly_name="CapstoneCreeper"
 
 [rendering]
 
