@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32819.101
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CapstoneCreeper", "CapstoneCreeper.csproj", "{9DB0B164-1B41-4BF1-804C-09481388FBA7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		ExportDebug|Any CPU = ExportDebug|Any CPU
+		ExportRelease|Any CPU = ExportRelease|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9DB0B164-1B41-4BF1-804C-09481388FBA7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9DB0B164-1B41-4BF1-804C-09481388FBA7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9DB0B164-1B41-4BF1-804C-09481388FBA7}.ExportDebug|Any CPU.ActiveCfg = ExportDebug|Any CPU
+		{9DB0B164-1B41-4BF1-804C-09481388FBA7}.ExportDebug|Any CPU.Build.0 = ExportDebug|Any CPU
+		{9DB0B164-1B41-4BF1-804C-09481388FBA7}.ExportRelease|Any CPU.ActiveCfg = ExportRelease|Any CPU
+		{9DB0B164-1B41-4BF1-804C-09481388FBA7}.ExportRelease|Any CPU.Build.0 = ExportRelease|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {485A5C02-47FD-4C4B-BCAB-18BE8D886BD2}
+	EndGlobalSection
+EndGlobal

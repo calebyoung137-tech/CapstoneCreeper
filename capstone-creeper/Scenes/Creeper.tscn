@@ -1,0 +1,57 @@
+[gd_scene load_steps=13 format=3 uid="uid://d300s8sjv8y60"]
+
+[ext_resource type="Texture2D" uid="uid://dksdr8yl7wesp" path="res://Assets/blackSquare64.png" id="1_n7bbs"]
+[ext_resource type="Texture2D" uid="uid://dnsuc6w63il7q" path="res://Assets/blueSquare64.png" id="2_bw8jy"]
+[ext_resource type="Texture2D" uid="uid://pxb8ec3qe2l2" path="res://Assets/whiteSquare64.png" id="3_3kw1g"]
+[ext_resource type="Texture2D" uid="uid://b7nced7x1y84p" path="res://Assets/circle-64px.png" id="4_itftu"]
+[ext_resource type="Texture2D" uid="uid://dl6c0ko4eoe01" path="res://Assets/circle-32px.png" id="5_bw8jy"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_2t3qr"]
+texture = ExtResource("1_n7bbs")
+texture_region_size = Vector2i(64, 64)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1x6mx"]
+texture = ExtResource("2_bw8jy")
+texture_region_size = Vector2i(64, 64)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_l5ada"]
+texture = ExtResource("3_3kw1g")
+texture_region_size = Vector2i(64, 64)
+0:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_6l5nv"]
+tile_size = Vector2i(64, 64)
+sources/0 = SubResource("TileSetAtlasSource_2t3qr")
+sources/1 = SubResource("TileSetAtlasSource_1x6mx")
+sources/2 = SubResource("TileSetAtlasSource_l5ada")
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_247vx"]
+texture = ExtResource("4_itftu")
+texture_region_size = Vector2i(64, 64)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_3kw1g"]
+texture = ExtResource("5_bw8jy")
+texture_region_size = Vector2i(32, 32)
+
+[sub_resource type="TileSet" id="TileSet_kbkxy"]
+tile_size = Vector2i(65, 64)
+sources/0 = SubResource("TileSetAtlasSource_247vx")
+sources/1 = SubResource("TileSetAtlasSource_3kw1g")
+
+[node name="Creeper" type="Node2D"]
+position = Vector2(0, 2)
+
+[node name="TilesBoard" type="TileMap" parent="."]
+position = Vector2(968, 518)
+tile_set = SubResource("TileSet_6l5nv")
+format = 2
+layer_0/tile_data = PackedInt32Array(-131075, 2, 0, 131074, 2, 0, 196605, 0, 0, -196606, 0, 0, -131074, 1, 0, -131073, 1, 0, -196608, 1, 0, -196607, 1, 0, -131071, 1, 0, -65535, 1, 0, 1, 1, 0, 65537, 1, 0, 131073, 1, 0, 131072, 1, 0, 196607, 1, 0, 196606, 1, 0, 131070, 1, 0, 65534, 1, 0, -2, 1, 0, -65538, 1, 0, -65537, 1, 0, -131072, 1, 0, -65536, 1, 0, 0, 1, 0, 65536, 1, 0, 131071, 1, 0, 65535, 1, 0, -1, 1, 0, -131070, 1, 0, -65534, 1, 0, 2, 1, 0, 65538, 1, 0, 131069, 1, 0, 65533, 1, 0, -3, 1, 0, -65539, 1, 0)
+
+[node name="PinsBoard" type="TileMap" parent="."]
+position = Vector2(1064, 550)
+tile_set = SubResource("TileSet_kbkxy")
+format = 2
+layer_0/tile_data = PackedInt32Array(-131077, 0, 0, -65541, 0, 0, -5, 0, 0, 65531, 0, 0, 131067, 0, 0, -196612, 0, 0, -131076, 0, 0, -65540, 0, 0, -4, 0, 0, 65532, 0, 0, 131068, 0, 0, 196604, 0, 0, -196611, 0, 0, -131075, 0, 0, -65539, 0, 0, -3, 0, 0, 65533, 0, 0, 131069, 0, 0, 196605, 0, 0, -196610, 0, 0, -131074, 0, 0, -65538, 0, 0, -2, 0, 0, 65534, 0, 0, 131070, 0, 0, 196606, 0, 0, -196609, 0, 0, -131073, 0, 0, -65537, 0, 0, -1, 0, 0, 65535, 0, 0, 131071, 0, 0, 196607, 0, 0, -262144, 0, 0, -196608, 0, 0, -131072, 0, 0, 0, 0, 0, 65536, 0, 0, 131072, 0, 0, -196607, 0, 0, -131071, 0, 0, -65535, 0, 0, 1, 0, 0, 65537, 0, 0, -65536, 0, 0)
