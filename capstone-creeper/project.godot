@@ -11,8 +11,14 @@ config_version=5
 [application]
 
 config/name="CapstoneCreeper"
-config/features=PackedStringArray("4.5", "Mobile")
+run/main_scene="uid://d300s8sjv8y60"
+config/features=PackedStringArray("4.5", "C#", "Mobile")
 config/icon="res://icon.svg"
+
+[display]
+
+window/size/viewport_width=1920
+window/size/viewport_height=1080
 
 [dotnet]
 
