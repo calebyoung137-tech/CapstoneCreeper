@@ -1,15 +1,24 @@
 using Godot;
-using System;
 
-public partial class TilesView : TileMap
+public partial class TilesView : Node2D
 {
-	// Called when the node enters the scene tree for the first time.
-	public override void _Ready()
-	{
-	}
+	[Export] public TileMap TileMap;
 
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
-	public override void _Process(double delta)
+	public void DrawBoard(GameBoard board)
 	{
+		TileMap.Clear();
+
+		for (int x = 0; x < board.Width; x++)
+		{
+			for (int y = 0; y < board.Height; y++)
+			{
+				var tile = board.Tiles[x, y];
+				if (tile.Amount > 0)
+				{
+					int tileId = (int)(tile.Amount * (TileMap.TileSet.GetLastUnusedTileId() - 1));
+					TileMap.SetCell(0, new Vector2I(x, y), tileId);
+				}
+			}
+		}
 	}
 }
