@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="CapstoneCreeper"
-run/main_scene="uid://d300s8sjv8y60"
+run/main_scene="res://Scenes/crown_craze.tscn"
 config/features=PackedStringArray("4.5", "C#", "Mobile")
 config/icon="res://icon.svg"
 
