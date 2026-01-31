@@ -7,7 +7,7 @@
 position = Vector2(0, 2)
 
 [node name="BoardView" type="Node2D" parent="."]
-position = Vector2(801, 376)
+position = Vector2(439, 130)
 script = ExtResource("1_0hxd0")
 
 [node name="GameController" type="Node" parent="."]

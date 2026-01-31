@@ -2,10 +2,16 @@ using Godot;
 using Godot.Collections;
 using Model; 
 using System;
+using static View.BoardView;
 namespace View; 
 
 public partial class BoardView : Node2D
 {
+	[Signal]
+	public delegate void PinClickedEventHandler(Vector2I pin);
+
+	private int pinSize = 16;
+	private int tileSize = 50; 
 
 	public partial class Tile : ColorRect
 	{
@@ -32,11 +38,22 @@ public partial class BoardView : Node2D
 					pin.GridPos.X = i;
 					pin.GridPos.Y = j;
 					pins[new Vector2I(i, j)] = pin;
-					pin.Size = new Vector2(16, 16);
+					pin.Size = new Vector2(pinSize, pinSize);
 
 					pin.Color = new Color(0.2f, 0.6f, 1.0f);
-					pin.Position = new Vector2(i * 50, j * 50);
+					pin.Position = new Vector2(i * (pinSize + tileSize), j * (tileSize + pinSize));
 					AddChild(pin);
+					pin.GuiInput += (InputEvent @event) =>
+					{
+						if (@event is InputEventMouseButton mouseEvent &&
+							mouseEvent.Pressed &&
+							mouseEvent.ButtonIndex == MouseButton.Left)
+						{
+							GD.Print("Got to creating the emit"); 
+							EmitSignal("PinClicked", pin.GridPos); 
+						   
+						}
+					};
 				}
 			}
 		}
@@ -50,13 +67,15 @@ public partial class BoardView : Node2D
 				tiles[new Vector2I(i, j)] = tile;
 
 				// Set size and color
-				tile.Size = new Vector2(34, 34);
+				tile.Size = new Vector2(tileSize, tileSize);
 
 
 				tile.Color = new Color(0.2f, 0.6f, 1.0f); // light blue
 
 				// Optional: position it
-				tile.Position = new Vector2(i * 50 + 16, j * 50 + 16);
+				tile.Position = new Vector2((i * (tileSize + pinSize)) + pinSize, (j * (tileSize + pinSize)) + pinSize);
+				
+
 				AddChild(tile);
 			}
 		}
@@ -113,5 +132,12 @@ public partial class BoardView : Node2D
 				}
 			}
 		}
+	}
+
+	public Vector2I ScreenToPinBoard(Vector2I screenPos)
+	{
+
+
+		return new Vector2I(0,0);
 	}
 }
