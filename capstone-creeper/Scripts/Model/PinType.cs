@@ -7,5 +7,6 @@ public enum PinType
     Black,
     White,
     Empty,
+    PossibleMove, 
     Corner
 }

@@ -17,16 +17,25 @@ public partial class GameController : Node
 		Black,
 		White
 	}
-	private Turn turn; 
+	private Turn turn;
+	private ControllerState controllerState;
+	public GameBoard gameBoard; 
+	public BoardView boardView;
+	private Vector2I selectedPin; 
 	public override void _Ready()
 	{
-		GameBoard gameBoard = new GameBoard();
+		gameBoard = new GameBoard();
 		gameBoard.InitBoard();
-		BoardView boardView = GetNode<BoardView>("../BoardView");
+		boardView = GetNode<BoardView>("../BoardView");
 		boardView.updateBoard(gameBoard);
 
 		turn = new Turn();
 		turn = Turn.White;
+		controllerState = new ControllerState();
+		controllerState = ControllerState.SelectingPin; 
+
+		selectedPin = new Vector2I();
+
 		boardView.Connect("PinClicked", new Callable(this, nameof(HandlePinClicked)));
 
 
@@ -38,6 +47,52 @@ public partial class GameController : Node
 	}
 	private void HandlePinClicked(Vector2I boardPos)
 	{
-		GD.Print("Pin was clicked");
+		if (controllerState == ControllerState.SelectingPin)
+		{
+			if (gameBoard.Pins[boardPos.X, boardPos.Y] == PinType.White && turn == Turn.White)
+			{
+				selectedPin = boardPos; 
+				gameBoard.HighlightPossibleMoves(boardPos);
+				controllerState = ControllerState.MakingMove;
+				boardView.updateBoard(gameBoard); 
+			}
+			else if (gameBoard.Pins[boardPos.X, boardPos.Y] == PinType.Black && turn == Turn.Black)
+			{
+				selectedPin = boardPos;
+				gameBoard.HighlightPossibleMoves(boardPos);
+				controllerState = ControllerState.MakingMove;
+				boardView.updateBoard(gameBoard);
+			}
+		}
+		else if (controllerState == ControllerState.MakingMove)
+		{
+			if (boardPos == selectedPin)
+			{
+				gameBoard.clearPossibleMoves();
+				controllerState = ControllerState.SelectingPin;
+				selectedPin = new Vector2I(-1, -1);
+				boardView.updateBoard(gameBoard);
+			}
+			else
+			{
+				if (gameBoard.Pins[boardPos.X,boardPos.Y] == PinType.PossibleMove)
+				{
+					gameBoard.makeMove(selectedPin, boardPos);
+					gameBoard.clearPossibleMoves(); 
+					boardView.updateBoard(gameBoard);
+					controllerState = ControllerState.SelectingPin;
+					if (turn == Turn.White)
+					{
+						turn = Turn.Black; 
+					}
+					else
+					{
+						turn = Turn.White; 
+					}
+					selectedPin = new Vector2I(-1, -1);
+
+				}
+			}
+		}
 	}
 }

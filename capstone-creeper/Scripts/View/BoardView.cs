@@ -49,7 +49,6 @@ public partial class BoardView : Node2D
 							mouseEvent.Pressed &&
 							mouseEvent.ButtonIndex == MouseButton.Left)
 						{
-							GD.Print("Got to creating the emit"); 
 							EmitSignal("PinClicked", pin.GridPos); 
 						   
 						}
@@ -107,6 +106,10 @@ public partial class BoardView : Node2D
 					{
 						pin.Color = Colors.White;
 					}
+					else if (gameBoard.Pins[i,j] == PinType.PossibleMove)
+					{
+						pin.Color = Colors.Orange; 
+					}
 				}
 			}
 		}
@@ -134,10 +137,5 @@ public partial class BoardView : Node2D
 		}
 	}
 
-	public Vector2I ScreenToPinBoard(Vector2I screenPos)
-	{
-
-
-		return new Vector2I(0,0);
-	}
+	
 }
