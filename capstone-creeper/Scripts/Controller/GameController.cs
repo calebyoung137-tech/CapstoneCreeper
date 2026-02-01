@@ -38,7 +38,6 @@ public partial class GameController : Node
 
 		boardView.Connect("PinClicked", new Callable(this, nameof(HandlePinClicked)));
 
-
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
