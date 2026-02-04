@@ -1,0 +1,30 @@
+using Godot;
+
+public partial class MainMenu : Control
+{
+    private Button _playButton;
+    private Button _helpButton;
+
+    public override void _Ready()
+    {
+        _playButton = GetNode<Button>("VBoxContainer/PlayButton");
+        _helpButton = GetNode<Button>("VBoxContainer/HelpButton");
+
+        _playButton.Text = "Play";
+        _helpButton.Text = "Help";
+
+        _playButton.Pressed += OnPlayPressed;
+        _helpButton.Pressed += OnHelpPressed;
+    }
+
+    private void OnPlayPressed()
+    {
+        GetTree().ChangeSceneToFile("res://scenes/play_menu.tscn");
+    }
+
+    private void OnHelpPressed()
+    {
+        GD.Print("Help pressed");
+        // Later: show help popup or load help scene
+    }
+}

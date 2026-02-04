@@ -44,9 +44,29 @@ public partial class GameController : Node
 	public override void _Process(double delta)
 	{
 	}
-	private void HandlePinClicked(Vector2I boardPos)
+    public void ApplyRemoteMove(Vector2I from, Vector2I to)
+    {
+        gameBoard.makeMove(from, to);
+        gameBoard.clearPossibleMoves();
+        boardView.updateBoard(gameBoard);
+
+        turn = turn == Turn.White ? Turn.Black : Turn.White;
+        selectedPin = new Vector2I(-1, -1);
+    }
+
+
+    private void HandlePinClicked(Vector2I boardPos)
 	{
-		if (controllerState == ControllerState.SelectingPin)
+        if (GameSettings.Mode == GameMode.OnlineMultiplayer)
+        {
+            
+            bool isMyTurn = (NetworkManager.Instance.Role == MultiplayerRole.Server && turn == Turn.White) ||
+                            (NetworkManager.Instance.Role == MultiplayerRole.Client && turn == Turn.Black);
+
+            if (!isMyTurn)
+                return; 
+        }
+        if (controllerState == ControllerState.SelectingPin)
 		{
 			if (gameBoard.Pins[boardPos.X, boardPos.Y] == PinType.White && turn == Turn.White)
 			{
