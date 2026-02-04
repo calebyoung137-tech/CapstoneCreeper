@@ -271,4 +271,29 @@ public class GameBoard
 			}
 		}
 	}
+
+	public bool checkDraw()
+	{
+		int blackCount = 0;
+		int whiteCount = 0;
+		foreach (var pin in Pins)
+		{
+			if (pin == PinType.Black)
+			{
+				blackCount++;
+			}
+			else if (pin == PinType.White)
+			{
+				whiteCount++;
+			}
+		}
+		if (blackCount == 0 || whiteCount == 0)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
 }

@@ -11,6 +11,7 @@ public partial class GameController : Node
 	{
 		SelectingPin,
 		MakingMove,
+		GameOver
 	}
 	private enum Turn
 	{
@@ -79,7 +80,14 @@ public partial class GameController : Node
 					gameBoard.makeMove(selectedPin, boardPos);
 					gameBoard.clearPossibleMoves(); 
 					boardView.updateBoard(gameBoard);
-					controllerState = ControllerState.SelectingPin;
+					if (gameBoard.checkDraw())
+					{
+						controllerState = ControllerState.GameOver;
+					}
+					else
+					{
+						controllerState = ControllerState.SelectingPin;
+					}
 					if (turn == Turn.White)
 					{
 						turn = Turn.Black; 
