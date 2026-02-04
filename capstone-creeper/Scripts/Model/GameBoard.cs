@@ -225,13 +225,16 @@ public class GameBoard
 			{
 				tileY = pinDestination.Y;
 			}
-			if (Pins[pinStart.X, pinStart.Y] == PinType.White)
-			{
-				Tiles[tileX, tileY] = TileType.White;
-			}
-			else
-			{
-				Tiles[tileX, tileY] = TileType.Black;
+
+			if (!(tileX == 0 && tileY == 0 || tileX == 5 && tileY == 0 || tileX == 0 && tileY == 5 || tileX == 5 && tileY == 5)) {
+				if (Pins[pinStart.X, pinStart.Y] == PinType.White)
+				{
+					Tiles[tileX, tileY] = TileType.White;
+				}
+				else
+				{
+					Tiles[tileX, tileY] = TileType.Black;
+				}
 			}
 		}
 
