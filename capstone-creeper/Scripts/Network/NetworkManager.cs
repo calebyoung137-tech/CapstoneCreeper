@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Net;
 
 
 
@@ -10,56 +11,35 @@ public partial class NetworkManager : Node
     public static NetworkManager Instance { get; private set; }
     public override void _Ready()
     {
-        GD.Print("NetworkManager ready");
         Instance = this;
     }
 
     public void HostGame(int port = 12345)
-    {
-        peer = new ENetMultiplayerPeer();
-        var result = peer.CreateServer(port, maxClients: 2);
-        if (result != Error.Ok)
-        {
-            GD.PrintErr("Failed to start server: ", result);
-            return;
-        }
-
+    {  //method from godot networking docs
+        //https://docs.godotengine.org/en/stable/tutorials/networking/high_level_multiplayer.html
+        var peer = new ENetMultiplayerPeer();
+        peer.CreateServer(port, maxClients: 2);
         Multiplayer.MultiplayerPeer = peer;
-        Role = MultiplayerRole.Server;
-        GD.Print("Hosting game on port ", port);
     }
 
     public void JoinGame(string ip, int port = 12345)
-    {
-        peer = new ENetMultiplayerPeer();
-        var result = peer.CreateClient(ip, port);
-        if (result != Error.Ok)
-        {
-            GD.PrintErr("Failed to connect: ", result);
-            return;
-        }
-
-        Multiplayer.MultiplayerPeer = peer;
+    { // method from godot networking docs
+        //https://docs.godotengine.org/en/stable/tutorials/networking/high_level_multiplayer.html
         Role = MultiplayerRole.Client;
-        GD.Print("Joined game at ", ip, ":", port);
+        var peer = new ENetMultiplayerPeer();
+        peer.CreateClient(ip, port);
+        Multiplayer.MultiplayerPeer = peer;
+
     }
 
     public void SendMove(Vector2I from, Vector2I to)
-    {
-        if (Role == MultiplayerRole.None)
-        {
-            GD.PrintErr("Not connected");
-            return;
-        }
-
+    { //motivation for using RPCs for this from team 8 2025, code closely follows that teams code
         RpcId(0, nameof(ReceiveMove), from, to);
     }
 
     [Rpc(MultiplayerApi.RpcMode.AnyPeer)]
     public void ReceiveMove(Vector2I from, Vector2I to)
-    {
-        GD.Print("Received move: ", from, " -> ", to);
-
+    { // gpt 
         if (GetTree().CurrentScene is Node root)
         {
             var gameController = root.GetNodeOrNull<GameController>("GameController");

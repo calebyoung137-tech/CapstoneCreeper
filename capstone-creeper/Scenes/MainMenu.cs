@@ -2,6 +2,10 @@ using Godot;
 
 public partial class MainMenu : Control
 {
+
+    // this menu screen is for setting up the networking functionality
+    // This is AI code that should be rewritten or replaced ! 
+
     private Button _playButton;
     private Button _helpButton;
 

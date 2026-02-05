@@ -50,8 +50,14 @@ public partial class GameController : Node
         gameBoard.clearPossibleMoves();
         boardView.updateBoard(gameBoard);
 
-        turn = turn == Turn.White ? Turn.Black : Turn.White;
-        selectedPin = new Vector2I(-1, -1);
+		if (turn == Turn.Black) { 
+			turn= Turn.White;
+		}
+		else
+		{
+            turn = Turn.Black;
+        }
+		//selectedPin = new Vector2I(?);
     }
 
 
@@ -59,7 +65,7 @@ public partial class GameController : Node
 	{
         if (GameSettings.Mode == GameMode.OnlineMultiplayer)
         {
-            
+            // determine turn, or return. only used for multiplayer
             bool isMyTurn = (NetworkManager.Instance.Role == MultiplayerRole.Server && turn == Turn.White) ||
                             (NetworkManager.Instance.Role == MultiplayerRole.Client && turn == Turn.Black);
 

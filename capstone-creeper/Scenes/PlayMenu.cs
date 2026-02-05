@@ -2,6 +2,8 @@ using Godot;
 
 public partial class PlayMenu : Control
 {
+    // this menu screen is for setting up the networking functionality
+    // This is AI code that should be rewritten or replaced ! 
     private Button _aiVAIButton;
     private Button _singlePlayerButton;
     private Button _localMultiplayerButton;
