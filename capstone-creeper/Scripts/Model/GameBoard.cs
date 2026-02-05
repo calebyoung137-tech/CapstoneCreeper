@@ -85,6 +85,11 @@ public class GameBoard
 		if (pin.X >= 0 && pin.X <= 6 && pin.Y >= 0 && pin.Y <= 6) { return true; }
 		else { return false; }
 	}
+	public bool isValidTile(Vector2I tile)
+	{
+		if (tile.X >= 0 && tile.X <= 5 && tile.Y >= 0 && tile.Y <= 5) { return true; }
+		else { return false; }
+	}
 
 	public void HighlightPossibleMoves(Vector2I selectedPin)
 	{
@@ -294,6 +299,79 @@ public class GameBoard
 		else
 		{
 			return false;
+		}
+	}
+
+	public bool checkWin()
+	{
+		bool[,] searched = new bool[6, 6];
+		bool blackWon = false;
+		bool whiteWon = false; 
+		blackWon = checkWin(new Vector2I(0, 0), searched, TileType.Black); 
+		whiteWon = checkWin(new Vector2I(5, 0), searched, TileType.White);
+		if (blackWon || whiteWon) { return true; }
+		else { return false;  }
+	}
+
+	public bool checkWin(Vector2I currentPos, bool[,] searched, TileType tileToWin)
+	{
+		searched[currentPos.X, currentPos.Y] = true;
+		if ((tileToWin == TileType.Black && currentPos == new Vector2I(5,5))
+			|| (tileToWin == TileType.White && currentPos == new Vector2I(0, 5)))
+		{
+			return true; 
+		}
+		else
+		{
+			bool up = false;
+			bool down = false;
+			bool left = false;
+			bool right = false; 
+			if (isValidTile(new Vector2I(currentPos.X + 1, currentPos.Y)) 
+				&& !(searched[currentPos.X + 1, currentPos.Y]))
+			{
+				if (Tiles[currentPos.X + 1, currentPos.Y] == tileToWin)
+				{
+					right = checkWin(new Vector2I(currentPos.X + 1, currentPos.Y), searched, tileToWin);
+				}
+			}
+
+			if (isValidTile(new Vector2I(currentPos.X - 1, currentPos.Y))
+				&& !(searched[currentPos.X - 1, currentPos.Y]))
+			{
+				if (Tiles[currentPos.X - 1, currentPos.Y] == tileToWin)
+				{
+					left = checkWin(new Vector2I(currentPos.X - 1, currentPos.Y), searched, tileToWin);
+				}
+			}
+
+			if (isValidTile(new Vector2I(currentPos.X, currentPos.Y + 1))
+				&& !(searched[currentPos.X, currentPos.Y + 1]))
+			{
+				if (Tiles[currentPos.X, currentPos.Y + 1] == tileToWin)
+				{
+					up = checkWin(new Vector2I(currentPos.X, currentPos.Y + 1), searched, tileToWin);
+				}
+			}
+
+			if (isValidTile(new Vector2I(currentPos.X, currentPos.Y - 1))
+				&& !(searched[currentPos.X, currentPos.Y - 1]))
+			{
+				if (Tiles[currentPos.X, currentPos.Y - 1] == tileToWin)
+				{
+					down = checkWin(new Vector2I(currentPos.X, currentPos.Y - 1), searched, tileToWin);
+				}
+			}
+
+			if (up || down || left || right)
+			{
+				return true; 
+			}
+			else
+			{
+				return false; 
+			}
+
 		}
 	}
 }

@@ -80,7 +80,11 @@ public partial class GameController : Node
 					gameBoard.makeMove(selectedPin, boardPos);
 					gameBoard.clearPossibleMoves(); 
 					boardView.updateBoard(gameBoard);
-					if (gameBoard.checkDraw())
+					if (gameBoard.checkWin())
+					{
+						controllerState = ControllerState.GameOver; 
+					}
+					else if (gameBoard.checkDraw())
 					{
 						controllerState = ControllerState.GameOver;
 					}
