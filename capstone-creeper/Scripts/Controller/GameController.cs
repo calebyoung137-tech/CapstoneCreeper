@@ -3,6 +3,7 @@ using Model;
 using View; 
 using System;
 using static Model.GameBoard;
+using System.Reflection.Metadata.Ecma335;
 public partial class GameController : Node
 {
 	//private BoardView boardView;
@@ -22,6 +23,7 @@ public partial class GameController : Node
 	public GameBoard gameBoard; 
 	public BoardView boardView;
 	private Vector2I selectedPin; 
+	public static GameController Controller{get; set;}
 	public override void _Ready()
 	{
 		gameBoard = new GameBoard();
@@ -35,7 +37,8 @@ public partial class GameController : Node
 		controllerState = ControllerState.SelectingPin; 
 
 		selectedPin = new Vector2I();
-
+		GD.Print("in the controller" +
+			"");
 		boardView.Connect("PinClicked", new Callable(this, nameof(HandlePinClicked)));
 
 	}
@@ -44,6 +47,12 @@ public partial class GameController : Node
 	public override void _Process(double delta)
 	{
 	}
+    //https://forum.godotengine.org/t/difference-between-enter-tree-and-ready/9923
+    public override void _EnterTree()
+    {
+	//instantiate controller before rpcs
+		Controller = this;
+    }
     public void ApplyRemoteMove(Vector2I from, Vector2I to)
     {
         gameBoard.makeMove(from, to);
@@ -57,21 +66,13 @@ public partial class GameController : Node
 		{
             turn = Turn.Black;
         }
-		//selectedPin = new Vector2I(?);
+		selectedPin = new Vector2I(-1,-1);
     }
 
 
     private void HandlePinClicked(Vector2I boardPos)
 	{
-        if (GameSettings.Mode == GameMode.OnlineMultiplayer)
-        {
-            // determine turn, or return. only used for multiplayer
-            bool isMyTurn = (NetworkManager.Instance.Role == MultiplayerRole.Server && turn == Turn.White) ||
-                            (NetworkManager.Instance.Role == MultiplayerRole.Client && turn == Turn.Black);
-
-            if (!isMyTurn)
-                return; 
-        }
+   
         if (controllerState == ControllerState.SelectingPin)
 		{
 			if (gameBoard.Pins[boardPos.X, boardPos.Y] == PinType.White && turn == Turn.White)
@@ -102,19 +103,22 @@ public partial class GameController : Node
 			{
 				if (gameBoard.Pins[boardPos.X,boardPos.Y] == PinType.PossibleMove)
 				{
-					gameBoard.makeMove(selectedPin, boardPos);
-					gameBoard.clearPossibleMoves(); 
-					boardView.updateBoard(gameBoard);
-					controllerState = ControllerState.SelectingPin;
-					if (turn == Turn.White)
+					//gameBoard.makeMove(selectedPin, boardPos);
+					//gameBoard.clearPossibleMoves(); 
+					//boardView.updateBoard(gameBoard);
+					//I'm kind of abusing the apply remote move method here and it's not the best. 
+					if (GameSettings.Mode == GameMode.OnlineMultiplayer)
 					{
-						turn = Turn.Black; 
+						NetworkManager.Instance.SendMove(selectedPin, boardPos);
 					}
-					else
+					else 
 					{
-						turn = Turn.White; 
+						// I'm using this because this method uses the same logic as what was above
+						//sorry for making your code bad
+						ApplyRemoteMove(selectedPin, boardPos);
 					}
-					selectedPin = new Vector2I(-1, -1);
+                    controllerState = ControllerState.SelectingPin;
+                    selectedPin = new Vector2I(-1, -1);
 
 				}
 			}

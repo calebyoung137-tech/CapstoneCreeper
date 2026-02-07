@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://cfprcd4s2gixl"]
+
+[ext_resource type="Script" uid="uid://bhj3182em45ce" path="res://Scenes/Waiting.cs" id="1_iypli"]
+
+[node name="waiting" type="CanvasLayer"]
+script = ExtResource("1_iypli")
+
+[node name="statuslabel" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 23.0

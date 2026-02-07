@@ -1,10 +1,5 @@
 using Godot;
-public enum MultiplayerRole
-{
-    None,
-    Server,
-    Client
-}
+
 public partial class OnlineMultiplayerMenu : Control
 {
     private Button _hostButton;
@@ -28,20 +23,21 @@ public partial class OnlineMultiplayerMenu : Control
 
     private void OnHost()
     {
-        NetworkManager.Instance.HostGame(12345);
-        GetTree().ChangeSceneToFile("res://scenes/Creeper.tscn");
+        NetworkManager.Instance.HostGame(9999);
+        GetTree().ChangeSceneToFile("res://scenes/waiting.tscn");
+        GD.Print("host pressed");
     }
-
+    
     private void OnJoin()
     {
         string ip = "127.0.0.1"; // Replace with LineEdit input later
-        NetworkManager.Instance.JoinGame(ip, 12345);
-        GetTree().ChangeSceneToFile("res://scenes/Creeper.tscn");
+        NetworkManager.Instance.JoinGame(ip, 9999);
+        GetTree().ChangeSceneToFile("res://scenes/waiting.tscn");
     }
 
     private void OnBack()
     {
         
-        GetTree().ChangeSceneToFile("res://play_menu.tscn");
+        GetTree().ChangeSceneToFile("res://scenes/play_menu.tscn");
     }
 }

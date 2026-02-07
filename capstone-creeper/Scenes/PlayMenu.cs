@@ -48,8 +48,8 @@ public partial class PlayMenu : Control
     private void OnLocalMultiplayer()
     {
         GameSettings.Mode = GameMode.LocalMultiplayer;
-        GD.Print("Local Multiplayer selected");
         // Same-machine multiplayer
+        GetTree().ChangeSceneToFile("res://scenes/Creeper.tscn");
     }
 
     private void OnOnlineMultiplayer()

@@ -15,6 +15,10 @@ run/main_scene="uid://bh0nb26xe8gbc"
 config/features=PackedStringArray("4.5", "C#", "Mobile")
 config/icon="res://icon.svg"
 
+[autoload]
+
+NetworkManager="*res://scenes/network_manager.tscn"
+
 [dotnet]
 
 project/assembly_name="CapstoneCreeper"
