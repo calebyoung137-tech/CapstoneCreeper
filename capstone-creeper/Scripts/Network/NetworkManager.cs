@@ -12,6 +12,8 @@ public enum MultiplayerRole
 /// <summary>
 /// The network manager includes methods to join/host a game, as well as methods that manage 
 /// the waiting for a peer to join, and sending moves over the network.
+/// TODO: this needs to include logic to handle unexpected endings, disconnections etc. 
+/// TODO: decide how to handle pressing join when no server is initiated? 
 /// </summary>
 public partial class NetworkManager : Node
 {
@@ -32,7 +34,6 @@ public partial class NetworkManager : Node
         Multiplayer.ConnectionFailed += OnConnectionFailed;
     }
 
-    
     public Error HostGame(int port = 9999)
     { // from godot docs, This code established a server, or returns an error
         peer = new ENetMultiplayerPeer();
