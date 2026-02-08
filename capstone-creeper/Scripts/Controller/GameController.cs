@@ -37,8 +37,6 @@ public partial class GameController : Node
 		controllerState = ControllerState.SelectingPin; 
 
 		selectedPin = new Vector2I();
-		GD.Print("in the controller" +
-			"");
 		boardView.Connect("PinClicked", new Callable(this, nameof(HandlePinClicked)));
 
 	}
@@ -53,7 +51,7 @@ public partial class GameController : Node
 	//instantiate controller before rpcs
 		Controller = this;
     }
-    public void ApplyRemoteMove(Vector2I from, Vector2I to)
+    public void ApplyMove(Vector2I from, Vector2I to)
     {
         gameBoard.makeMove(from, to);
         gameBoard.clearPossibleMoves();
@@ -68,8 +66,6 @@ public partial class GameController : Node
         }
 		selectedPin = new Vector2I(-1,-1);
     }
-
-
     private void HandlePinClicked(Vector2I boardPos)
 	{
    
@@ -103,20 +99,12 @@ public partial class GameController : Node
 			{
 				if (gameBoard.Pins[boardPos.X,boardPos.Y] == PinType.PossibleMove)
 				{
-					//gameBoard.makeMove(selectedPin, boardPos);
-					//gameBoard.clearPossibleMoves(); 
-					//boardView.updateBoard(gameBoard);
-					//I'm kind of abusing the apply remote move method here and it's not the best. 
 					if (GameSettings.Mode == GameMode.OnlineMultiplayer)
-					{
+					{ // if multiplayer, send the move, and apply locally
 						NetworkManager.Instance.SendMove(selectedPin, boardPos);
 					}
-					else 
-					{
-						// I'm using this because this method uses the same logic as what was above
-						//sorry for making your code bad
-						ApplyRemoteMove(selectedPin, boardPos);
-					}
+						ApplyMove(selectedPin, boardPos);
+					
                     controllerState = ControllerState.SelectingPin;
                     selectedPin = new Vector2I(-1, -1);
 

@@ -9,27 +9,34 @@ public enum MultiplayerRole
     Client
 }
 
+/// <summary>
+/// The network manager includes methods to join/host a game, as well as methods that manage 
+/// the waiting for a peer to join, and sending moves over the network.
+/// </summary>
 public partial class NetworkManager : Node
 {
     public static NetworkManager Instance { get; private set; }
-
     public MultiplayerRole Role { get; private set; } = MultiplayerRole.None;
     public ENetMultiplayerPeer peer;
-    private HashSet<long> _readyPeers = new HashSet<long>();
+    private int _playersLoaded = 0;
+
     public override void _Ready()
     {
+        //Instantiate Network manager
+        // set the peerconnected, connectedtoserver, and Connection failed properties of multiplayer
+        // The on connected to server is used to set the game into progress once a player has connected
         Instance = this;
-
+        
         Multiplayer.PeerConnected += OnPeerConnected;
         Multiplayer.ConnectedToServer += OnConnectedToServer;
         Multiplayer.ConnectionFailed += OnConnectionFailed;
     }
 
-    //godot docs
+    
     public Error HostGame(int port = 9999)
-    {
+    { // from godot docs, This code established a server, or returns an error
         peer = new ENetMultiplayerPeer();
-        var error = peer.CreateServer(port, 2); // max 2 players
+        var error = peer.CreateServer(port, 2);
         if (error != Error.Ok)
         {
             GD.Print("server fail");
@@ -38,12 +45,12 @@ public partial class NetworkManager : Node
 
         Multiplayer.MultiplayerPeer = peer;
         Role = MultiplayerRole.Server;
-        _readyPeers.Add(Multiplayer.GetUniqueId());
+       
         return Error.Ok;
     }
-    //godot docs
+   
     public Error JoinGame(string address = "127.0.0.1", int port = 9999)
-    {
+    {  //from godot docs, this joins the server, and creates a client
         peer = new ENetMultiplayerPeer();
         var error = peer.CreateClient(address, port);
         if (error != Error.Ok)
@@ -58,16 +65,16 @@ public partial class NetworkManager : Node
     }
     private void OnPeerConnected(long id)
     {
-        GD.Print($"Peer connected: {id}");
+        GD.Print($"Peer connected");
     }
 
     private void OnConnectedToServer()
     {
         GD.Print("Connected to server");
-
+       // tell host to call rpc and start the game
         if (Role == MultiplayerRole.Client)
         {
-            MarkReady();
+            RpcId(1, nameof(ClientReady), Multiplayer.GetUniqueId());
         }
     }
 
@@ -76,76 +83,40 @@ public partial class NetworkManager : Node
         GD.Print("Connection failed");
     }
 
-    public void MarkReady()
-    {
-        if (Role == MultiplayerRole.Client)
-        {
-                RpcId(1, nameof(ClientReady), Multiplayer.GetUniqueId());
-        }
-        else if (Role == MultiplayerRole.Server)
-        {
-            GD.Print("monkey business is afoot");
-        }
-    }
 
     [Rpc(MultiplayerApi.RpcMode.AnyPeer)]
     public void ClientReady(long peerId)
-    {
+    { // this method changes the game scene to game board, only after the peer connects to the server
+        // This has to be called by the server, putting the function calls in the "onconnectedtoserver"
+        // method doesn't start the game for the host for some reason. 
         if (!Multiplayer.IsServer())
             return;
 
-        _readyPeers.Add(peerId);
-
-        if (_readyPeers.Count == 2)
-        {
-          //This should not really have to exist but I could not get this working with one rpc
-            StartGameLocal();
-            //since there is a local method, only call the rpc on the client
-            long clientId = _readyPeers.First(id => id != Multiplayer.GetUniqueId()); 
-            RpcId(clientId, nameof(StartGame));
-        }
-        else
-        {
-            GD.Print("[Server] Waiting for other player...");
-        }
+        LoadGameLocal();
+        RpcId(peerId, nameof(LoadGame));
     }
 
-    
-    public void StartGameLocal()
+    public void LoadGameLocal()
     {
         GetTree().ChangeSceneToFile("res://scenes/Creeper.tscn");
     }
 
-    [Rpc(MultiplayerApi.RpcMode.AnyPeer)]
-    public void StartGame()
+    //from godot docs
+    [Rpc(CallLocal = true, TransferMode = MultiplayerPeer.TransferModeEnum.Reliable)]
+    private void LoadGame()
     {
         GetTree().ChangeSceneToFile("res://scenes/Creeper.tscn");
     }
-
     public void SendMove(Vector2I from, Vector2I to)
-    {
-        if (Multiplayer.MultiplayerPeer == null)
-        {
-            GD.Print("[NetworkManager] Cannot send move: not connected");
-            return;
-        }
-
-        GD.Print($"[NetworkManager] Sending move {from} -> {to}");
+    { 
         Rpc(nameof(ReceiveMove), from, to);
     }
 
     [Rpc(MultiplayerApi.RpcMode.AnyPeer)]
     public void ReceiveMove(Vector2I from, Vector2I to)
-    {
+    {// call this on peer, controller handles logic to apply move locally
         var controller = GameController.Controller;
-        if (controller != null)
-        {
-            controller.ApplyRemoteMove(from, to);
-            GD.Print($"[NetworkManager] Applied move {from} -> {to}");
-        }
-        else
-        {
-            GD.Print("[NetworkManager] GameController is null!");
-        }
+        controller.ApplyMove(from, to);
+        
     }
 }
