@@ -28,7 +28,8 @@ public partial class NetworkManager : Node
         // set the peerconnected, connectedtoserver, and Connection failed properties of multiplayer
         // The on connected to server is used to set the game into progress once a player has connected
         Instance = this;
-        
+        Multiplayer.ServerDisconnected += ServerDisconnected;
+        Multiplayer.PeerDisconnected += PeerDisconnected;
         Multiplayer.PeerConnected += OnPeerConnected;
         Multiplayer.ConnectedToServer += OnConnectedToServer;
         Multiplayer.ConnectionFailed += OnConnectionFailed;
@@ -63,6 +64,21 @@ public partial class NetworkManager : Node
         Multiplayer.MultiplayerPeer = peer;
         Role = MultiplayerRole.Client;
         return Error.Ok;
+    }
+    private void PeerDisconnected(long id)
+    { // method from team 8 spring 2025
+        GD.Print("Player disconnected: " + id.ToString());
+        Multiplayer.MultiplayerPeer = null;
+    }
+    private void ServerDisconnected()
+    { // method from team 8 spring 2025
+        if (peer != null)
+        {
+            peer.Close();
+            peer = null;
+        }
+        GD.Print("SERVER DISCONNECTED");
+        Multiplayer.MultiplayerPeer = null;
     }
     private void OnPeerConnected(long id)
     {
