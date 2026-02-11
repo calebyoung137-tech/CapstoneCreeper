@@ -1,3 +1,10 @@
+Files to pull from this branch: 
+NetworkManager.cs add to creeper node as child - control node
+waiting.cs and add scene with label as child - canvas layer node
+onlineMultiplayerMenu.cs and scene - type is control and has child vboxcontainer which contains 3 buttons as children
+gamesettings.cs 
+changes to game controller - _EnterTree() method, if online multiplayer, call send move.
 
-
-Used Chatgpt to ask for basic setup to a chessboard, since it has similar logic and setup, adapted its code.  
+Under project -> project settings -> globals -> autoload: include path to network manager and name NetworkManager, this is to avoid null object reference errors.
+do not pull: 
+main menu, play menu
