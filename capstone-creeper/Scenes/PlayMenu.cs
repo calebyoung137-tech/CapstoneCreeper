@@ -34,15 +34,17 @@ public partial class PlayMenu : Control
     private void OnAIVAI()
     {
         GameSettings.Mode = GameMode.AIVAI;
-        GD.Print("AI vs AI selected");
-        // Load AI-only game scene
+
+        GD.Print("changed scene");
+        GetTree().ChangeSceneToFile("res://scenes/AIVAI.tscn");
     }
 
     private void OnSinglePlayer()
     {
         GameSettings.Mode = GameMode.SinglePlayer;
-        GD.Print("Single Player selected");
-        // Load single player scene
+        GetTree().ChangeSceneToFile("res://scenes/Creeper.tscn");
+        //This needs to have ai integration
+        
     }
 
     private void OnLocalMultiplayer()
