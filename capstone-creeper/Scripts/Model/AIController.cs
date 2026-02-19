@@ -156,8 +156,8 @@ public class AIController
 		}
 
 		// 1 character represents current player
-		if (state[85] == 'x') WhitePlayer = true;
-	}
+		WhitePlayer = (state[85] == 'x');
+    }
 
 	// Minimax algorithm
 	//      Parameters: 
