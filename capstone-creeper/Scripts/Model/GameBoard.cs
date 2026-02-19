@@ -12,9 +12,12 @@ public class GameBoard
 
 	public PinType[,] Pins;
 	public TileType[,] Tiles;
+	private Dictionary<string, int> gameStateHist; 
 
 	public void InitBoard()
 	{
+		gameStateHist = new Dictionary<string, int>();
+		gameStateHist.Add(".o.o..xx.o......xo......x.......x.....o.x.....o..xx.o.o..o.....x........................x....o.", 1); 
 		Pins = new PinType[7, 7]; 
 		Tiles = new TileType[6, 6];
 		for (int i = 0; i < 7; i++)
@@ -280,29 +283,88 @@ public class GameBoard
 	public bool checkDraw()
 	{
 		int blackCount = 0;
-		int whiteCount = 0;
+		int possibleMoveCount = 0; 
+		for (int i = 0; i < Pins.GetLength(0); i++) {
+			for (int j = 0; j < Pins.GetLength(1); j++)
+			{
+				if (Pins[i, j] == PinType.Black)
+				{
+					HighlightPossibleMoves(new Vector2I(i, j));
+
+				}
+			}
+		}
 		foreach (var pin in Pins)
 		{
-			if (pin == PinType.Black)
-			{
-				blackCount++;
-			}
-			else if (pin == PinType.White)
-			{
-				whiteCount++;
-			}
+			if (pin == PinType.Black) blackCount++;
+			if (pin == PinType.PossibleMove) possibleMoveCount++;
 		}
-		if (blackCount == 0 || whiteCount == 0)
-		{
-			return true;
-		}
-		else
-		{
-			return false;
-		}
-	}
+        if (blackCount == 0 || possibleMoveCount == 0)
+        {
 
-	public bool checkWin()
+            return true;
+        }
+		clearPossibleMoves();
+        int whiteCount = 0;
+        possibleMoveCount = 0;
+        for (int i = 0; i < Pins.GetLength(0); i++)
+        {
+            for (int j = 0; j < Pins.GetLength(1); j++)
+            {
+                if (Pins[i, j] == PinType.White)
+                {
+                    HighlightPossibleMoves(new Vector2I(i, j));
+
+                }
+            }
+        }
+        foreach (var pin in Pins)
+        {
+            if (pin == PinType.White) whiteCount++;
+            if (pin == PinType.PossibleMove) possibleMoveCount++;
+        }
+        clearPossibleMoves();
+        if (whiteCount == 0 || possibleMoveCount == 0)
+        {
+
+            return true;
+        }
+
+
+
+		string gameState = ""; 
+		foreach (var pin in Pins)
+		{
+			if (pin == PinType.Black) gameState += "o";
+			if (pin == PinType.White) gameState += "x";
+			else gameState += ".";
+		}
+		foreach (var tile in Tiles)
+		{
+			if (tile == TileType.Black) gameState += "o";
+			if (tile == TileType.White) gameState += "x";
+			else gameState += ".";
+		}
+
+		if (!gameStateHist.ContainsKey(gameState))
+		{
+			gameStateHist.Add(gameState, 1); 	
+		}
+		else if (gameStateHist.ContainsKey(gameState))
+		{
+			gameStateHist[gameState] = gameStateHist[gameState] + 1;
+		}
+		if (gameStateHist[gameState] == 3)
+		{
+			return true; 
+		}
+
+		
+		return false; 
+  
+    }
+
+    public bool checkWin()
 	{
 		bool[,] searched = new bool[6, 6];
 		bool blackWon = false;
