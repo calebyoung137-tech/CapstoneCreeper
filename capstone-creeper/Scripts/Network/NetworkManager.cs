@@ -133,7 +133,13 @@ public partial class NetworkManager : Node
     public void ReceiveMove(Vector2I from, Vector2I to)
     {// call this on peer, controller handles logic to apply move locally
         var controller = GameController.Controller;
-        controller.ApplyMove(from, to);
+        // the losing side gets to make one additional move before they know the game is over. 
+        //if (controller.GameOver(from, to)) { 
+        //    // the game is over display something
+        //}
+        //else // keep on going
+            controller.ApplyMove(from, to);
         
     }
+    
 }

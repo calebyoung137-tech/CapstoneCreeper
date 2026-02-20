@@ -2,7 +2,7 @@
 using CapstoneCreeper;
 using Godot;
 using System;
-
+using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
 using System.Text.Json;
@@ -12,6 +12,7 @@ public partial class AIvAi : CanvasLayer
 	// Called when the node enters the scene tree for the first time.
 	private static readonly string baseUrl = "https://softserve.harding.edu";
     private static readonly string CreateUrl = baseUrl + "/player/create";
+    private static readonly string CreateEventUrl = baseUrl + "/event/create";
     private static readonly string playStateUrl = baseUrl + "/aivai/play-state";
     private static readonly string actionUrl = baseUrl + "/aivai/submit-action";
     private static readonly string connectionToken = "";
@@ -116,6 +117,29 @@ public partial class AIvAi : CanvasLayer
         return winner;
     }
 
+    public static async Task<EventResponse> CreateEvent() {
+        List<string> Players = new List<string>();
+        Players.Add("player1");
+        Players.Add("player2");
+        using StringContent jsonContent = new(
+       JsonSerializer.Serialize(new
+       {
+           name = "Team8",
+           players = Players,
+           game_pairs=0
+       }),
+       Encoding.UTF8,
+       "application/json");
+        //make post request
+        using HttpResponseMessage response = await client.PostAsync(CreateEventUrl, jsonContent);
+
+        //deserialize response
+        var jsonResponse = await response.Content.ReadAsStringAsync();
+        var result = JsonSerializer.Deserialize<EventResponse>(jsonResponse);
+        //int returnValue =
+        return result;
+        
+    }
     public async Task AiTournament() {
         // the softserve integration guide specifies that this is the order 
         // the ai game loop should use.
