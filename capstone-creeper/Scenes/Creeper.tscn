@@ -4,10 +4,10 @@
 [ext_resource type="Script" uid="uid://wrlrobpcoifo" path="res://Scripts/Controller/GameController.cs" id="2_hao4k"]
 
 [node name="Creeper" type="Node2D"]
-position = Vector2(0, 2)
+position = Vector2(-4, -3)
 
 [node name="BoardView" type="Node2D" parent="."]
-position = Vector2(367, 104)
+position = Vector2(371, 104)
 script = ExtResource("1_0hxd0")
 
 [node name="GameController" type="Node" parent="."]

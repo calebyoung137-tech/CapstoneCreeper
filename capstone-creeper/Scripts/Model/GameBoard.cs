@@ -12,9 +12,12 @@ public class GameBoard
 
 	public PinType[,] Pins;
 	public TileType[,] Tiles;
+	private Dictionary<string, int> gameStateHist; 
 
 	public void InitBoard()
 	{
+		gameStateHist = new Dictionary<string, int>();
+		gameStateHist.Add(".o.o..xx.o......xo......x.......x.....o.x.....o..xx.o.o..o.....x........................x....o.", 1); 
 		Pins = new PinType[7, 7]; 
 		Tiles = new TileType[6, 6];
 		for (int i = 0; i < 7; i++)
@@ -83,6 +86,11 @@ public class GameBoard
 	public bool isValidPinHole(Vector2I pin)
 	{
 		if (pin.X >= 0 && pin.X <= 6 && pin.Y >= 0 && pin.Y <= 6) { return true; }
+		else { return false; }
+	}
+	public bool isValidTile(Vector2I tile)
+	{
+		if (tile.X >= 0 && tile.X <= 5 && tile.Y >= 0 && tile.Y <= 5) { return true; }
 		else { return false; }
 	}
 
@@ -225,13 +233,16 @@ public class GameBoard
 			{
 				tileY = pinDestination.Y;
 			}
-			if (Pins[pinStart.X, pinStart.Y] == PinType.White)
-			{
-				Tiles[tileX, tileY] = TileType.White;
-			}
-			else
-			{
-				Tiles[tileX, tileY] = TileType.Black;
+
+			if (!(tileX == 0 && tileY == 0 || tileX == 5 && tileY == 0 || tileX == 0 && tileY == 5 || tileX == 5 && tileY == 5)) {
+				if (Pins[pinStart.X, pinStart.Y] == PinType.White)
+				{
+					Tiles[tileX, tileY] = TileType.White;
+				}
+				else
+				{
+					Tiles[tileX, tileY] = TileType.Black;
+				}
 			}
 		}
 
@@ -266,6 +277,163 @@ public class GameBoard
 					Pins[i,j] = PinType.Empty;
 				}
 			}
+		}
+	}
+
+	public bool checkDraw()
+	{
+		int blackCount = 0;
+		int possibleMoveCount = 0; 
+		for (int i = 0; i < Pins.GetLength(0); i++) {
+			for (int j = 0; j < Pins.GetLength(1); j++)
+			{
+				if (Pins[i, j] == PinType.Black)
+				{
+					HighlightPossibleMoves(new Vector2I(i, j));
+
+				}
+			}
+		}
+		foreach (var pin in Pins)
+		{
+			if (pin == PinType.Black) blackCount++;
+			if (pin == PinType.PossibleMove) possibleMoveCount++;
+		}
+        if (blackCount == 0 || possibleMoveCount == 0)
+        {
+
+            return true;
+        }
+		clearPossibleMoves();
+        int whiteCount = 0;
+        possibleMoveCount = 0;
+        for (int i = 0; i < Pins.GetLength(0); i++)
+        {
+            for (int j = 0; j < Pins.GetLength(1); j++)
+            {
+                if (Pins[i, j] == PinType.White)
+                {
+                    HighlightPossibleMoves(new Vector2I(i, j));
+
+                }
+            }
+        }
+        foreach (var pin in Pins)
+        {
+            if (pin == PinType.White) whiteCount++;
+            if (pin == PinType.PossibleMove) possibleMoveCount++;
+        }
+        clearPossibleMoves();
+        if (whiteCount == 0 || possibleMoveCount == 0)
+        {
+
+            return true;
+        }
+
+
+
+		string gameState = ""; 
+		foreach (var pin in Pins)
+		{
+			if (pin == PinType.Black) gameState += "o";
+			if (pin == PinType.White) gameState += "x";
+			else gameState += ".";
+		}
+		foreach (var tile in Tiles)
+		{
+			if (tile == TileType.Black) gameState += "o";
+			if (tile == TileType.White) gameState += "x";
+			else gameState += ".";
+		}
+
+		if (!gameStateHist.ContainsKey(gameState))
+		{
+			gameStateHist.Add(gameState, 1); 	
+		}
+		else if (gameStateHist.ContainsKey(gameState))
+		{
+			gameStateHist[gameState] = gameStateHist[gameState] + 1;
+		}
+		if (gameStateHist[gameState] == 3)
+		{
+			return true; 
+		}
+
+		
+		return false; 
+  
+    }
+
+    public bool checkWin()
+	{
+		bool[,] searched = new bool[6, 6];
+		bool blackWon = false;
+		bool whiteWon = false; 
+		blackWon = checkWin(new Vector2I(0, 0), searched, TileType.Black); 
+		whiteWon = checkWin(new Vector2I(5, 0), searched, TileType.White);
+		if (blackWon || whiteWon) { return true; }
+		else { return false;  }
+	}
+
+	public bool checkWin(Vector2I currentPos, bool[,] searched, TileType tileToWin)
+	{
+		searched[currentPos.X, currentPos.Y] = true;
+		if ((tileToWin == TileType.Black && currentPos == new Vector2I(5,5))
+			|| (tileToWin == TileType.White && currentPos == new Vector2I(0, 5)))
+		{
+			return true; 
+		}
+		else
+		{
+			bool up = false;
+			bool down = false;
+			bool left = false;
+			bool right = false; 
+			if (isValidTile(new Vector2I(currentPos.X + 1, currentPos.Y)) 
+				&& !(searched[currentPos.X + 1, currentPos.Y]))
+			{
+				if (Tiles[currentPos.X + 1, currentPos.Y] == tileToWin)
+				{
+					right = checkWin(new Vector2I(currentPos.X + 1, currentPos.Y), searched, tileToWin);
+				}
+			}
+
+			if (isValidTile(new Vector2I(currentPos.X - 1, currentPos.Y))
+				&& !(searched[currentPos.X - 1, currentPos.Y]))
+			{
+				if (Tiles[currentPos.X - 1, currentPos.Y] == tileToWin)
+				{
+					left = checkWin(new Vector2I(currentPos.X - 1, currentPos.Y), searched, tileToWin);
+				}
+			}
+
+			if (isValidTile(new Vector2I(currentPos.X, currentPos.Y + 1))
+				&& !(searched[currentPos.X, currentPos.Y + 1]))
+			{
+				if (Tiles[currentPos.X, currentPos.Y + 1] == tileToWin)
+				{
+					up = checkWin(new Vector2I(currentPos.X, currentPos.Y + 1), searched, tileToWin);
+				}
+			}
+
+			if (isValidTile(new Vector2I(currentPos.X, currentPos.Y - 1))
+				&& !(searched[currentPos.X, currentPos.Y - 1]))
+			{
+				if (Tiles[currentPos.X, currentPos.Y - 1] == tileToWin)
+				{
+					down = checkWin(new Vector2I(currentPos.X, currentPos.Y - 1), searched, tileToWin);
+				}
+			}
+
+			if (up || down || left || right)
+			{
+				return true; 
+			}
+			else
+			{
+				return false; 
+			}
+
 		}
 	}
 }
