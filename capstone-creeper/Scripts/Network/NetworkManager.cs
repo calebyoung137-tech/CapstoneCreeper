@@ -24,8 +24,7 @@ public partial class NetworkManager : Node
 	public string HostIp;
 	private int _playersLoaded = 0;
 	private bool _cleanedUp = false;
-	[Signal]
-	public delegate void HostStartedEventHandler(string ipAddress);
+	
 	public bool connectedToHost = false;
 	 
 	public override void _Ready()
@@ -63,7 +62,7 @@ public partial class NetworkManager : Node
 			Multiplayer.MultiplayerPeer = null;
 		}
 
-		GetTree().ChangeSceneToFile("res://Scenes/MainMenu.tscn");
+		GetTree().ChangeSceneToFile("res://Scenes/main_menu.tscn");
 	}
 	public Error HostGame(int port = 9999)
 	{ // from godot docs, This code established a server, or returns an error
@@ -81,10 +80,7 @@ public partial class NetworkManager : Node
 		Multiplayer.MultiplayerPeer = peer;
 		Role = MultiplayerRole.Server;
 
-		if (HostIp != null)
-		{
-			EmitSignal(SignalName.HostStarted, HostIp);
-		}
+		
 		return Error.Ok;
 	}
 	public Error JoinGame(string address, int port = 9999)
