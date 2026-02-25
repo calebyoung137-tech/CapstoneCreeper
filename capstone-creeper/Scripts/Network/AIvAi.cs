@@ -1,6 +1,7 @@
 //using CapstoneCreeper;
 using CapstoneCreeper;
 using Godot;
+using Model;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
@@ -15,7 +16,8 @@ public partial class AIvAi : CanvasLayer
     private static readonly string CreateEventUrl = baseUrl + "/event/create";
     private static readonly string playStateUrl = baseUrl + "/aivai/play-state";
     private static readonly string actionUrl = baseUrl + "/aivai/submit-action";
-    private static readonly string connectionToken = "";
+    // private static readonly string connectionToken = "I8TCqmU5KqeUg1lR3DmhvwxGeH1Zy2UFpTqyjid5hDk"; team 8 token
+    private static readonly string connectionToken = "zlbM6MsNf0EqPS9GyKAWW9h6ZtHd6vLU_LAnKgfjbmQ"; // team 82 token
     private static readonly System.Net.Http.HttpClient client = new System.Net.Http.HttpClient();
     private Label label;
 	public async override void _Ready()
@@ -69,9 +71,9 @@ public partial class AIvAi : CanvasLayer
         using StringContent jsonContent = new(
         JsonSerializer.Serialize(new
         {
-            player = "Team8", // ??
+            player = "team82", // ??
             token = connectionToken,
-            @event = "" // learned something new, how neat. I can use reserved key words.
+            @event = "mirror" // learned something new, how neat. I can use reserved key words.
         }),
         Encoding.UTF8,
         "application/json");
@@ -83,7 +85,7 @@ public partial class AIvAi : CanvasLayer
         //deserialize response
         var jsonResponse = await response.Content.ReadAsStringAsync();
         playState = JsonSerializer.Deserialize<PlayState>(jsonResponse);
-
+        GD.Print("Request Playstate Response: " + jsonResponse);
 
         //return
         Tuple<PlayState, System.Net.HttpStatusCode> returnValue= new Tuple<PlayState, System.Net.HttpStatusCode> (playState, statusCode);
@@ -99,19 +101,20 @@ public partial class AIvAi : CanvasLayer
         JsonSerializer.Serialize(new
         {
             action = Action,
-            player= "Team8", 
+            player= "team82", 
             token= connectionToken,
             action_id=actionId
         }),
         Encoding.UTF8,
         "application/json");
-
+        GD.Print("Trents beautiful AI move: " + Action);
         //make request
         using HttpResponseMessage response = await client.PostAsync(actionUrl, jsonContent);
 
         //deserialize response
         var jsonResponse = await response.Content.ReadAsStringAsync();
-        Console.WriteLine($"{jsonResponse}\n");
+        
+        GD.Print("Send playstate Response: " +jsonResponse);
         var winner = JsonSerializer.Deserialize<AIWinnerResult>(jsonResponse);
 
         return winner;
@@ -126,7 +129,7 @@ public partial class AIvAi : CanvasLayer
        {
            name = "Team8",
            players = Players,
-           game_pairs=0
+           game_pairs=10
        }),
        Encoding.UTF8,
        "application/json");
@@ -161,12 +164,16 @@ public partial class AIvAi : CanvasLayer
             }
             else 
             {
+                //GD.Print(playStateResponse.Item2);
                 //3.
                 PlayState playState = playStateResponse.Item1;
                 var state = playState.State;
                 // For Trent: Carry out the AI action with the given playstate
                 //4.
-                string aiMove = "";
+                GD.Print("state string: " + state);
+                AIController ai = new AIController();
+                string aiMove = ai.GetBestMoveString(state);
+                GD.Print(aiMove);
                 //5.
                 await SendPlayState(playState.ActionID, aiMove);
             }

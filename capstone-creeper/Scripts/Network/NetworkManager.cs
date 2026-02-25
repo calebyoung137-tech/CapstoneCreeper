@@ -24,12 +24,12 @@ public partial class NetworkManager : Node
 	private bool _cleanedUp = false;
 	
 	public bool connectedToHost = false;
-    private UdpServer discoveryServer;
-    private PacketPeerUdp discoveryPeer;
+	private UdpServer discoveryServer;
+	private PacketPeerUdp discoveryPeer;
 
-    private const int DiscoveryPort = 9998;
+	private const int DiscoveryPort = 9998;
 
-    public override void _Ready()
+	public override void _Ready()
 	{
 		//Instantiate Network manager
 		// set the peerconnected, connectedtoserver, and Connection failed properties of multiplayer
