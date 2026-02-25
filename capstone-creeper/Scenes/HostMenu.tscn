@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://ckd2uhdcubpx8"]
+
+[ext_resource type="Script" uid="uid://d0qtxskayqktl" path="res://Scripts/View/HostMenu.cs" id="1_ohamn"]
+
+[node name="HostMenu" type="CanvasLayer" unique_id=363385040]
+script = ExtResource("1_ohamn")
+
+[node name="IPLabel" type="Label" parent="." unique_id=1499434223]
+offset_right = 40.0
+offset_bottom = 23.0

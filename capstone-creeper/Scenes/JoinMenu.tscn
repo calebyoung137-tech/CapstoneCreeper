@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://ddttspjiasi7c"]
+
+[ext_resource type="Script" uid="uid://m74yqwyjmfae" path="res://Scripts/View/JoinMenu.cs" id="1_7be0v"]
+
+[node name="JoinMenu" type="CanvasLayer" unique_id=195667042]
+script = ExtResource("1_7be0v")
+
+[node name="JoinContainer" type="VBoxContainer" parent="." unique_id=1582732673]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Label" type="Label" parent="JoinContainer" unique_id=2083010473]
+layout_mode = 2
+
+[node name="IPINFO" type="LineEdit" parent="JoinContainer" unique_id=1097405424]
+layout_mode = 2
+
+[node name="Button" type="Button" parent="JoinContainer" unique_id=1496357981]
+layout_mode = 2

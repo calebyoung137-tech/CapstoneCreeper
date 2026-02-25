@@ -23,6 +23,7 @@ public partial class GameController : Node
     public GameBoard gameBoard;
     public BoardView boardView;
     private Vector2I selectedPin;
+    public string NetworkGameOver = ""; 
     public static GameController Controller { get; set; }
     public override void _Ready()
     {
@@ -41,7 +42,18 @@ public partial class GameController : Node
         boardView.Connect("PinClicked", new Callable(this, nameof(HandlePinClicked)));
 
     }
-
+    public bool GameOver(Vector2I from, Vector2I to) {
+        var tempGameBoard = gameBoard;
+        tempGameBoard.makeMove(from, to);
+        tempGameBoard.clearPossibleMoves();
+        if (tempGameBoard.checkDraw()) {
+            return true;
+        }
+        if (tempGameBoard.checkWin()) {
+            return true;
+        }
+        return false;
+    }
     public override void _EnterTree()
     {
         //instantiate controller before rpcs
@@ -51,6 +63,7 @@ public partial class GameController : Node
     public override void _Process(double delta)
     {
     }
+   
     public void ApplyMove(Vector2I from, Vector2I to)
     {
         gameBoard.makeMove(from, to);
@@ -125,6 +138,7 @@ public partial class GameController : Node
             {
                 if (gameBoard.Pins[boardPos.X, boardPos.Y] == PinType.PossibleMove)
                 {
+
                     if (GameSettings.Mode == GameMode.OnlineMultiplayer)
                     { // if multiplayer, send the move, and apply locally
                         NetworkManager.Instance.SendMove(selectedPin, boardPos);
@@ -135,10 +149,12 @@ public partial class GameController : Node
                     if (gameBoard.checkWin())
                     {
                         controllerState = ControllerState.GameOver;
+                        
                     }
                     else if (gameBoard.checkDraw())
                     {
                         controllerState = ControllerState.GameOver;
+                        
                     }
                     else
                     {

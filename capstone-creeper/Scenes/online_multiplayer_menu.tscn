@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://dkdffrv1vjttw"]
+[gd_scene format=3 uid="uid://dkdffrv1vjttw"]
 
-[ext_resource type="Script" uid="uid://qshkm1k31xo3" path="res://Scenes/OnlineMultiplayerMenu.cs" id="1_s7uw5"]
+[ext_resource type="Script" uid="uid://qshkm1k31xo3" path="res://Scripts/Model/OnlineMultiplayerMenu.cs" id="1_s7uw5"]
 
 [node name="OnlineMultiplayerMenu" type="Control"]
 layout_mode = 3

@@ -17,11 +17,14 @@ public enum MultiplayerRole
 /// </summary>
 public partial class NetworkManager : Node
 {
+    
     public static NetworkManager Instance { get; private set; }
     public MultiplayerRole Role { get; private set; } = MultiplayerRole.None;
     public ENetMultiplayerPeer peer;
+    public string HostIp;
     private int _playersLoaded = 0;
-
+    [Signal]
+    public delegate void HostStartedEventHandler(string ipAddress);
     public override void _Ready()
     {
         //Instantiate Network manager
@@ -35,8 +38,20 @@ public partial class NetworkManager : Node
         Multiplayer.ConnectionFailed += OnConnectionFailed;
     }
 
+    public void LeaveGame() {
+        if (Multiplayer.MultiplayerPeer != null)
+        {
+            Multiplayer.MultiplayerPeer.Close();
+            Multiplayer.MultiplayerPeer = null;
+        }
+
+        GetTree().ChangeSceneToFile("res://Scenes/MainMenu.tscn");
+    }
     public Error HostGame(int port = 9999)
     { // from godot docs, This code established a server, or returns an error
+        var addresses = IP.GetLocalAddresses();
+        HostIp= addresses.Where(ip=>ip.Contains(".") && ip.StartsWith("10")).First();
+        GD.Print(HostIp);       
         peer = new ENetMultiplayerPeer();
         var error = peer.CreateServer(port, 2);
         if (error != Error.Ok)
@@ -47,20 +62,24 @@ public partial class NetworkManager : Node
 
         Multiplayer.MultiplayerPeer = peer;
         Role = MultiplayerRole.Server;
-       
+
+        if (HostIp != null)
+        {
+            EmitSignal(SignalName.HostStarted, HostIp);
+        }
         return Error.Ok;
     }
-   
-    public Error JoinGame(string address = "127.0.0.1", int port = 9999)
+    public Error JoinGame(string address, int port = 9999)
     {  //from godot docs, this joins the server, and creates a client
         peer = new ENetMultiplayerPeer();
-        var error = peer.CreateClient(address, port);
+        var error = peer.CreateClient(address, port,0,0,2);
         if (error != Error.Ok)
         {
             GD.Print("client failed");
             return error;
         }
-
+        GD.Print("joining game at: " + address);
+        peer.Host.Compress(ENetConnection.CompressionMode.RangeCoder);
         Multiplayer.MultiplayerPeer = peer;
         Role = MultiplayerRole.Client;
         return Error.Ok;
@@ -69,6 +88,7 @@ public partial class NetworkManager : Node
     { // method from team 8 spring 2025
         GD.Print("Player disconnected: " + id.ToString());
         Multiplayer.MultiplayerPeer = null;
+        GetTree().ChangeSceneToFile("res://scenes/MainMenu.tscn");
     }
     private void ServerDisconnected()
     { // method from team 8 spring 2025
@@ -79,6 +99,8 @@ public partial class NetworkManager : Node
         }
         GD.Print("SERVER DISCONNECTED");
         Multiplayer.MultiplayerPeer = null;
+        //probably should be an error screen
+        GetTree().ChangeSceneToFile("res://scenes/MainMenu.tscn");
     }
     private void OnPeerConnected(long id)
     {
@@ -134,10 +156,11 @@ public partial class NetworkManager : Node
     {// call this on peer, controller handles logic to apply move locally
         var controller = GameController.Controller;
         // the losing side gets to make one additional move before they know the game is over. 
-        //if (controller.GameOver(from, to)) { 
-        //    // the game is over display something
-        //}
-        //else // keep on going
+        if (controller.GameOver(from, to))
+        {
+            LeaveGame();
+        }
+        else // keep on going
             controller.ApplyMove(from, to);
         
     }

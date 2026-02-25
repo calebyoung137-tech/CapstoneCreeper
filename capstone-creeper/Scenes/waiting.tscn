@@ -1,10 +1,23 @@
-[gd_scene load_steps=2 format=3 uid="uid://cfprcd4s2gixl"]
+[gd_scene format=3 uid="uid://bnj3p2re7n4o8"]
 
-[ext_resource type="Script" uid="uid://bhj3182em45ce" path="res://Scenes/Waiting.cs" id="1_iypli"]
+[sub_resource type="CSharpScript" id="CSharpScript_cnjqf"]
+script/source = "using Godot;
 
-[node name="waiting" type="CanvasLayer"]
-script = ExtResource("1_iypli")
+public partial class Waiting : CanvasLayer
+{
+    private Label status;
 
-[node name="statuslabel" type="Label" parent="."]
+    public override void _Ready()
+    {
+        status = GetNode<Label>(\"statuslabel\");
+        status.Text = \"Waiting for player...\";
+    }
+}
+"
+
+[node name="waiting" type="CanvasLayer" unique_id=680024039]
+script = SubResource("CSharpScript_cnjqf")
+
+[node name="statuslabel" type="Label" parent="." unique_id=174551118]
 offset_right = 40.0
 offset_bottom = 23.0

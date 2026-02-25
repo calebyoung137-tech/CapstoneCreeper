@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://d4f73xdd162x0"]
+[gd_scene format=3 uid="uid://d4f73xdd162x0"]
 
-[ext_resource type="Script" uid="uid://dk13fwx55v1ok" path="res://Scenes/PlayMenu.cs" id="1_40c3s"]
+[ext_resource type="Script" uid="uid://dk13fwx55v1ok" path="res://Scripts/View/PlayMenu.cs" id="1_40c3s"]
 
 [node name="PlayMenu" type="Control"]
 layout_mode = 3

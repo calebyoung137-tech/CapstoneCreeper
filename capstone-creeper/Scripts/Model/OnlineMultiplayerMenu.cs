@@ -24,15 +24,13 @@ public partial class OnlineMultiplayerMenu : Control
     private void OnHost()
     { // go to waiting
         NetworkManager.Instance.HostGame(9999);
-        GetTree().ChangeSceneToFile("res://scenes/waiting.tscn");
+        GetTree().ChangeSceneToFile("res://scenes/HostMenu.tscn");
         GD.Print("host pressed");
     }
     
     private void OnJoin()
-    { // go to waiting
-        string ip = "127.0.0.1"; 
-        NetworkManager.Instance.JoinGame(ip, 9999);
-        GetTree().ChangeSceneToFile("res://scenes/waiting.tscn");
+    { 
+        GetTree().ChangeSceneToFile("res://scenes/JoinMenu.tscn");
     }
 
     private void OnBack()
