@@ -26,6 +26,7 @@ public partial class NetworkManager : Node
 	private bool _cleanedUp = false;
 	[Signal]
 	public delegate void HostStartedEventHandler(string ipAddress);
+	public bool connectedToHost = false;
 	 
 	public override void _Ready()
 	{
@@ -38,6 +39,21 @@ public partial class NetworkManager : Node
 		Multiplayer.PeerConnected += OnPeerConnected;
 		Multiplayer.ConnectedToServer += OnConnectedToServer;
 		Multiplayer.ConnectionFailed += OnConnectionFailed;
+	}
+
+	public override void _Process(double delta)
+	{
+		if (Role == MultiplayerRole.Client && connectedToHost && Multiplayer.MultiplayerPeer != null)
+		{
+			var status = Multiplayer.MultiplayerPeer.GetConnectionStatus();
+
+			if (status != MultiplayerPeer.ConnectionStatus.Connected)
+			{
+				GD.Print("Lost connection to host!");
+				Cleanup();
+				GetTree().ChangeSceneToFile("res://Scenes/main_menu.tscn");
+			}
+		}
 	}
 
 	public void LeaveGame() {
@@ -86,37 +102,38 @@ public partial class NetworkManager : Node
 		Role = MultiplayerRole.Client;
 		return Error.Ok;
 	}
-	//private void Cleanup(){
-	//	if (_cleanedUp)
-	//	return;
+	private void Cleanup()
+	{
+		if (_cleanedUp)
+			return;
 
-	//_cleanedUp = true;
+		_cleanedUp = true;
 
-	//if (Multiplayer.MultiplayerPeer != null)
-	//{
-	//	Multiplayer.MultiplayerPeer.Close();
-	//	Multiplayer.MultiplayerPeer = null;
-	//}
+		if (Multiplayer.MultiplayerPeer != null)
+		{
+			Multiplayer.MultiplayerPeer.Close();
+			Multiplayer.MultiplayerPeer = null;
+		}
 
-	//if (peer != null)
-	//{
-	//	peer.Dispose();
-	//	peer = null;
-	//}
+		if (peer != null)
+		{
+			peer.Dispose();
+			peer = null;
+		}
 
-	//Role = MultiplayerRole.None;
-	//}
+		Role = MultiplayerRole.None;
+	}
 	private void PeerDisconnected(long id)
 	{ // method from team 8 spring 2025
 		GD.Print("Player disconnected: " + id.ToString());
-		//Cleanup();
+		Cleanup();
 		GetTree().ChangeSceneToFile("res://scenes/main_menu.tscn");
 	}
 	private void ServerDisconnected()
 	{ // method from team 8 spring 2025
 	   
 		GD.Print("SERVER DISCONNECTED");
-		//Cleanup();
+		Cleanup();
 		//probably should be an error screen
 		GetTree().ChangeSceneToFile("res://scenes/main_menu.tscn");
 	}
@@ -128,6 +145,7 @@ public partial class NetworkManager : Node
 
 	private void OnConnectedToServer()
 	{
+		connectedToHost= true;
 		GD.Print("Connected to server");
 		// tell host to call rpc and start the game
 	  
@@ -176,13 +194,13 @@ public partial class NetworkManager : Node
 	public void ReceiveMove(Vector2I from, Vector2I to)
 	{// call this on peer, controller handles logic to apply move locally
 		var controller = GameController.Controller;
-		// the losing side gets to make one additional move before they know the game is over. 
-		if (controller.GameOver(from, to))
+
+		controller.ApplyMove(from, to);
+
+		if (controller.IsGameOver())
 		{
 			LeaveGame();
 		}
-		else // keep on going
-			controller.ApplyMove(from, to);
 		
 	}
 	

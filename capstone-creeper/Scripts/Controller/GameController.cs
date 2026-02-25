@@ -42,16 +42,15 @@ public partial class GameController : Node
         boardView.Connect("PinClicked", new Callable(this, nameof(HandlePinClicked)));
 
     }
-    public bool GameOver(Vector2I from, Vector2I to) {
-        var tempGameBoard = gameBoard;
-        tempGameBoard.makeMove(from, to);
-        tempGameBoard.clearPossibleMoves();
-        if (tempGameBoard.checkDraw()) {
-            return true;
-        }
-        if (tempGameBoard.checkWin()) {
-            return true;
-        }
+    public bool IsGameOver()
+    {
+        // Clone the board for simulation
+        
+        //gameBoard.clearPossibleMoves();
+
+        if (gameBoard.checkDraw()) return true;
+        if (gameBoard.checkWin()) return true;
+
         return false;
     }
     public override void _EnterTree()
