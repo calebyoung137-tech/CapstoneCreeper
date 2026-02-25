@@ -79,7 +79,7 @@ public partial class NetworkManager : Node
             return error;
         }
         GD.Print("joining game at: " + address);
-        peer.Host.Compress(ENetConnection.CompressionMode.RangeCoder);
+       // peer.Host.Compress(ENetConnection.CompressionMode.RangeCoder);
         Multiplayer.MultiplayerPeer = peer;
         Role = MultiplayerRole.Client;
         return Error.Ok;
@@ -88,7 +88,7 @@ public partial class NetworkManager : Node
     { // method from team 8 spring 2025
         GD.Print("Player disconnected: " + id.ToString());
         Multiplayer.MultiplayerPeer = null;
-        GetTree().ChangeSceneToFile("res://scenes/MainMenu.tscn");
+        GetTree().ChangeSceneToFile("res://Scenes/MainMenu.tscn");
     }
     private void ServerDisconnected()
     { // method from team 8 spring 2025
@@ -100,11 +100,11 @@ public partial class NetworkManager : Node
         GD.Print("SERVER DISCONNECTED");
         Multiplayer.MultiplayerPeer = null;
         //probably should be an error screen
-        GetTree().ChangeSceneToFile("res://scenes/MainMenu.tscn");
+        GetTree().ChangeSceneToFile("res://Scenes/MainMenu.tscn");
     }
     private void OnPeerConnected(long id)
     {
-        GetTree().ChangeSceneToFile("res://scenes/Creeper.tscn");
+        
         GD.Print($"Peer connected");
     }
 
@@ -112,7 +112,7 @@ public partial class NetworkManager : Node
     {
         GD.Print("Connected to server");
         // tell host to call rpc and start the game
-        GetTree().ChangeSceneToFile("res://scenes/Creeper.tscn");
+      
 
         if (Role == MultiplayerRole.Client)
         {
@@ -140,7 +140,7 @@ public partial class NetworkManager : Node
 
     public void LoadGameLocal()
     {
-        GetTree().ChangeSceneToFile("res://scenes/Creeper.tscn");
+        GetTree().ChangeSceneToFile("res://Scenes/Creeper.tscn");
     }
 
     //from godot docs

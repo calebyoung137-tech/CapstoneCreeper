@@ -25,9 +25,13 @@ public partial class JoinMenu : CanvasLayer
 			GD.Print("empty string");
 			return;
 		}
+
 		NetworkManager.Instance.JoinGame(ip, 9999);
-        //GetTree().ChangeSceneToFile("res://scenes/Creeper.tscn");
-    }
+		//GD.Print("before change scene");
+  //      GetTree().ChangeSceneToFile("res://scenes/Creeper.tscn");
+		//GD.Print("after change scene");
+		
+	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
