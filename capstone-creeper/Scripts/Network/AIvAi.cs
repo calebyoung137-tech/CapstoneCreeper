@@ -18,7 +18,7 @@ public partial class AIvAi : CanvasLayer
     private static readonly string connectionToken = "";
     private static readonly System.Net.Http.HttpClient client = new System.Net.Http.HttpClient();
     private Label label;
-	public override void _Ready()
+	public async override void _Ready()
 	{
         GD.Print("reached scene");
         label = GetNode<Label>("DifferentName");
@@ -27,7 +27,7 @@ public partial class AIvAi : CanvasLayer
         
 
         //make method async, do some testing
-        //await AiTournament();
+        await AiTournament();
     }
 	public static async Task<int> CreatePlayer()
     { 
@@ -163,6 +163,7 @@ public partial class AIvAi : CanvasLayer
             {
                 //3.
                 PlayState playState = playStateResponse.Item1;
+                var state = playState.State;
                 // For Trent: Carry out the AI action with the given playstate
                 //4.
                 string aiMove = "";

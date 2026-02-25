@@ -16,9 +16,7 @@ public enum MultiplayerRole
 /// TODO: decide how to handle pressing join when no server is initiated? 
 /// </summary>
 public partial class NetworkManager : Node
-{
-	
-	
+{	
 	public MultiplayerRole Role { get; private set; } = MultiplayerRole.None;
 	public ENetMultiplayerPeer peer;
 	public string HostIp;
@@ -26,8 +24,12 @@ public partial class NetworkManager : Node
 	private bool _cleanedUp = false;
 	
 	public bool connectedToHost = false;
-	 
-	public override void _Ready()
+    private UdpServer discoveryServer;
+    private PacketPeerUdp discoveryPeer;
+
+    private const int DiscoveryPort = 9998;
+
+    public override void _Ready()
 	{
 		//Instantiate Network manager
 		// set the peerconnected, connectedtoserver, and Connection failed properties of multiplayer
@@ -76,7 +78,7 @@ public partial class NetworkManager : Node
 			GD.Print("server fail");
 			return error;
 		}
-
+		
 		Multiplayer.MultiplayerPeer = peer;
 		Role = MultiplayerRole.Server;
 
