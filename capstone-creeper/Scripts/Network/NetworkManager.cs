@@ -104,13 +104,16 @@ public partial class NetworkManager : Node
     }
     private void OnPeerConnected(long id)
     {
+        GetTree().ChangeSceneToFile("res://scenes/Creeper.tscn");
         GD.Print($"Peer connected");
     }
 
     private void OnConnectedToServer()
     {
         GD.Print("Connected to server");
-       // tell host to call rpc and start the game
+        // tell host to call rpc and start the game
+        GetTree().ChangeSceneToFile("res://scenes/Creeper.tscn");
+
         if (Role == MultiplayerRole.Client)
         {
             RpcId(1, nameof(ClientReady), Multiplayer.GetUniqueId());

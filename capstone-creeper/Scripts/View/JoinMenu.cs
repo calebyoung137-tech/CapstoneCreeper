@@ -26,7 +26,8 @@ public partial class JoinMenu : CanvasLayer
 			return;
 		}
 		NetworkManager.Instance.JoinGame(ip, 9999);
-	}
+        //GetTree().ChangeSceneToFile("res://scenes/Creeper.tscn");
+    }
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
