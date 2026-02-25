@@ -26,7 +26,7 @@ public partial class JoinMenu : CanvasLayer
 			return;
 		}
 
-		NetworkManager.Instance.JoinGame(ip, 9999);
+		GetNode<NetworkManager>("/root/Network").JoinGame(ip, 9999);
 		//GD.Print("before change scene");
   //      GetTree().ChangeSceneToFile("res://scenes/Creeper.tscn");
 		//GD.Print("after change scene");

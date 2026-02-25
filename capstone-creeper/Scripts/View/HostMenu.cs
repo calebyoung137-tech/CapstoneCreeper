@@ -8,9 +8,9 @@ public partial class HostMenu : CanvasLayer
 	public override void _Ready()
 	{
 		ip = GetNode<Label>("IPLabel");
-		NetworkManager.Instance.HostStarted+=OnHostStarted;
-		if (!string.IsNullOrEmpty(NetworkManager.Instance.HostIp)) {
-			OnHostStarted(NetworkManager.Instance.HostIp);
+		GetNode<NetworkManager>("/root/Network").HostStarted+=OnHostStarted;
+		if (!string.IsNullOrEmpty(GetNode<NetworkManager>("/root/Network").HostIp)) {
+			OnHostStarted(GetNode<NetworkManager>("/root/Network").HostIp);
 		}
 	}
 	public void OnHostStarted(string ipAddress) { 

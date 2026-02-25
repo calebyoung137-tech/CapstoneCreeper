@@ -141,7 +141,7 @@ public partial class GameController : Node
 
                     if (GameSettings.Mode == GameMode.OnlineMultiplayer)
                     { // if multiplayer, send the move, and apply locally
-                        NetworkManager.Instance.SendMove(selectedPin, boardPos);
+                        GetNode<NetworkManager>("/root/Network").SendMove(selectedPin, boardPos);
                     }
                     gameBoard.makeMove(selectedPin, boardPos);
                     gameBoard.clearPossibleMoves();

@@ -23,7 +23,7 @@ public partial class OnlineMultiplayerMenu : Control
 
     private void OnHost()
     { // go to waiting
-        NetworkManager.Instance.HostGame(9999);
+        GetNode<NetworkManager>("/root/Network").HostGame(9999);
         GetTree().ChangeSceneToFile("res://scenes/HostMenu.tscn");
         GD.Print("host pressed");
     }
