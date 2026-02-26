@@ -226,30 +226,30 @@ public class AIController
 
 	}
 
-	// Converts a Move into softserve move notation
-	//      Parameters: Move struct
-	//      Returns: A string in softserve move notation
-	private string ConvertMoveToString(Move move)
-	{
-		string result = "";
+    // Converts a Move into softserve move notation
+    //      Parameters: Move struct
+    //      Returns: A string in softserve move notation
+    private string ConvertMoveToString(Move move)
+    {
+        string result = "";
 
-		int startX = move.start.X;
-		int startY = move.start.Y + 1;
-		int endX = move.end.X;
-		int endY = move.end.Y + 1;
+        int startRow = move.start.X + 1;
+        int startCol = move.start.Y;
+        int endRow = move.end.X + 1;
+        int endCol = move.end.Y;
 
-		result += (char)('a' + startX);
-		result += startY;
-		result += (char)('a' + endX);
-		result += endY;
+        result += (char)('a' + startCol);
+        result += startRow;
+        result += (char)('a' + endCol);
+        result += endRow;
 
-		return result;
-	}
+        return result;
+    }
 
-	// Modifies the gameboard to reflect a move being made
-	//      Parameters: Move struct
-	//		Returns: none
-	private void MakeMove(Move move)
+    // Modifies the gameboard to reflect a move being made
+    //      Parameters: Move struct
+    //		Returns: none
+    private void MakeMove(Move move)
 	{
 		Vector2I pinStart = move.start;
 		Vector2I pinDestination = move.end;
