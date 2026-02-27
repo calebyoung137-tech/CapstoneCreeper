@@ -1,12 +1,11 @@
 using Godot;
 using System;
 namespace Model;
-using System.Collections.Generic;
-using System.Data;
-using static Godot.XmlParser;
-using static Model.MoveType;
 using static Model.PinType;
 using static Model.TileType;
+using static Model.MoveType;
+using System.Collections.Generic;
+using System.Data;
 
 // struct used to store moves
 //      contains:   the starting coordinates of moved pin,
@@ -235,15 +234,15 @@ public class AIController
     {
         string result = "";
 
-        int startX = move.start.X;
-        int startY = move.start.Y + 1;
-        int endX = move.end.X;
-        int endY = move.end.Y + 1;
+        int startRow = move.start.X + 1;
+        int startCol = move.start.Y;
+        int endRow = move.end.X + 1;
+        int endCol = move.end.Y;
 
-        result += (char)('a' + startX);
-        result += startY;
-        result += (char)('a' + endX);
-        result += endY;
+        result += (char)('a' + startCol);
+        result += startRow;
+        result += (char)('a' + endCol);
+        result += endRow;
 
         return result;
     }

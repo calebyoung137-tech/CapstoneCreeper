@@ -16,8 +16,8 @@ public partial class AIvAi : CanvasLayer
     private static readonly string CreateEventUrl = baseUrl + "/event/create";
     private static readonly string playStateUrl = baseUrl + "/aivai/play-state";
     private static readonly string actionUrl = baseUrl + "/aivai/submit-action";
-    // private static readonly string connectionToken = "I8TCqmU5KqeUg1lR3DmhvwxGeH1Zy2UFpTqyjid5hDk"; team 8 token
-    private static readonly string connectionToken = "zlbM6MsNf0EqPS9GyKAWW9h6ZtHd6vLU_LAnKgfjbmQ"; // team 82 token
+    private static readonly string connectionToken = "I8TCqmU5KqeUg1lR3DmhvwxGeH1Zy2UFpTqyjid5hDk"; //team 8 token
+    //private static readonly string connectionToken = "zlbM6MsNf0EqPS9GyKAWW9h6ZtHd6vLU_LAnKgfjbmQ"; // team 82 token
     private static readonly System.Net.Http.HttpClient client = new System.Net.Http.HttpClient();
     private Label label;
 	public async override void _Ready()
@@ -71,9 +71,9 @@ public partial class AIvAi : CanvasLayer
         using StringContent jsonContent = new(
         JsonSerializer.Serialize(new
         {
-            player = "team82", // ??
+            player = "team8", // ??
             token = connectionToken,
-            @event = "mirror" // learned something new, how neat. I can use reserved key words.
+            @event = "midterm" // learned something new, how neat. I can use reserved key words.
         }),
         Encoding.UTF8,
         "application/json");
@@ -101,7 +101,7 @@ public partial class AIvAi : CanvasLayer
         JsonSerializer.Serialize(new
         {
             action = Action,
-            player= "team82", 
+            player= "team8", 
             token= connectionToken,
             action_id=actionId
         }),
@@ -127,7 +127,7 @@ public partial class AIvAi : CanvasLayer
         using StringContent jsonContent = new(
        JsonSerializer.Serialize(new
        {
-           name = "Team8",
+           name = "team8",
            players = Players,
            game_pairs=10
        }),
@@ -162,7 +162,11 @@ public partial class AIvAi : CanvasLayer
             {
                 await Task.Delay(3000);
             }
-            else 
+            else if (playStateResponse.Item2 == System.Net.HttpStatusCode.InternalServerError || playStateResponse.Item2 == System.Net.HttpStatusCode.ServiceUnavailable) {
+               //500
+                await Task.Delay(3000);
+            }
+            else
             {
                 //GD.Print(playStateResponse.Item2);
                 //3.
