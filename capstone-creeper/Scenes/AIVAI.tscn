@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://cbhk7sydjbdk5"]
+
+[ext_resource type="Script" uid="uid://8tocar3ytd1k" path="res://Scripts/Network/AIvAi.cs" id="1_jo0lq"]
+
+[node name="AIvAI" type="CanvasLayer"]
+script = ExtResource("1_jo0lq")
+
+[node name="DifferentName" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 23.0
