@@ -5,6 +5,4 @@ onlineMultiplayerMenu.cs and scene - type is control and has child vboxcontainer
 gamesettings.cs 
 changes to game controller - _EnterTree() method, if online multiplayer, call send move.
 
-Under project -> project settings -> globals -> autoload: include path to network manager and name NetworkManager, this is to avoid null object reference errors.
-do not pull: 
-main menu, play menu
+
