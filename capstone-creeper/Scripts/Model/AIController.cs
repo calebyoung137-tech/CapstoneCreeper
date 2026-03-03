@@ -90,11 +90,11 @@ public class AIController
 
 	public Move GetBestMove(string state)
 	{
-        ConvertStateToBoard(state);
-        Move bestMove;
-        Minimax(5, int.MinValue, int.MaxValue, WhitePlayer, out bestMove);
-        return bestMove;
-    }
+		ConvertStateToBoard(state);
+		Move bestMove;
+		Minimax(5, int.MinValue, int.MaxValue, WhitePlayer, out bestMove);
+		return bestMove;
+	}
 
 	// Possible ConvertBoardToString function?
 	//      Would allow for a string to be generated in softserve state notation
@@ -110,13 +110,13 @@ public class AIController
 	//      Returns: void
 	private void ConvertStateToBoard(string state)
 	{
-        whitePinCount = 0;
-        blackPinCount = 0;
-        whiteTileCount = 0;
-        blackTileCount = 0;
+		whitePinCount = 0;
+		blackPinCount = 0;
+		whiteTileCount = 0;
+		blackTileCount = 0;
 
-        // 49 characters represent pin grid ( 7 x 7 )
-        for (int i = 0; i < 49; i++)
+		// 49 characters represent pin grid ( 7 x 7 )
+		for (int i = 0; i < 49; i++)
 		{
 			int row = i / 7;
 			int col = i % 7;
@@ -159,7 +159,7 @@ public class AIController
 
 		// 1 character represents current player
 		WhitePlayer = (state[85] == 'x');
-    }
+	}
 
 	// Minimax algorithm
 	//      Parameters: 
@@ -175,10 +175,10 @@ public class AIController
 			affectedPosition = new Vector2I(-1, -1)
 		};
 
-        if (InWinningPosition(TileType.White)) return WIN_SCORE + depth;
+		if (InWinningPosition(TileType.White)) return WIN_SCORE + depth;
 		if (InWinningPosition(TileType.Black)) return -WIN_SCORE - depth;
 		if (whitePinCount == 0 || blackPinCount == 0) return 0;
-        if (depth == 0) return Heuristic();
+		if (depth == 0) return Heuristic();
 
 		if (isMaximizing)
 		{
@@ -226,30 +226,30 @@ public class AIController
 
 	}
 
-    // Converts a Move into softserve move notation
-    //      Parameters: Move struct
-    //      Returns: A string in softserve move notation
-    private string ConvertMoveToString(Move move)
-    {
-        string result = "";
+	// Converts a Move into softserve move notation
+	//      Parameters: Move struct
+	//      Returns: A string in softserve move notation
+	private string ConvertMoveToString(Move move)
+	{
+		string result = "";
 
-        int startRow = move.start.X + 1;
-        int startCol = move.start.Y;
-        int endRow = move.end.X + 1;
-        int endCol = move.end.Y;
+		int startRow = move.start.X + 1;
+		int startCol = move.start.Y;
+		int endRow = move.end.X + 1;
+		int endCol = move.end.Y;
 
-        result += (char)('a' + startCol);
-        result += startRow;
-        result += (char)('a' + endCol);
-        result += endRow;
+		result += (char)('a' + startCol);
+		result += startRow;
+		result += (char)('a' + endCol);
+		result += endRow;
 
-        return result;
-    }
+		return result;
+	}
 
-    // Modifies the gameboard to reflect a move being made
-    //      Parameters: Move struct
-    //		Returns: none
-    private void MakeMove(Move move)
+	// Modifies the gameboard to reflect a move being made
+	//      Parameters: Move struct
+	//		Returns: none
+	private void MakeMove(Move move)
 	{
 		Vector2I pinStart = move.start;
 		Vector2I pinDestination = move.end;
@@ -263,8 +263,8 @@ public class AIController
 			// stores capturedPin owner
 			PinType capturedPin = Pins[move.affectedPosition.X, move.affectedPosition.Y];
 
-            // Removes captured pin
-            Pins[move.affectedPosition.X, move.affectedPosition.Y] = PinType.Empty;
+			// Removes captured pin
+			Pins[move.affectedPosition.X, move.affectedPosition.Y] = PinType.Empty;
 
 			// updates pin count
 			if (capturedPin == PinType.Black) blackPinCount--;
@@ -273,16 +273,16 @@ public class AIController
 		else if (move.type == MoveType.TileCapture)
 		{
 			// stores current player
-            TileType curPlayer = TileType.Black;
-            if (Pins[pinDestination.X, pinDestination.Y] == PinType.White) curPlayer = TileType.White;
+			TileType curPlayer = TileType.Black;
+			if (Pins[pinDestination.X, pinDestination.Y] == PinType.White) curPlayer = TileType.White;
 
 			// stores affected opponent
 			TileType capturedTile = Tiles[move.affectedPosition.X, move.affectedPosition.Y];
 
-            // Changes tile to color of current player
+			// Changes tile to color of current player
 			if (capturedTile != curPlayer)
 			{
-                Tiles[move.affectedPosition.X, move.affectedPosition.Y] = curPlayer;
+				Tiles[move.affectedPosition.X, move.affectedPosition.Y] = curPlayer;
 
 				// updates tile counts
 				if (curPlayer == TileType.White)			whiteTileCount++;
@@ -290,37 +290,37 @@ public class AIController
 
 				if (capturedTile == TileType.White)			whiteTileCount--;
 				else if (capturedTile == TileType.Black)	blackTileCount--;
-            }
+			}
 		}
 	}
 
-    // Modifies the gameboard to undo a move that was previously made
-    //      Parameters: Move struct
-    //		Returns: none
-    private void UndoMove(Move move)
-    {
-        Vector2I pinStart = move.start;
-        Vector2I pinDestination = move.end;
+	// Modifies the gameboard to undo a move that was previously made
+	//      Parameters: Move struct
+	//		Returns: none
+	private void UndoMove(Move move)
+	{
+		Vector2I pinStart = move.start;
+		Vector2I pinDestination = move.end;
 
-        // Moves pin back to starting position
-        Pins[pinStart.X, pinStart.Y] = Pins[pinDestination.X, pinDestination.Y];
-        Pins[pinDestination.X, pinDestination.Y] = PinType.Empty;
+		// Moves pin back to starting position
+		Pins[pinStart.X, pinStart.Y] = Pins[pinDestination.X, pinDestination.Y];
+		Pins[pinDestination.X, pinDestination.Y] = PinType.Empty;
 
-        if (move.type == MoveType.PinCapture)
-        {
+		if (move.type == MoveType.PinCapture)
+		{
 			// checks owner of the removed pin
 			PinType removedPin = PinType.Black;
 			if (move.affectedPieceOwner == TileType.White) removedPin = PinType.White;
 
-            // Puts captured pin back
-            Pins[move.affectedPosition.X, move.affectedPosition.Y] = removedPin;
+			// Puts captured pin back
+			Pins[move.affectedPosition.X, move.affectedPosition.Y] = removedPin;
 
 			// updates pin count
 			if (removedPin == PinType.White) whitePinCount++;
 			else blackPinCount++;
-        }
-        else if (move.type == MoveType.TileCapture)
-        {
+		}
+		else if (move.type == MoveType.TileCapture)
+		{
 			// checks current tile color
 			TileType capturedColor = Tiles[move.affectedPosition.X, move.affectedPosition.Y];
 
@@ -329,7 +329,7 @@ public class AIController
 			if (capturedColor != originalColor)
 			{
 				// changes tile back to original color
-                Tiles[move.affectedPosition.X, move.affectedPosition.Y] = originalColor;
+				Tiles[move.affectedPosition.X, move.affectedPosition.Y] = originalColor;
 
 				// updates tile counts
 				if (capturedColor == TileType.White) whiteTileCount--;
@@ -337,10 +337,10 @@ public class AIController
 
 				if (originalColor == TileType.White) whiteTileCount++;
 				else if (originalColor == TileType.Black) blackTileCount++;
-            }
-            
-        }
-    }
+			}
+			
+		}
+	}
 
 	// Creates a list of legal moves at the current board position
 	//		parameters: PinType of curPlayer
@@ -380,80 +380,80 @@ public class AIController
 				{
 					pinsFound++;
 
-                    // check for adjacent vertical and horizontal empty spaces
-                    var directions = new[] { (0, 1), (1, 0), (0, -1), (-1, 0) };
+					// check for adjacent vertical and horizontal empty spaces
+					var directions = new[] { (0, 1), (1, 0), (0, -1), (-1, 0) };
 					foreach (var (dr, dc) in directions)
 					{
 						if (PinInBounds(curRow + dr, curCol + dc) &&
-                            Pins[curRow + dr, curCol + dc] == PinType.Empty)
+							Pins[curRow + dr, curCol + dc] == PinType.Empty)
 						{
-                            // legal BasicMove found
-                            moves.Add(new Move
-                            {
-                                start = new Vector2I(curRow, curCol),
-                                end = new Vector2I(curRow + dr, curCol + dc),
-                                type = MoveType.BasicMove,
-                                affectedPieceOwner = TileType.Empty,
-                                affectedPosition = new Vector2I(-1, -1)
-                            });
-                        }
+							// legal BasicMove found
+							moves.Add(new Move
+							{
+								start = new Vector2I(curRow, curCol),
+								end = new Vector2I(curRow + dr, curCol + dc),
+								type = MoveType.BasicMove,
+								affectedPieceOwner = TileType.Empty,
+								affectedPosition = new Vector2I(-1, -1)
+							});
+						}
 						else if (PinInBounds(curRow + 2*dr, curCol + 2*dc) &&
-                                 Pins[curRow + dr, curCol + dc] == oppPin &&
-                                 Pins[curRow + 2*dr, curCol + 2*dc] == PinType.Empty)
+								 Pins[curRow + dr, curCol + dc] == oppPin &&
+								 Pins[curRow + 2*dr, curCol + 2*dc] == PinType.Empty)
 						{
-                            // legal PinCapture found
-                            moves.Add(new Move
-                            {
-                                start = new Vector2I(curRow, curCol),
-                                end = new Vector2I(curRow + 2*dr, curCol + 2*dc),
-                                type = MoveType.PinCapture,
-                                affectedPieceOwner = oppTile,
-                                affectedPosition = new Vector2I(curRow + dr, curCol + dc)
-                            });
-                        }
-                    }
+							// legal PinCapture found
+							moves.Add(new Move
+							{
+								start = new Vector2I(curRow, curCol),
+								end = new Vector2I(curRow + 2*dr, curCol + 2*dc),
+								type = MoveType.PinCapture,
+								affectedPieceOwner = oppTile,
+								affectedPosition = new Vector2I(curRow + dr, curCol + dc)
+							});
+						}
+					}
 
-                    // check for adjacent diagonal spaces
-                    var diagonals = new[] { (1, 1, 0, 0), (1, -1, 0, -1), (-1, -1, -1, -1), (-1, 1, -1, 0) };
+					// check for adjacent diagonal spaces
+					var diagonals = new[] { (1, 1, 0, 0), (1, -1, 0, -1), (-1, -1, -1, -1), (-1, 1, -1, 0) };
 					foreach (var (dr, dc, tileR, tileC) in diagonals)
 					{
-                        if (PinInBounds(curRow + dr, curCol + dc) &&
-                            Pins[curRow + dr, curCol + dc] == PinType.Empty &&
+						if (PinInBounds(curRow + dr, curCol + dc) &&
+							Pins[curRow + dr, curCol + dc] == PinType.Empty &&
 							TileInBounds(curRow + tileR, curCol + tileC))
-                        {
-                            // legal TileCapture found
-                            moves.Add(new Move
-                            {
-                                start = new Vector2I(curRow, curCol),
-                                end = new Vector2I(curRow + dr, curCol + dc),
-                                type = MoveType.TileCapture,
-                                affectedPieceOwner = Tiles[curRow + tileR, curCol + tileC],
-                                affectedPosition = new Vector2I(curRow + tileR, curCol + tileC)
-                            });
-                        }
-                    }
+						{
+							// legal TileCapture found
+							moves.Add(new Move
+							{
+								start = new Vector2I(curRow, curCol),
+								end = new Vector2I(curRow + dr, curCol + dc),
+								type = MoveType.TileCapture,
+								affectedPieceOwner = Tiles[curRow + tileR, curCol + tileC],
+								affectedPosition = new Vector2I(curRow + tileR, curCol + tileC)
+							});
+						}
+					}
 
-                }
+				}
 
 			}
 		}
 
-        // Sort moves: Captures first, then basic moves
+		// Sort moves: Captures first, then basic moves
 		//		Generated by Claude AI
-        moves.Sort((a, b) =>
-        {
-            // Pin captures are most valuable
-            if (a.type == MoveType.PinCapture && b.type != MoveType.PinCapture) return -1;
-            if (b.type == MoveType.PinCapture && a.type != MoveType.PinCapture) return 1;
+		moves.Sort((a, b) =>
+		{
+			// Pin captures are most valuable
+			if (a.type == MoveType.PinCapture && b.type != MoveType.PinCapture) return -1;
+			if (b.type == MoveType.PinCapture && a.type != MoveType.PinCapture) return 1;
 
-            // Tile captures next
-            if (a.type == MoveType.TileCapture && b.type == MoveType.BasicMove) return -1;
-            if (b.type == MoveType.TileCapture && a.type == MoveType.BasicMove) return 1;
+			// Tile captures next
+			if (a.type == MoveType.TileCapture && b.type == MoveType.BasicMove) return -1;
+			if (b.type == MoveType.TileCapture && a.type == MoveType.BasicMove) return 1;
 
-            return 0;
-        });
+			return 0;
+		});
 
-        return moves;
+		return moves;
 	}
 
 	// Checks if a coordinate for a pin is in bounds
@@ -467,42 +467,42 @@ public class AIController
 		}
 
 		if ((row == 0 && col == 0) ||
-            (row == 0 && col == 6) ||
-            (row == 6 && col == 6) ||
-            (row == 6 && col == 0))
+			(row == 0 && col == 6) ||
+			(row == 6 && col == 6) ||
+			(row == 6 && col == 0))
 		{
 			return false;
 		}
 
 		return true;
-    }
-
-    // Checks if a coordinate for a tile is in bounds (includes disallowing corner tiles)
-    //		parameters: int row and int col representing coordinates of tile
-    //		returns: bool representing whether the tile is in bounds
-    private bool TileInBounds(int row, int col)
-	{
-        if (row < 0 || row > 5 || col < 0 || col > 5)
-        {
-            return false;
-        }
-
-        if ((row == 0 && col == 0) ||
-            (row == 0 && col == 5) ||
-            (row == 5 && col == 5) ||
-            (row == 5 && col == 0))
-        {
-            return false;
-        }
-
-        return true;
 	}
 
-    // Checks if there is a path between a start and an end point of all the same color
-    //		Parameters: Color TileType
-    //		Returns: bool of whether the provided TileType has won
-    //		( Created with assistance from Claude.ai )
-    private bool InWinningPosition(TileType color)
+	// Checks if a coordinate for a tile is in bounds (includes disallowing corner tiles)
+	//		parameters: int row and int col representing coordinates of tile
+	//		returns: bool representing whether the tile is in bounds
+	private bool TileInBounds(int row, int col)
+	{
+		if (row < 0 || row > 5 || col < 0 || col > 5)
+		{
+			return false;
+		}
+
+		if ((row == 0 && col == 0) ||
+			(row == 0 && col == 5) ||
+			(row == 5 && col == 5) ||
+			(row == 5 && col == 0))
+		{
+			return false;
+		}
+
+		return true;
+	}
+
+	// Checks if there is a path between a start and an end point of all the same color
+	//		Parameters: Color TileType
+	//		Returns: bool of whether the provided TileType has won
+	//		( Created with assistance from Claude.ai )
+	private bool InWinningPosition(TileType color)
 	{
 		Vector2I start = new Vector2I();
 		Vector2I end = new Vector2I();
@@ -519,12 +519,12 @@ public class AIController
 		else 
 		{
 			// checking for black tile victory
-            start.X = 0;
-            start.Y = 0;
+			start.X = 0;
+			start.Y = 0;
 
-            end.X = 5;
-            end.Y = 5;
-        }
+			end.X = 5;
+			end.Y = 5;
+		}
 
 		var visited = new HashSet<(int, int)>();
 		var queue = new Queue<(int, int)>();
@@ -613,9 +613,9 @@ public class AIController
 		}
 		else
 		{
-            start = new Vector2I(0, 0);
-            end = new Vector2I(5, 5);
-        }
+			start = new Vector2I(0, 0);
+			end = new Vector2I(5, 5);
+		}
 
 		var priorityQueue = new SortedSet<(int cost, int row, int col)>();
 		var visited = new HashSet<(int row, int col)>();
@@ -635,8 +635,8 @@ public class AIController
 				return curCost;
 			}
 
-            var directions = new[] { (0, 1), (1, 0), (0, -1), (-1, 0) };
-            foreach (var (dr, dc) in directions)
+			var directions = new[] { (0, 1), (1, 0), (0, -1), (-1, 0) };
+			foreach (var (dr, dc) in directions)
 			{
 				int newRow = curRow + dr;
 				int newCol = curCol + dc;
@@ -650,36 +650,36 @@ public class AIController
 				}
 			}
 
-        }
+		}
 
-        return Math.Abs(end.X - start.X) + Math.Abs(end.Y - start.Y);
-    }
+		return Math.Abs(end.X - start.X) + Math.Abs(end.Y - start.Y);
+	}
 
-    // Uses BFS to count the tiles reachable from either corner
-    //		Parameters: TileType player
+	// Uses BFS to count the tiles reachable from either corner
+	//		Parameters: TileType player
 	//		Returns: number of player's tiles reachable from either corner
 	//			Made with assistance from Claude AI
-    private int CountConnectedTiles(TileType player)
+	private int CountConnectedTiles(TileType player)
 	{
-        Vector2I corner1;
-        Vector2I corner2;
+		Vector2I corner1;
+		Vector2I corner2;
 
-        if (player == TileType.White)
-        {
-            corner1 = new Vector2I(0, 5);
-            corner2 = new Vector2I(5, 0);
-        }
-        else
-        {
-            corner1 = new Vector2I(0, 0);
-            corner2 = new Vector2I(5, 5);
-        }
+		if (player == TileType.White)
+		{
+			corner1 = new Vector2I(0, 5);
+			corner2 = new Vector2I(5, 0);
+		}
+		else
+		{
+			corner1 = new Vector2I(0, 0);
+			corner2 = new Vector2I(5, 5);
+		}
 
 		int count1 = BFSFromPosition(corner1.X, corner1.Y, player);
 		int count2 = BFSFromPosition(corner2.X, corner2.Y, player);
 
 		return count1 + count2;
-    }
+	}
 
 	// Counts the number of a players tiles that are reachable from a designated position
 	//		Parameters: starting row and col, and TileType player
@@ -690,31 +690,31 @@ public class AIController
 		var visited = new HashSet<(int, int)>();
 
 		queue.Enqueue((startRow, startCol));
-        visited.Add((startRow, startCol));
+		visited.Add((startRow, startCol));
 
 		while (queue.Count > 0)
 		{
 			var (curRow, curCol) = queue.Dequeue();
 
-            var directions = new[] { (0, 1), (1, 0), (0, -1), (-1, 0) };
-            foreach (var (dr, dc) in directions)
+			var directions = new[] { (0, 1), (1, 0), (0, -1), (-1, 0) };
+			foreach (var (dr, dc) in directions)
 			{
-                int newRow = curRow + dr;
-                int newCol = curCol + dc;
+				int newRow = curRow + dr;
+				int newCol = curCol + dc;
 
-                if (!visited.Contains((newRow, newCol)) &&
-                    newRow >= 0 && newRow <= 5 &&
-                    newCol >= 0 && newCol <= 5 &&
-                    Tiles[newRow, newCol] == player)
-                {
-                    visited.Add((newRow, newCol));
-                    queue.Enqueue((newRow, newCol));
-                }
-            }
+				if (!visited.Contains((newRow, newCol)) &&
+					newRow >= 0 && newRow <= 5 &&
+					newCol >= 0 && newCol <= 5 &&
+					Tiles[newRow, newCol] == player)
+				{
+					visited.Add((newRow, newCol));
+					queue.Enqueue((newRow, newCol));
+				}
+			}
 
-        }
+		}
 
 		return visited.Count;
-    }
+	}
 
 }
