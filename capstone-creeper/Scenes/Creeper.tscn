@@ -1,15 +1,20 @@
-[gd_scene load_steps=4 format=3 uid="uid://d300s8sjv8y60"]
+[gd_scene load_steps=5 format=3 uid="uid://d300s8sjv8y60"]
 
 [ext_resource type="Script" uid="uid://d32apyva0tm88" path="res://Scripts/View/BoardView.cs" id="1_0hxd0"]
+[ext_resource type="Script" uid="uid://cdfk5kj8kkqwe" path="res://Scripts/View/BoardBackground.cs" id="2_bw8jy"]
 [ext_resource type="Script" uid="uid://wrlrobpcoifo" path="res://Scripts/Controller/GameController.cs" id="2_hao4k"]
 [ext_resource type="Script" uid="uid://beraphv7f37kf" path="res://Scripts/Network/NetworkManager.cs" id="3_1wijr"]
 
 [node name="Creeper" type="Node2D"]
-position = Vector2(-4, -3)
+position = Vector2(979, 429)
 
 [node name="BoardView" type="Node2D" parent="."]
-position = Vector2(371, 104)
+position = Vector2(-547, -282)
 script = ExtResource("1_0hxd0")
+
+[node name="BoardBackground" type="Node2D" parent="BoardView"]
+position = Vector2(262, 131)
+script = ExtResource("2_bw8jy")
 
 [node name="GameController" type="Node" parent="."]
 script = ExtResource("2_hao4k")
