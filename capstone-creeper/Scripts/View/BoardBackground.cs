@@ -6,6 +6,8 @@ public partial class BoardBackground : Node2D
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
+		Position = Vector2.Zero;
+		
 		for (int i = 0; i < 6; i++)
 		{
 			for (int j = 0; j < 6; j++)
@@ -17,9 +19,30 @@ public partial class BoardBackground : Node2D
 				// Set the region rectangle
 				grassTile.RegionRect = new Rect2(192.0f, 192.3f, 64f, 64f);
 				grassTile.Scale = new Vector2(1.7f, 1.7f); 
-				grassTile.Position = new Vector2(i * 104, j * 104);
-				grassTile.ZIndex = 1; 
+				grassTile.Position = new Vector2(i * 98, j * 98);
+				grassTile.ZIndex = -2; 
 				AddChild(grassTile);
+			}
+		}
+
+		for (int i = 0; i < 7; i++)
+		{
+			for (int j = 0; j < 7; j++)
+			{
+				if (!(i == 0 && j == 0 || i == 0 && j == 6 || i == 6 && j == 0 || i == 6 && j == 6))
+				{
+					Sprite2D grassTile = new Sprite2D();
+					grassTile.Texture = GD.Load<Texture2D>("res://Assets/Tiny Swords (Free Pack)/Terrain/Tileset/Tilemap_color5.png");
+					grassTile.RegionEnabled = true;
+
+					// Set the region rectangle
+					grassTile.RegionRect = new Rect2(192.0f, 192.3f, 64f, 64f);
+					grassTile.Scale = new Vector2(0.9f, 0.9f);
+					grassTile.RotationDegrees = 45;
+					grassTile.Position = new Vector2((i * 98) - 49, (j * 98) - 49);
+					grassTile.ZIndex = -1;
+					AddChild(grassTile);
+				}
 			}
 		}
 

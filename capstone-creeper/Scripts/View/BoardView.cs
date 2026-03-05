@@ -10,8 +10,8 @@ public partial class BoardView : Node2D
 	[Signal]
 	public delegate void PinClickedEventHandler(Vector2I pin);
 
-	private int pinSize = 16;
-	private int tileSize = 50; 
+	//private int pinSize = 16;
+	//private int tileSize = 50; 
 
 	public partial class Tile : ColorRect
 	{
@@ -28,7 +28,9 @@ public partial class BoardView : Node2D
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		for (int i = 0; i < 7; i++)
+        Position = new Vector2(712, 285);
+
+        for (int i = 0; i < 7; i++)
 		{
 			for (int j = 0; j < 7; j++)
 			{
@@ -38,10 +40,10 @@ public partial class BoardView : Node2D
 					pin.GridPos.X = i;
 					pin.GridPos.Y = j;
 					pins[new Vector2I(i, j)] = pin;
-					pin.Size = new Vector2(pinSize, pinSize);
+					pin.Size = new Vector2(16, 16);
 
 					pin.Color = new Color(0.2f, 0.6f, 1.0f);
-					pin.Position = new Vector2(i * (pinSize + tileSize), j * (tileSize + pinSize));
+					pin.Position = new Vector2((i * 98) - 48 - 8, (j * 98) - 48 - 8);
 					AddChild(pin);
 					pin.GuiInput += (InputEvent @event) =>
 					{
@@ -66,13 +68,13 @@ public partial class BoardView : Node2D
 				tiles[new Vector2I(i, j)] = tile;
 
 				// Set size and color
-				tile.Size = new Vector2(tileSize, tileSize);
+				tile.Size = new Vector2(30, 30);
 
 
 				tile.Color = new Color(0.2f, 0.6f, 1.0f); // light blue
 
 				// Optional: position it
-				tile.Position = new Vector2((i * (tileSize + pinSize)) + pinSize, (j * (tileSize + pinSize)) + pinSize);
+				tile.Position = new Vector2(i * 98 - 15, j * 98 - 15);
 				
 
 				AddChild(tile);
