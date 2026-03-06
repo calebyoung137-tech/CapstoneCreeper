@@ -1,10 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://d300s8sjv8y60"]
+[gd_scene load_steps=5 format=3 uid="uid://d300s8sjv8y60"]
 
 [ext_resource type="Script" uid="uid://d32apyva0tm88" path="res://Scripts/View/BoardView.cs" id="1_0hxd0"]
 [ext_resource type="Script" uid="uid://cdfk5kj8kkqwe" path="res://Scripts/View/BoardBackground.cs" id="2_bw8jy"]
 [ext_resource type="Script" uid="uid://wrlrobpcoifo" path="res://Scripts/Controller/GameController.cs" id="2_hao4k"]
 [ext_resource type="Script" uid="uid://beraphv7f37kf" path="res://Scripts/Network/NetworkManager.cs" id="3_1wijr"]
-[ext_resource type="Script" uid="uid://ds518bsgpmy2d" path="res://Scenes/IdleKnight.cs" id="5_bw8jy"]
 
 [node name="Creeper" type="Node2D"]
 position = Vector2(0, 2)
@@ -26,7 +25,3 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("3_1wijr")
-
-[node name="IdleKnight" type="Node2D" parent="NetworkManager"]
-position = Vector2(163, 247)
-script = ExtResource("5_bw8jy")

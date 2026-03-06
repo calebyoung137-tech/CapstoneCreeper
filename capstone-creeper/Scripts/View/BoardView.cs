@@ -118,24 +118,32 @@ public partial class BoardView : Node2D
 					{
 						AnimatedSprite2D sprite = pin.GetChild<IdleKnight>(1).GetChild<AnimatedSprite2D>(0); 
 						sprite.Visible = false;
-                        //pin.Color = new Color(0.2f, 0.6f, 1.0f); // light blue
+          
                     }
 					else if (gameBoard.Pins[i, j] == PinType.Black)
 					{
                         AnimatedSprite2D sprite = pin.GetChild<IdleKnight>(1).GetChild<AnimatedSprite2D>(0);
                         sprite.Visible = true;
+                        pin.GetChild<IdleKnight>(1).setKnight("Blue", pin.GetChild<IdleKnight>(1).GetChild<AnimatedSprite2D>(0));
+
+
                     }
-					else if (gameBoard.Pins[i, j] == PinType.White)
+                    else if (gameBoard.Pins[i, j] == PinType.White)
 					{
                         AnimatedSprite2D sprite = pin.GetChild<IdleKnight>(1).GetChild<AnimatedSprite2D>(0);
                         sprite.Visible = true;
+                        pin.GetChild<IdleKnight>(1).setKnight("Red", pin.GetChild<IdleKnight>(1).GetChild<AnimatedSprite2D>(0));
+
+
                     }
-					else if (gameBoard.Pins[i,j] == PinType.PossibleMove)
+                    else if (gameBoard.Pins[i,j] == PinType.PossibleMove)
 					{
                         AnimatedSprite2D sprite = pin.GetChild<IdleKnight>(1).GetChild<AnimatedSprite2D>(0);
                         sprite.Visible = true;
+                        pin.GetChild<IdleKnight>(1).setKnight("Black", pin.GetChild<IdleKnight>(1).GetChild<AnimatedSprite2D>(0));
+
                     }
-				}
+                }
 			}
 		}
 
