@@ -96,6 +96,18 @@ public class AIController
         return bestMove;
     }
 
+	public Move GetEasyMove(string state)
+	{
+		Random random = new Random();
+		int moveDepth = random.Next(1, 4);
+
+		GD.Print("Playing move at depth: " + moveDepth);
+        ConvertStateToBoard(state);
+        Move easyMove;
+        Minimax(moveDepth, int.MinValue, int.MaxValue, WhitePlayer, out easyMove);
+        return easyMove;
+    }
+
 	// Possible ConvertBoardToString function?
 	//      Would allow for a string to be generated in softserve state notation
 	//      Helpful for using AI algorithm in gameplay
