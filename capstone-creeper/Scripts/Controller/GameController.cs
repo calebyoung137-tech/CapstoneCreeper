@@ -7,22 +7,22 @@ public partial class GameController : Node
 {
     //private BoardView boardView;
     // Called when the node enters the scene tree for the first time.
-    enum ControllerState
+    public enum ControllerState
     {
         SelectingPin,
         MakingMove,
         GameOver
     }
-    private enum Turn
+    public enum Turn
     {
         Black,
         White
     }
-    private Turn turn;
-    private ControllerState controllerState;
+    public Turn turn { get; private set; }
+    public ControllerState controllerState { get; private set; }
     public GameBoard gameBoard;
     public BoardView boardView;
-    private Vector2I selectedPin;
+    public Vector2I selectedPin { get; private set; }
     public string NetworkGameOver = ""; 
     public static GameController Controller { get; set; }
     public override void _Ready()
@@ -30,7 +30,7 @@ public partial class GameController : Node
         gameBoard = new GameBoard();
         gameBoard.InitBoard();
         boardView = GetNode<BoardView>("../BoardView");
-        boardView.updateBoard(gameBoard);
+        boardView.initializeBoard(gameBoard);
 
         turn = new Turn();
         turn = Turn.White;
