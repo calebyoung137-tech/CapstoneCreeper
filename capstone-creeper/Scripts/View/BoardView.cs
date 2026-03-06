@@ -13,7 +13,7 @@ public partial class BoardView : Node2D
 	//private int pinSize = 16;
 	//private int tileSize = 50; 
 
-	public partial class Tile : ColorRect
+	public partial class Tile : Sprite2D
 	{
 		public Vector2I GridPos; // e.g., (x, y) in the grid
 	}
@@ -86,14 +86,14 @@ public partial class BoardView : Node2D
 				tiles[new Vector2I(i, j)] = tile;
 
 				// Set size and color
-				tile.Size = new Vector2(30, 30);
+				//tile.Size = new Vector2(30, 30);
 
 
-				tile.Color = new Color(0.2f, 0.6f, 1.0f); // light blue
-
-				// Optional: position it
-				tile.Position = new Vector2(i * 98 - 15, j * 98 - 15);
-				
+				//tile.Color = new Color(0.2f, 0.6f, 1.0f); // light blue
+				tile.Texture = GD.Load<Texture2D>("res://Assets/Tiny Swords (Free Pack)/Buildings/Black Buildings/Tower.png");
+                // Optional: position it
+                tile.Position = new Vector2(i * 98, j * 98 - 8);
+				tile.Scale = new Vector2(0.5f, 0.5f); 
 
 				AddChild(tile);
 			}
@@ -155,17 +155,19 @@ public partial class BoardView : Node2D
 				{
 					if (gameBoard.Tiles[i, j] == TileType.Empty)
 					{
-						tile.Color = new Color(0.2f, 0.6f, 1.0f); // light blue
+						tile.Texture = null;
 					}
 					else if (gameBoard.Tiles[i, j] == TileType.Black)
 					{
-						tile.Color = Colors.Black;
-					}
-					else if (gameBoard.Tiles[i, j] == TileType.White)
+                        tile.Texture = GD.Load<Texture2D>("res://Assets/Tiny Swords (Free Pack)/Buildings/Blue Buildings/Tower.png");
+
+                    }
+                    else if (gameBoard.Tiles[i, j] == TileType.White)
 					{
-						tile.Color = Colors.White;
-					}
-				}
+                        tile.Texture = GD.Load<Texture2D>("res://Assets/Tiny Swords (Free Pack)/Buildings/Red Buildings/Tower.png");
+
+                    }
+                }
 			}
 		}
 	}
