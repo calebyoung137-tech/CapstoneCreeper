@@ -55,10 +55,11 @@ public partial class BoardView : Node2D
 					pin.AddChild(collision);
 
 					IdleKnight knight = new IdleKnight();
-
-					pin.AddChild(knight); 
-
-
+					knight.ZIndex = 4; 
+					
+					pin.MouseEntered += () => OnMouseEntered(knight.GetChild<AnimatedSprite2D>(0));
+                    pin.MouseExited += () => OnMouseExited(knight.GetChild<AnimatedSprite2D>(0));
+                    pin.AddChild(knight);
                     pin.Position = new Vector2((i * 98) - 48, (j * 98) - 48 - 8);
 					AddChild(pin); 
 					
@@ -90,11 +91,38 @@ public partial class BoardView : Node2D
 
 
 				//tile.Color = new Color(0.2f, 0.6f, 1.0f); // light blue
-				tile.Texture = GD.Load<Texture2D>("res://Assets/Tiny Swords (Free Pack)/Buildings/Black Buildings/Tower.png");
-                // Optional: position it
-                tile.Position = new Vector2(i * 98, j * 98 - 8);
-				tile.Scale = new Vector2(0.5f, 0.5f); 
-
+				if (i == 0 && j == 0)
+				{
+                    tile.Texture = GD.Load<Texture2D>("res://Assets/Tiny Swords (Free Pack)/Buildings/Blue Buildings/Castle.png");
+					tile.Scale = new Vector2(0.5f, 0.5f); 
+                    tile.Position = new Vector2(i * 98 - 49 - 5, j * 98 - 49 - 15);
+				}
+				else if (i == 0 && j == 5)
+				{
+                    tile.Texture = GD.Load<Texture2D>("res://Assets/Tiny Swords (Free Pack)/Buildings/Red Buildings/Castle.png");
+                    tile.Scale = new Vector2(0.5f, 0.5f);
+                    tile.Position = new Vector2(i * 98 - 49 - 5, j * 98 + 49 - 15);
+				}
+				else if (i == 5 && j == 0)
+				{
+                    tile.Texture = GD.Load<Texture2D>("res://Assets/Tiny Swords (Free Pack)/Buildings/Red Buildings/Castle.png");
+                    tile.Scale = new Vector2(0.5f, 0.5f);
+                    tile.Position = new Vector2(i * 98 + 49 + 5, j * 98 - 49 - 15);
+				}
+				else if (i == 5 && j == 5)
+				{
+                    tile.Texture = GD.Load<Texture2D>("res://Assets/Tiny Swords (Free Pack)/Buildings/Blue Buildings/Castle.png");
+					tile.Scale = new Vector2(0.5f, 0.5f);
+                    tile.Position = new Vector2(i * 98 + 49 + 5, j * 98 + 49 - 15);
+				}
+				else
+				{
+					tile.Texture = GD.Load<Texture2D>("res://Assets/Tiny Swords (Free Pack)/Buildings/Black Buildings/Tower.png");
+					// Optional: position it
+					tile.Position = new Vector2(i * 98, j * 98 - 8);
+					tile.Scale = new Vector2(0.5f, 0.5f);
+				}
+				tile.ZIndex = 3; 
 				AddChild(tile);
 			}
 		}
@@ -105,8 +133,16 @@ public partial class BoardView : Node2D
 	{
 	}
 
+    private void OnMouseEntered(AnimatedSprite2D sprite)
+    {
+        sprite.Scale = new Vector2(0.85f, 0.85f); // slightly larger
+    }
 
-	public void updateBoard(in GameBoard gameBoard)
+    private void OnMouseExited(AnimatedSprite2D sprite)
+    {
+        sprite.Scale = new Vector2(0.7f, 0.7f); // back to normal
+    }
+    public void updateBoard(in GameBoard gameBoard)
 	{
 		for (int i = 0; i < gameBoard.Pins.GetLength(0); i++)
 		{
@@ -151,23 +187,25 @@ public partial class BoardView : Node2D
 		{
 			for (int j = 0; j < gameBoard.Tiles.GetLength(1); j++)
 			{
-				if (tiles.TryGetValue(new Vector2I(i, j), out Tile tile))
-				{
-					if (gameBoard.Tiles[i, j] == TileType.Empty)
+				if (!(i == 0 && j == 0 || i == 0 && j == 5 || i == 5 && j == 0 || i == 5 && j == 5)) {
+					if (tiles.TryGetValue(new Vector2I(i, j), out Tile tile))
 					{
-						tile.Texture = null;
+						if (gameBoard.Tiles[i, j] == TileType.Empty)
+						{
+							tile.Texture = null;
+						}
+						else if (gameBoard.Tiles[i, j] == TileType.Black)
+						{
+							tile.Texture = GD.Load<Texture2D>("res://Assets/Tiny Swords (Free Pack)/Buildings/Blue Buildings/Tower.png");
+
+						}
+						else if (gameBoard.Tiles[i, j] == TileType.White)
+						{
+							tile.Texture = GD.Load<Texture2D>("res://Assets/Tiny Swords (Free Pack)/Buildings/Red Buildings/Tower.png");
+
+						}
 					}
-					else if (gameBoard.Tiles[i, j] == TileType.Black)
-					{
-                        tile.Texture = GD.Load<Texture2D>("res://Assets/Tiny Swords (Free Pack)/Buildings/Blue Buildings/Tower.png");
-
-                    }
-                    else if (gameBoard.Tiles[i, j] == TileType.White)
-					{
-                        tile.Texture = GD.Load<Texture2D>("res://Assets/Tiny Swords (Free Pack)/Buildings/Red Buildings/Tower.png");
-
-                    }
-                }
+				}
 			}
 		}
 	}
