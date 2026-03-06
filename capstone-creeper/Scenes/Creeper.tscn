@@ -1,85 +1,20 @@
-[gd_scene load_steps=15 format=3 uid="uid://d300s8sjv8y60"]
+[gd_scene load_steps=6 format=3 uid="uid://d300s8sjv8y60"]
 
 [ext_resource type="Script" uid="uid://d32apyva0tm88" path="res://Scripts/View/BoardView.cs" id="1_0hxd0"]
 [ext_resource type="Script" uid="uid://cdfk5kj8kkqwe" path="res://Scripts/View/BoardBackground.cs" id="2_bw8jy"]
 [ext_resource type="Script" uid="uid://wrlrobpcoifo" path="res://Scripts/Controller/GameController.cs" id="2_hao4k"]
 [ext_resource type="Script" uid="uid://beraphv7f37kf" path="res://Scripts/Network/NetworkManager.cs" id="3_1wijr"]
-[ext_resource type="Texture2D" uid="uid://i7s2ofrfexhx" path="res://Assets/Tiny Swords (Free Pack)/Units/Blue Units/Warrior/Warrior_Idle.png" id="5_bw8jy"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_3kw1g"]
-atlas = ExtResource("5_bw8jy")
-region = Rect2(0, 0, 192, 192)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_itftu"]
-atlas = ExtResource("5_bw8jy")
-region = Rect2(192, 0, 192, 192)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_2t3qr"]
-atlas = ExtResource("5_bw8jy")
-region = Rect2(384, 0, 192, 192)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_1x6mx"]
-atlas = ExtResource("5_bw8jy")
-region = Rect2(576, 0, 192, 192)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_l5ada"]
-atlas = ExtResource("5_bw8jy")
-region = Rect2(768, 0, 192, 192)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_6l5nv"]
-atlas = ExtResource("5_bw8jy")
-region = Rect2(960, 0, 192, 192)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_247vx"]
-atlas = ExtResource("5_bw8jy")
-region = Rect2(1152, 0, 192, 192)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_kbkxy"]
-atlas = ExtResource("5_bw8jy")
-region = Rect2(1344, 0, 192, 192)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_e7how"]
-resource_local_to_scene = true
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_3kw1g")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_itftu")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_2t3qr")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_1x6mx")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_l5ada")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_6l5nv")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_247vx")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_kbkxy")
-}],
-"loop": true,
-"name": &"default",
-"speed": 12.0
-}]
+[ext_resource type="Script" uid="uid://ds518bsgpmy2d" path="res://Scenes/IdleKnight.cs" id="5_bw8jy"]
 
 [node name="Creeper" type="Node2D"]
-position = Vector2(-6, 4)
+position = Vector2(0, 2)
 
 [node name="BoardView" type="Node2D" parent="."]
-position = Vector2(617, 233)
+position = Vector2(584, 174)
 script = ExtResource("1_0hxd0")
 
 [node name="BoardBackground" type="Node2D" parent="BoardView"]
-position = Vector2(0, -6)
+position = Vector2(-2, 4)
 script = ExtResource("2_bw8jy")
 
 [node name="GameController" type="Node" parent="."]
@@ -92,7 +27,6 @@ offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("3_1wijr")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(194, 440)
-sprite_frames = SubResource("SpriteFrames_e7how")
-frame_progress = 0.57499444
+[node name="IdleKnight" type="Node2D" parent="NetworkManager"]
+position = Vector2(163, 247)
+script = ExtResource("5_bw8jy")

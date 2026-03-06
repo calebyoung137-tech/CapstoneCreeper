@@ -17,8 +17,8 @@ public partial class BoardBackground : Node2D
 				grassTile.RegionEnabled = true;
 
 				// Set the region rectangle
-				grassTile.RegionRect = new Rect2(192.0f, 192.3f, 64f, 64f);
-				grassTile.Scale = new Vector2(1.7f, 1.7f); 
+				grassTile.RegionRect = new Rect2(0f, 0f, 192f, 192f);
+				grassTile.Scale = new Vector2(0.52f, 0.52f); 
 				grassTile.Position = new Vector2(i * 98, j * 98);
 				grassTile.ZIndex = -2; 
 				AddChild(grassTile);
@@ -36,8 +36,8 @@ public partial class BoardBackground : Node2D
 					grassTile.RegionEnabled = true;
 
 					// Set the region rectangle
-					grassTile.RegionRect = new Rect2(192.0f, 192.3f, 64f, 64f);
-					grassTile.Scale = new Vector2(0.9f, 0.9f);
+					grassTile.RegionRect = new Rect2(0f, 0f, 192f, 192f);
+					grassTile.Scale = new Vector2(0.27f, 0.27f);
 					grassTile.RotationDegrees = 45;
 					grassTile.Position = new Vector2((i * 98) - 49, (j * 98) - 49);
 					grassTile.ZIndex = -1;
