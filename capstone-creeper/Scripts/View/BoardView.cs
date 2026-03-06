@@ -10,14 +10,14 @@ public partial class BoardView : Node2D
 	[Signal]
 	public delegate void PinClickedEventHandler(Vector2I pin);
 
-	private int pinSize = 16;
-	private int tileSize = 50; 
+	//private int pinSize = 16;
+	//private int tileSize = 50; 
 
 	public partial class Tile : ColorRect
 	{
 		public Vector2I GridPos; // e.g., (x, y) in the grid
 	}
-	public partial class Pin : ColorRect
+	public partial class Pin : Area2D
 	{
 		public Vector2I GridPos; // e.g., (x, y) in the grid
 	}
@@ -25,35 +25,55 @@ public partial class BoardView : Node2D
 	public Dictionary<Vector2I, Tile> tiles = new Dictionary<Vector2I, Tile>();
 	public Dictionary<Vector2I, Pin> pins = new Dictionary<Vector2I, Pin>();
 
-	// Called when the node enters the scene tree for the first time.
-	public override void _Ready()
+    // Called when the node enters the scene tree for the first time.
+ 
+    public override void _Ready()
 	{
-		for (int i = 0; i < 7; i++)
+        Position = new Vector2(712, 285);
+
+        for (int i = 0; i < 7; i++)
 		{
 			for (int j = 0; j < 7; j++)
 			{
 				if (!((i == 0 && j == 0) || (i == 6 && j == 6) || (i == 0 && j == 6) || (i == 6 && j == 0)))
 				{
 					Pin pin = new Pin();
+
 					pin.GridPos.X = i;
 					pin.GridPos.Y = j;
 					pins[new Vector2I(i, j)] = pin;
-					pin.Size = new Vector2(pinSize, pinSize);
 
-					pin.Color = new Color(0.2f, 0.6f, 1.0f);
-					pin.Position = new Vector2(i * (pinSize + tileSize), j * (tileSize + pinSize));
-					AddChild(pin);
-					pin.GuiInput += (InputEvent @event) =>
-					{
-						if (@event is InputEventMouseButton mouseEvent &&
-							mouseEvent.Pressed &&
-							mouseEvent.ButtonIndex == MouseButton.Left)
-						{
-							EmitSignal("PinClicked", pin.GridPos); 
-						   
-						}
-					};
-				}
+
+					//setting a collisionshape so that our area2d can be clicked. 
+                    CollisionShape2D collision = new CollisionShape2D();
+
+                    RectangleShape2D rect = new RectangleShape2D();
+                    rect.Size = new Vector2(64, 64);   // size of clickable area
+
+                    collision.Shape = rect;
+
+					pin.AddChild(collision);
+
+					IdleKnight knight = new IdleKnight();
+
+					pin.AddChild(knight); 
+
+
+                    pin.Position = new Vector2((i * 98) - 48, (j * 98) - 48 - 8);
+					AddChild(pin); 
+					
+					pin.InputPickable = true;
+
+                    pin.InputEvent += (Node viewport, InputEvent @event, long shapeIdx) =>
+                    {
+                        if (@event is InputEventMouseButton mouseEvent &&
+                            mouseEvent.Pressed &&
+                            mouseEvent.ButtonIndex == MouseButton.Left)
+                        {
+                            EmitSignal("PinClicked", pin.GridPos);
+                        }
+                    };
+                }
 			}
 		}
 		for (int i = 0; i < 6; i++)
@@ -66,13 +86,13 @@ public partial class BoardView : Node2D
 				tiles[new Vector2I(i, j)] = tile;
 
 				// Set size and color
-				tile.Size = new Vector2(tileSize, tileSize);
+				tile.Size = new Vector2(30, 30);
 
 
 				tile.Color = new Color(0.2f, 0.6f, 1.0f); // light blue
 
 				// Optional: position it
-				tile.Position = new Vector2((i * (tileSize + pinSize)) + pinSize, (j * (tileSize + pinSize)) + pinSize);
+				tile.Position = new Vector2(i * 98 - 15, j * 98 - 15);
 				
 
 				AddChild(tile);
@@ -96,21 +116,34 @@ public partial class BoardView : Node2D
 				{
 					if (gameBoard.Pins[i, j] == PinType.Empty)
 					{
-						pin.Color = new Color(0.2f, 0.6f, 1.0f); // light blue
-					}
+						AnimatedSprite2D sprite = pin.GetChild<IdleKnight>(1).GetChild<AnimatedSprite2D>(0); 
+						sprite.Visible = false;
+          
+                    }
 					else if (gameBoard.Pins[i, j] == PinType.Black)
 					{
-						pin.Color = Colors.Black;
-					}
-					else if (gameBoard.Pins[i, j] == PinType.White)
+                        AnimatedSprite2D sprite = pin.GetChild<IdleKnight>(1).GetChild<AnimatedSprite2D>(0);
+                        sprite.Visible = true;
+                        pin.GetChild<IdleKnight>(1).setKnight("Blue", pin.GetChild<IdleKnight>(1).GetChild<AnimatedSprite2D>(0));
+
+
+                    }
+                    else if (gameBoard.Pins[i, j] == PinType.White)
 					{
-						pin.Color = Colors.White;
-					}
-					else if (gameBoard.Pins[i,j] == PinType.PossibleMove)
+                        AnimatedSprite2D sprite = pin.GetChild<IdleKnight>(1).GetChild<AnimatedSprite2D>(0);
+                        sprite.Visible = true;
+                        pin.GetChild<IdleKnight>(1).setKnight("Red", pin.GetChild<IdleKnight>(1).GetChild<AnimatedSprite2D>(0));
+
+
+                    }
+                    else if (gameBoard.Pins[i,j] == PinType.PossibleMove)
 					{
-						pin.Color = Colors.Orange; 
-					}
-				}
+                        AnimatedSprite2D sprite = pin.GetChild<IdleKnight>(1).GetChild<AnimatedSprite2D>(0);
+                        sprite.Visible = true;
+                        pin.GetChild<IdleKnight>(1).setKnight("Black", pin.GetChild<IdleKnight>(1).GetChild<AnimatedSprite2D>(0));
+
+                    }
+                }
 			}
 		}
 

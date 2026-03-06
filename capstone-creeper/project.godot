@@ -8,12 +8,27 @@
 
 config_version=5
 
+[animation]
+
+compatibility/default_parent_skeleton_in_mesh_instance_3d=true
+
 [application]
 
 config/name="CapstoneCreeper"
-run/main_scene="uid://d300s8sjv8y60"
+run/main_scene="uid://bh0nb26xe8gbc"
 config/features=PackedStringArray("4.5", "C#", "Mobile")
 config/icon="res://icon.svg"
+
+[autoload]
+
+Network="*uid://beraphv7f37kf"
+
+[display]
+
+window/size/viewport_width=1920
+window/size/viewport_height=1080
+window/size/mode=3
+window/stretch/mode="canvas_items"
 
 [dotnet]
 
