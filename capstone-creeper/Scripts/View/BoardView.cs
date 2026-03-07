@@ -16,6 +16,7 @@ public partial class BoardView : Node2D
 	public partial class Tile : Sprite2D
 	{
 		public Vector2I GridPos; // e.g., (x, y) in the grid
+		public string towerTeam; 
 	}
 	public partial class Pin : Area2D
 	{
@@ -117,7 +118,8 @@ public partial class BoardView : Node2D
 				}
 				else
 				{
-					tile.Texture = GD.Load<Texture2D>("res://Assets/Tiny Swords (Free Pack)/Buildings/Black Buildings/Tower.png");
+					tile.Texture = null; 
+					//tile.Texture = GD.Load<Texture2D>("res://Assets/Tiny Swords (Free Pack)/Buildings/Black Buildings/Tower.png");
 					// Optional: position it
 					tile.Position = new Vector2(i * 98, j * 98 - 8);
 					tile.Scale = new Vector2(0.5f, 0.5f);
@@ -148,7 +150,7 @@ public partial class BoardView : Node2D
 			pin.GetChild<IdleKnight>(1).GetChild<AnimatedSprite2D>(0).Scale = new Vector2(0.7f, 0.7f); // back to normal
 		}
 	}
-	public void updateBoard(in GameBoard gameBoard)
+	public async void updateBoard(GameBoard gameBoard)
 	{
 		for (int i = 0; i < gameBoard.Pins.GetLength(0); i++)
 		{
@@ -157,7 +159,7 @@ public partial class BoardView : Node2D
 				if (pins.TryGetValue(new Vector2I(i, j), out Pin pin))
 				{
 
-					if (ChangedValue(gameBoard.Pins[i, j], pin) 
+					if (ChangedPinValue(gameBoard.Pins[i, j], pin) 
 						&& !(gameBoard.Pins[i,j] == PinType.PossibleMove
 						&& pin.GetChild<IdleKnight>(1).knightColor == "Purple"
 						|| gameBoard.Pins[i, j] == PinType.Empty
@@ -206,27 +208,59 @@ public partial class BoardView : Node2D
 		{
 			for (int j = 0; j < gameBoard.Tiles.GetLength(1); j++)
 			{
-				if (!(i == 0 && j == 0 || i == 0 && j == 5 || i == 5 && j == 0 || i == 5 && j == 5)) {
+				if (!(i == 0 && j == 0 || i == 0 && j == 5 || i == 5 && j == 0 || i == 5 && j == 5))
+				{
 					if (tiles.TryGetValue(new Vector2I(i, j), out Tile tile))
 					{
 						if (gameBoard.Tiles[i, j] == TileType.Empty)
 						{
 							tile.Texture = null;
+							tile.towerTeam = null;
 						}
 						else if (gameBoard.Tiles[i, j] == TileType.Black)
 						{
-							tile.Texture = GD.Load<Texture2D>("res://Assets/Tiny Swords (Free Pack)/Buildings/Blue Buildings/Tower.png");
-
+							if (tile.Texture == null)
+							{
+								tile.Texture = GD.Load<Texture2D>("res://Assets/Tiny Swords (Free Pack)/Buildings/Blue Buildings/Tower.png");
+								tile.towerTeam = "Blue"; 
+								towerGrowingAnimation(tile); 
+							}
+							else if (tile.towerTeam == "Red")
+							{
+								PlayTowerExplosion(tile.Position);
+								await ToSignal(GetTree().CreateTimer(0.33f), "timeout");
+								tile.Texture = null;
+								await ToSignal(GetTree().CreateTimer(0.5f), "timeout");
+								tile.Texture = GD.Load<Texture2D>("res://Assets/Tiny Swords (Free Pack)/Buildings/Blue Buildings/Tower.png");
+								towerGrowingAnimation(tile);
+								tile.towerTeam = "Blue";
+							}
 						}
 						else if (gameBoard.Tiles[i, j] == TileType.White)
 						{
-							tile.Texture = GD.Load<Texture2D>("res://Assets/Tiny Swords (Free Pack)/Buildings/Red Buildings/Tower.png");
+							if (tile.Texture == null)
+							{
+								tile.Texture = GD.Load<Texture2D>("res://Assets/Tiny Swords (Free Pack)/Buildings/Red Buildings/Tower.png");
+								tile.towerTeam = "Red";
+								towerGrowingAnimation(tile);
+							}
+							else if (tile.towerTeam == "Blue")
+							{
+								PlayTowerExplosion(tile.Position);
+								await ToSignal(GetTree().CreateTimer(0.33f), "timeout");
+								tile.Texture = null;
+								await ToSignal(GetTree().CreateTimer(0.7f), "timeout");
 
+								tile.Texture = GD.Load<Texture2D>("res://Assets/Tiny Swords (Free Pack)/Buildings/Red Buildings/Tower.png");
+								towerGrowingAnimation(tile);
+								tile.towerTeam = "Red";
+							}
 						}
 					}
 				}
 			}
 		}
+
 
 		if (GameController.Controller.controllerState == GameController.ControllerState.MakingMove)
 		{
@@ -324,7 +358,7 @@ public partial class BoardView : Node2D
 	}
 
 
-	private bool ChangedValue(PinType pinType, Pin pin)
+	private bool ChangedPinValue(PinType pinType, Pin pin)
 	{
 		if (pinType == PinType.Black && pin.GetChild<IdleKnight>(1).knightColor == "Blue"
 			|| pinType == PinType.White && pin.GetChild<IdleKnight>(1).knightColor == "Red"
@@ -370,5 +404,141 @@ public partial class BoardView : Node2D
 		}
 
 	}
+
+	private bool newTower(TileType tileType, Tile tile)
+	{
+		if (tileType != TileType.Empty && tile.Texture == null)
+		{
+			return true; 
+		}
+		else
+		{
+			return false; 
+		}
+	}
+	private void towerGrowingAnimation(Tile tower)
+	{
+		tower.Scale = new Vector2(0.05f, 0.05f); // start very small
+
+		var tween = CreateTween();
+
+		tween.TweenProperty(tower, "scale", new Vector2(0.575f, 0.575f), 0.3f)
+			 .SetEase(Tween.EaseType.Out);
+
+		tween.TweenProperty(tower, "scale", new Vector2(0.5f, 0.5f), 0.08f)
+			 .SetEase(Tween.EaseType.In);
+	}
+
+	void SpawnExplosion(Vector2 position, SpriteFrames frames)
+	{
+		var explosion = new AnimatedSprite2D();
+
+		explosion.SpriteFrames = frames;
+		explosion.Animation = "explode";
+		explosion.ZIndex = 5;
+		explosion.Scale = new Vector2(0.7f, 0.7f); 
+		explosion.Position = position;
+		explosion.Play();
+
+		AddChild(explosion);
+
+		explosion.AnimationFinished += () =>
+		{
+			explosion.QueueFree();
+		};
+	}
+	public SpriteFrames explosionA()
+	{
+		Texture2D explosionSheet = GD.Load<Texture2D>("res://Assets/Tiny Swords (Free Pack)/Particle FX/Explosion_01.png");
+
+		SpriteFrames explosionFrames = new SpriteFrames();
+
+		string animationName = "explode";
+		explosionFrames.AddAnimation(animationName);
+		explosionFrames.SetAnimationLoop(animationName, false);
+		explosionFrames.SetAnimationSpeed(animationName, 12);
+
+		int frameCount = 8;
+
+		int frameWidth = explosionSheet.GetWidth() / frameCount;
+		int frameHeight = explosionSheet.GetHeight();
+
+		for (int i = 0; i < frameCount; i++)
+		{
+			AtlasTexture frame = new AtlasTexture();
+
+			frame.Atlas = explosionSheet;
+
+			frame.Region = new Rect2(
+				i * frameWidth,
+				0,
+				frameWidth,
+				frameHeight
+			);
+
+			explosionFrames.AddFrame(animationName, frame);
+		}
+		return explosionFrames;
+	}
+	public SpriteFrames explosionB()
+	{
+		Texture2D explosionSheet = GD.Load<Texture2D>("res://Assets/Tiny Swords (Free Pack)/Particle FX/Explosion_02.png");
+
+		SpriteFrames explosionFrames = new SpriteFrames();
+
+		string animationName = "explode";
+		explosionFrames.AddAnimation(animationName);
+		explosionFrames.SetAnimationLoop(animationName, false);
+		explosionFrames.SetAnimationSpeed(animationName, 12);
+
+		int frameCount = 10;
+
+		int frameWidth = explosionSheet.GetWidth() / frameCount;
+		int frameHeight = explosionSheet.GetHeight();
+
+		for (int i = 0; i < frameCount; i++)
+		{
+			AtlasTexture frame = new AtlasTexture();
+
+			frame.Atlas = explosionSheet;
+
+			frame.Region = new Rect2(
+				i * frameWidth,
+				0,
+				frameWidth,
+				frameHeight
+			);
+
+			explosionFrames.AddFrame(animationName, frame);
+		}
+		return explosionFrames;
+	}
 	
+	async void PlayTowerExplosion(Vector2 towerPosition)
+	{
+		Vector2[] offsetsA =
+		{
+		new Vector2(-20, -20),
+		new Vector2(20, 0),
+		new Vector2(-20, 20)
+		};
+		Vector2[] offsetsB =
+		{
+		new Vector2(20, 20),
+		new Vector2(-20, 0),
+		new Vector2(20, -20)
+		};
+
+		foreach (var offset in offsetsA)
+		{
+			SpawnExplosion(towerPosition + offset, explosionA());
+			await ToSignal(GetTree().CreateTimer(0.05f), "timeout");
+		}
+
+		foreach (var offset in offsetsB)
+		{
+			SpawnExplosion(towerPosition + offset, explosionB());
+			await ToSignal(GetTree().CreateTimer(0.05f), "timeout");
+		}
+	}
 }
