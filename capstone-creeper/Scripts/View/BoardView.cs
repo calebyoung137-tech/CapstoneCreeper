@@ -395,7 +395,7 @@ public partial class BoardView : Node2D
 			}
 			else
 			{
-				return true;
+				return false;
 			}
 		}
 		else
