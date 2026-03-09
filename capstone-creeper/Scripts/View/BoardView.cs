@@ -371,27 +371,42 @@ public partial class BoardView : Node2D
 	}
 	private bool clickable(Vector2I pos)
 	{
-		if (GameController.Controller.controllerState == GameController.ControllerState.SelectingPin)
+		if (
+			(GameSettings.Mode == GameMode.OnlineMultiplayer
+			&& (GameController.Controller.turn == GameController.Turn.Black && !Multiplayer.IsServer())
+			|| (GameController.Controller.turn == GameController.Turn.White && Multiplayer.IsServer())
+			)
+			|| GameSettings.Mode == GameMode.LocalMultiplayer
+			|| GameSettings.Mode == GameMode.SinglePlayer
+			)
 		{
-			if (GameController.Controller.turn == GameController.Turn.Black
-				&& GameController.Controller.gameBoard.Pins[pos.X, pos.Y] == PinType.Black
-				||
-				GameController.Controller.turn == GameController.Turn.White
-				&& GameController.Controller.gameBoard.Pins[pos.X, pos.Y] == PinType.White)
+
+			if (GameController.Controller.controllerState == GameController.ControllerState.SelectingPin)
 			{
-				return true; 
+				if (GameController.Controller.turn == GameController.Turn.Black
+					&& GameController.Controller.gameBoard.Pins[pos.X, pos.Y] == PinType.Black
+					||
+					GameController.Controller.turn == GameController.Turn.White
+					&& GameController.Controller.gameBoard.Pins[pos.X, pos.Y] == PinType.White)
+				{
+					return true;
+				}
+				else
+				{
+					return false;
+				}
 			}
-			else
+			else if (GameController.Controller.controllerState == GameController.ControllerState.MakingMove)
 			{
-				return false; 
-			}
-		}
-		else if (GameController.Controller.controllerState == GameController.ControllerState.MakingMove)
-		{
-			if (pos == GameController.Controller.selectedPin
-				|| GameController.Controller.gameBoard.Pins[pos.X, pos.Y] == PinType.PossibleMove)
-			{
-				return true;
+				if (pos == GameController.Controller.selectedPin
+					|| GameController.Controller.gameBoard.Pins[pos.X, pos.Y] == PinType.PossibleMove)
+				{
+					return true;
+				}
+				else
+				{
+					return false;
+				}
 			}
 			else
 			{
@@ -400,9 +415,8 @@ public partial class BoardView : Node2D
 		}
 		else
 		{
-			return false;
+			return false; 
 		}
-
 	}
 
 	private bool newTower(TileType tileType, Tile tile)
