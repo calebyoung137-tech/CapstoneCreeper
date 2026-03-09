@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://ddttspjiasi7c"]
+[gd_scene load_steps=0 format=3 uid="uid://ddttspjiasi7c"]
 
 [ext_resource type="Script" uid="uid://m74yqwyjmfae" path="res://Scripts/View/JoinMenu.cs" id="1_7be0v"]
 

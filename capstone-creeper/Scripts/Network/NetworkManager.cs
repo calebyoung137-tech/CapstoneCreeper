@@ -24,10 +24,10 @@ public partial class NetworkManager : Node
 	private bool _cleanedUp = false;
 	
 	public bool connectedToHost = false;
-	private UdpServer discoveryServer;
-	private PacketPeerUdp discoveryPeer;
+	//private UdpServer discoveryServer;
+	//private PacketPeerUdp discoveryPeer;
 
-	private const int DiscoveryPort = 9998;
+	//private const int DiscoveryPort = 9998;
 
 	public override void _Ready()
 	{
@@ -46,7 +46,10 @@ public partial class NetworkManager : Node
 	{
 		if (Role == MultiplayerRole.Client && connectedToHost && Multiplayer.MultiplayerPeer != null)
 		{
-			var status = Multiplayer.MultiplayerPeer.GetConnectionStatus();
+            if (Multiplayer.MultiplayerPeer == null)
+                return;
+
+            var status = Multiplayer.MultiplayerPeer.GetConnectionStatus();
 
 			if (status != MultiplayerPeer.ConnectionStatus.Connected)
 			{
@@ -69,7 +72,12 @@ public partial class NetworkManager : Node
 	public Error HostGame(int port = 9999)
 	{ // from godot docs, This code established a server, or returns an error
 		var addresses = IP.GetLocalAddresses();
-		HostIp= addresses.Where(ip=>ip.Contains(".") && ip.StartsWith("10")).First();
+		//this logic for the hostip works in the computer lab, not laptops
+		HostIp = addresses.Where(ip => ip.Contains(".") && ip.StartsWith("10")).FirstOrDefault();
+		if (string.IsNullOrEmpty(HostIp)) {
+			GD.Print("Default to local host when no ip found.");
+			HostIp = "127.0.0.1";
+		}
 		GD.Print(HostIp);       
 		peer = new ENetMultiplayerPeer();
 		var error = peer.CreateServer(port, 2);
@@ -100,40 +108,44 @@ public partial class NetworkManager : Node
 		Role = MultiplayerRole.Client;
 		return Error.Ok;
 	}
-	private void Cleanup()
-	{
-		if (_cleanedUp)
-			return;
+    private void Cleanup()
+    {
+        if (_cleanedUp)
+            return;
 
-		_cleanedUp = true;
+        _cleanedUp = true;
 
-		if (Multiplayer.MultiplayerPeer != null)
-		{
-			Multiplayer.MultiplayerPeer.Close();
-			Multiplayer.MultiplayerPeer = null;
-		}
+        GD.Print("Cleaning up network");
 
-		if (peer != null)
-		{
-			peer.Dispose();
-			peer = null;
-		}
+        if (Multiplayer != null && Multiplayer.MultiplayerPeer != null)
+        {
+            Multiplayer.MultiplayerPeer.Close();
+            Multiplayer.MultiplayerPeer = null;
+        }
 
-		Role = MultiplayerRole.None;
-	}
-	private void PeerDisconnected(long id)
-	{ // method from team 8 spring 2025
+        if (peer != null)
+        {
+            peer.Dispose();
+            peer = null;
+        }
+
+        Role = MultiplayerRole.None;
+        connectedToHost = false;
+    }
+    private void PeerDisconnected(long id)
+	{ 
 		GD.Print("Player disconnected: " + id.ToString());
 		Cleanup();
-		GetTree().ChangeSceneToFile("res://scenes/main_menu.tscn");
+		if(IsInsideTree()) // for whatever reason, this is being executed in some instances where the tree has been disposed of ?
+			GetTree().ChangeSceneToFile("res://Scenes/main_menu.tscn");
 	}
 	private void ServerDisconnected()
-	{ // method from team 8 spring 2025
+	{ 
 	   
 		GD.Print("SERVER DISCONNECTED");
 		Cleanup();
-		//probably should be an error screen
-		GetTree().ChangeSceneToFile("res://scenes/main_menu.tscn");
+		//should be an error screen
+		GetTree().ChangeSceneToFile("res://Scenes/main_menu.tscn");
 	}
 	private void OnPeerConnected(long id)
 	{
@@ -181,7 +193,7 @@ public partial class NetworkManager : Node
 	[Rpc(CallLocal = true, TransferMode = MultiplayerPeer.TransferModeEnum.Reliable)]
 	private void LoadGame()
 	{
-		GetTree().ChangeSceneToFile("res://scenes/Creeper.tscn");
+		GetTree().ChangeSceneToFile("res://Scenes/Creeper.tscn");
 	}
 	public void SendMove(Vector2I from, Vector2I to)
 	{ 
