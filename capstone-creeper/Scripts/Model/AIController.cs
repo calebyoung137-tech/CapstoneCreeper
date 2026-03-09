@@ -102,11 +102,11 @@ public class AIController
 		int moveDepth = random.Next(1, 4);
 
 		GD.Print("Playing move at depth: " + moveDepth);
-        ConvertStateToBoard(state);
-        Move easyMove;
-        Minimax(moveDepth, int.MinValue, int.MaxValue, WhitePlayer, out easyMove);
-        return easyMove;
-    }
+		ConvertStateToBoard(state);
+		Move easyMove;
+		Minimax(moveDepth, int.MinValue, int.MaxValue, WhitePlayer, out easyMove);
+		return easyMove;
+	}
 
 	// Possible ConvertBoardToString function?
 	//      Would allow for a string to be generated in softserve state notation
