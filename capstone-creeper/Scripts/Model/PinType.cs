@@ -4,9 +4,9 @@ namespace Model;
 
 public enum PinType
 {
-    Black,
-    White,
-    Empty,
-    PossibleMove, 
-    Corner
+	Black,
+	White,
+	Empty,
+	PossibleMove, 
+	Corner
 }
