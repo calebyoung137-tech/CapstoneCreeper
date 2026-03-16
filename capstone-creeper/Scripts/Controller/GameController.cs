@@ -3,6 +3,7 @@ using Model;
 using View;
 using System;
 using static Model.GameBoard;
+using System.Threading.Tasks;
 public partial class GameController : Node
 {
 	//private BoardView boardView;
@@ -11,7 +12,8 @@ public partial class GameController : Node
 	{
 		SelectingPin,
 		MakingMove,
-		GameOver
+		GameOver,
+		AIMove
 	}
 	public enum Turn
 	{
@@ -79,7 +81,8 @@ public partial class GameController : Node
 		}
 		selectedPin = new Vector2I(-1, -1);
 	}
-	private void HandlePinClicked(Vector2I boardPos)
+
+	private async void HandlePinClicked(Vector2I boardPos)
 	{
 		if (controllerState == ControllerState.SelectingPin)
 		{
@@ -142,9 +145,12 @@ public partial class GameController : Node
 					{ // if multiplayer, send the move, and apply locally
 						GetNode<NetworkManager>("/root/Network").SendMove(selectedPin, boardPos);
 					}
+
 					gameBoard.makeMove(selectedPin, boardPos);
 					gameBoard.clearPossibleMoves();
 					boardView.updateBoard(gameBoard);
+					selectedPin = new Vector2I(-1, -1);
+
 					if (gameBoard.checkWin())
 					{
 						controllerState = ControllerState.GameOver;
@@ -155,20 +161,57 @@ public partial class GameController : Node
 						controllerState = ControllerState.GameOver;
 						
 					}
+					else if (GameSettings.Mode == GameMode.SinglePlayer) 
+					{
+						// Code for playing against AI opponent
+						turn = (turn == Turn.White) ? Turn.Black : Turn.White;
+						controllerState = ControllerState.AIMove;
+
+						AIController ai = new AIController();
+
+						string state = gameBoard.BoardToAIState();
+						state += (turn == Turn.White) ? "x" : "o";
+
+						Move aiMove = ai.GetEasyMove(state);
+
+						await Task.Delay(800);
+
+						selectedPin = new Vector2I(aiMove.start.Y, aiMove.start.X);
+						controllerState = ControllerState.MakingMove;
+						boardView.updateBoard(gameBoard);
+						controllerState = ControllerState.AIMove;
+
+						await Task.Delay(800);
+
+						// Coordinates had to be swapped due to an issue where the AI code and gameboard code work on different coordinate systems
+						//		AI uses (row, col)
+						//		gameBoard uses (X, Y)
+						gameBoard.makeMove(new Vector2I(aiMove.start.Y, aiMove.start.X), new Vector2I(aiMove.end.Y, aiMove.end.X));
+						gameBoard.clearPossibleMoves();
+						boardView.updateBoard(gameBoard);
+
+						if (gameBoard.checkWin())
+						{
+							controllerState = ControllerState.GameOver;
+						}
+						else if (gameBoard.checkDraw())
+						{
+							controllerState = ControllerState.GameOver;
+						}
+						else
+						{
+							turn = (turn == Turn.White) ? Turn.Black : Turn.White;
+							selectedPin = new Vector2I(-1, -1);
+							controllerState = ControllerState.SelectingPin;
+						}
+					}
 					else
 					{
+						turn = (turn == Turn.White) ? Turn.Black : Turn.White;
+						selectedPin = new Vector2I(-1, -1);
 						controllerState = ControllerState.SelectingPin;
 					}
-					if (turn == Turn.White)
-					{
-						turn = Turn.Black;
-					}
-					else
-					{
-						turn = Turn.White;
-					}
-					selectedPin = new Vector2I(-1, -1);
-
+					
 				}
 			}
 		}

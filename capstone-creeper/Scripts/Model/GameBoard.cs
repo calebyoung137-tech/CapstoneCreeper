@@ -333,21 +333,7 @@ public class GameBoard
 			return true;
 		}
 
-
-
-		string gameState = "";
-		foreach (var pin in Pins)
-		{
-			if (pin == PinType.Black) gameState += "o";
-			if (pin == PinType.White) gameState += "x";
-			else gameState += ".";
-		}
-		foreach (var tile in Tiles)
-		{
-			if (tile == TileType.Black) gameState += "o";
-			if (tile == TileType.White) gameState += "x";
-			else gameState += ".";
-		}
+		string gameState = BoardToString();
 
 		if (!gameStateHist.ContainsKey(gameState))
 		{
@@ -438,5 +424,65 @@ public class GameBoard
 			}
 
 		}
+	}
+
+	public string BoardToString()
+	{
+		string gameState = "";
+		foreach (var pin in Pins)
+		{
+			if (pin == PinType.Black) gameState += "o";
+			if (pin == PinType.White) gameState += "x";
+			else gameState += ".";
+		}
+		foreach (var tile in Tiles)
+		{
+			if (tile == TileType.Black) gameState += "o";
+			if (tile == TileType.White) gameState += "x";
+			else gameState += ".";
+		}
+		return gameState;
+	}
+
+	public string BoardToAIState()
+	{
+		string gameState = "";
+		for (int i = 0; i < 49; i++)
+		{
+			int row = i / 7;
+			int col = i % 7;
+			if (Pins[col, row] == PinType.Empty || Pins[col, row] == PinType.Corner)
+			{
+				gameState += ".";
+			}
+			else if (Pins[col, row] == PinType.White)
+			{
+				gameState += "x";
+			}
+			else if (Pins[col, row] == PinType.Black)
+			{
+				gameState += "o";
+			}
+		}
+
+		// 36 characters represent tile grid ( 6 x 6 )
+		for (int i = 0; i < 36; i++)
+		{
+			int row = i / 6;
+			int col = i % 6;
+			if (Tiles[col, row] == TileType.Empty)
+			{
+				gameState += ".";
+			}
+			else if (Tiles[col, row] == TileType.White)
+			{
+				gameState += "x";
+			}
+			else if (Tiles[col, row] == TileType.Black)
+			{
+				gameState += "o";
+			}
+		}
+		return gameState;
 	}
 }
