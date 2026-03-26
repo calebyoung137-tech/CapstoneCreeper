@@ -709,18 +709,18 @@ texture = ExtResource("6_itftu")
 [node name="Creeper" type="Node2D" unique_id=1849327213]
 position = Vector2(0, 2)
 
-[node name="BoardView" type="Node2D" parent="."]
+[node name="BoardView" type="Node2D" parent="." unique_id=628213777]
 position = Vector2(584, 174)
 script = ExtResource("1_0hxd0")
 
-[node name="BoardBackground" type="Node2D" parent="BoardView"]
+[node name="BoardBackground" type="Node2D" parent="BoardView" unique_id=263587013]
 position = Vector2(-2, 4)
 script = ExtResource("2_bw8jy")
 
-[node name="GameController" type="Node" parent="."]
+[node name="GameController" type="Node" parent="." unique_id=1682788888]
 script = ExtResource("2_hao4k")
 
-[node name="NetworkManager" type="Control" parent="."]
+[node name="NetworkManager" type="Control" parent="." unique_id=627754418]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0

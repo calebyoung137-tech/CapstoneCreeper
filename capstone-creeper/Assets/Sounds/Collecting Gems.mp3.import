@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://dsihjd4gchutb"
+path="res://.godot/imported/Collecting Gems.mp3-378e8bf1038e53609786403b830baa62.mp3str"
+
+[deps]
+
+source_file="res://Assets/Sounds/Collecting Gems.mp3"
+dest_files=["res://.godot/imported/Collecting Gems.mp3-378e8bf1038e53609786403b830baa62.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
