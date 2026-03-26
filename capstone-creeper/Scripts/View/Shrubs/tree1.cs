@@ -47,7 +47,7 @@ public partial class tree1 : AnimatedSprite2D
 
         // 7️⃣ Assign SpriteFrames
         SpriteFrames = spriteFrames;
-        Scale = new Vector2(0.3f, 0.3f); 
+        Scale = new Vector2(0.5f, 0.5f); 
         // 8️⃣ Play animation
 
         
