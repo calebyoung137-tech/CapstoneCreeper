@@ -15,6 +15,7 @@
 [ext_resource type="Script" uid="uid://dbvnrfpdc5w1w" path="res://Scripts/View/RightIcon.cs" id="13_kbkxy"]
 [ext_resource type="Texture2D" uid="uid://df60rk28tol42" path="res://Assets/Tiny Swords (Free Pack)/UI Elements/UI Elements/Icons/Icon_09.png" id="14_e7how"]
 [ext_resource type="Texture2D" uid="uid://di11b1wsqkqv0" path="res://Assets/Tiny Swords (Free Pack)/UI Elements/UI Elements/Icons/Icon_11.png" id="15_hg43c"]
+[ext_resource type="Script" uid="uid://ccsqkawr36gyk" path="res://Scripts/buttons/Exit.cs" id="15_xa52x"]
 [ext_resource type="Texture2D" uid="uid://dxpukc7agpesp" path="res://Assets/Tiny Swords (Free Pack)/UI Elements/UI Elements/Icons/Icon_12.png" id="16_xewuo"]
 [ext_resource type="Texture2D" uid="uid://basjyyjmlkoid" path="res://Assets/Tiny Swords (Free Pack)/Terrain/Decorations/Rocks in the Water/Water Rocks_01.png" id="17_xewuo"]
 [ext_resource type="Script" uid="uid://3oy7jyrsyoh5" path="res://Scripts/View/Shrubs/Rock.cs" id="18_1jl7h"]
@@ -1373,6 +1374,7 @@ offset_right = 1859.0
 offset_bottom = 64.0
 scale = Vector2(2, 2)
 texture_normal = ExtResource("14_e7how")
+script = ExtResource("15_xa52x")
 
 [node name="info" type="TextureButton" parent="." unique_id=1629639066]
 offset_left = 1678.0
