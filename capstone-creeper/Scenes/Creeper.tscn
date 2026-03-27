@@ -1378,9 +1378,9 @@ script = ExtResource("15_xa52x")
 
 [node name="info" type="TextureButton" parent="." unique_id=1629639066]
 offset_left = 1678.0
-offset_top = 1.0
+offset_top = -3.0
 offset_right = 1742.0
-offset_bottom = 65.0
+offset_bottom = 61.0
 scale = Vector2(2, 2)
 texture_normal = ExtResource("15_hg43c")
 
