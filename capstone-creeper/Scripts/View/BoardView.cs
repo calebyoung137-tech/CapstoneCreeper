@@ -152,6 +152,8 @@ public partial class BoardView : Node2D
 	}
 	public async void updateBoard(GameBoard gameBoard)
 	{
+		Node Parent = GetParent();
+		Parent.GetNode<TextureButton>("info").GetNode<TileMapLayer>("paperBackground").Visible = false; 
 		for (int i = 0; i < gameBoard.Pins.GetLength(0); i++)
 		{
 			for (int j = 0; j < gameBoard.Pins.GetLength(1); j++)
