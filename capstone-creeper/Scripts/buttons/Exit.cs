@@ -12,8 +12,10 @@ public partial class Exit : TextureButton
 		_dialog.DialogText = "Do you want to continue?";
 		_dialog.Hide();
 		AddChild(_dialog); // IMPORTANT: must be in the scene tree
-		_dialog.AddThemeFontSizeOverride("font_size", 32);
+		//var label = _dialog.GetNode<Label>("Label");
+		//Slabel.AddThemeFontSizeOverride("font_size", 32);
 		_dialog.Size = new Vector2I(600, 300); // width, height
+		_dialog.AddThemeFontSizeOverride("large", 100);
 		Pressed += OnButtonPressed;
 	}
 
