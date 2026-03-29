@@ -25,7 +25,8 @@ public partial class RightIcon : Sprite2D
 	public override void _Process(double delta)
 	{
 		sunRays.Rotate(0.003f);
-		if (GameController.Controller.turn != GameController.Turn.White)
+		if (GameController.Controller.turn != GameController.Turn.White &&
+            GameController.Controller.controllerState != GameController.ControllerState.GameOver)
 		{
 			sunRays.Visible = true;
 		}

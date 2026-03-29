@@ -282,7 +282,7 @@ public class GameBoard
         }
     }
 
-    public bool checkDraw()
+    public GameResult checkDraw()
     {
         int blackCount = 0;
         int possibleMoveCount = 0;
@@ -305,7 +305,7 @@ public class GameBoard
         if (blackCount == 0 || possibleMoveCount == 0)
         {
 
-            return true;
+            return GameResult.Draw;
         }
         clearPossibleMoves();
         int whiteCount = 0;
@@ -330,7 +330,7 @@ public class GameBoard
         if (whiteCount == 0 || possibleMoveCount == 0)
         {
 
-            return true;
+            return GameResult.Draw;
         }
 
 
@@ -359,23 +359,24 @@ public class GameBoard
         }
         if (gameStateHist[gameState] == 3)
         {
-            return true;
+            return GameResult.Draw;
         }
 
 
-        return false;
+        return GameResult.NotOver;
 
     }
 
-    public bool checkWin()
+    public GameResult checkWin()
     {
         bool[,] searched = new bool[6, 6];
         bool blackWon = false;
         bool whiteWon = false;
         blackWon = checkWin(new Vector2I(0, 0), searched, TileType.Black);
         whiteWon = checkWin(new Vector2I(5, 0), searched, TileType.White);
-        if (blackWon || whiteWon) { return true; }
-        else { return false; }
+        if (blackWon) { return GameResult.BlackWin; }
+        else if (whiteWon) { return GameResult.WhiteWin; }
+        else { return GameResult.NotOver; }
     }
 
     public bool checkWin(Vector2I currentPos, bool[,] searched, TileType tileToWin)
@@ -437,6 +438,22 @@ public class GameBoard
                 return false;
             }
 
+        }
+    }
+
+    public void eraseTowers(TileType loser)
+    {
+        for (int x = 0; x < Tiles.GetLength(0); x++)
+        {
+            for (int y = 0; y < Tiles.GetLength(1); y++)
+            {
+        
+                if (Tiles[x, y] == loser)
+                {
+                    
+                    Tiles[x, y] = TileType.Empty;
+                }
+            }
         }
     }
 }

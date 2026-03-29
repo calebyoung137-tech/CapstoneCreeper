@@ -216,6 +216,12 @@ public partial class BoardView : Node2D
 					{
 						if (gameBoard.Tiles[i, j] == TileType.Empty)
 						{
+							if (tile.towerTeam == "Red" || tile.towerTeam == "Blue")
+							{
+                                PlayTowerExplosion(tile.Position);
+                                await ToSignal(GetTree().CreateTimer(0.33f), "timeout");
+                                tile.Texture = null;
+                            }
 							tile.Texture = null;
 							tile.towerTeam = null;
 						}
