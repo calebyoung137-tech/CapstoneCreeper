@@ -34,6 +34,10 @@ window/stretch/mode="canvas_items"
 
 project/assembly_name="CapstoneCreeper"
 
+[gui]
+
+theme/custom_font="uid://w5xmayfwnnuh"
+
 [rendering]
 
 renderer/rendering_method="mobile"

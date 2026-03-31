@@ -282,17 +282,17 @@ public class GameBoard
 		}
 	}
 
-	public bool checkDraw()
-	{
-		int blackCount = 0;
-		int possibleMoveCount = 0;
-		for (int i = 0; i < Pins.GetLength(0); i++)
-		{
-			for (int j = 0; j < Pins.GetLength(1); j++)
-			{
-				if (Pins[i, j] == PinType.Black)
-				{
-					HighlightPossibleMoves(new Vector2I(i, j));
+    public GameResult checkDraw()
+    {
+        int blackCount = 0;
+        int possibleMoveCount = 0;
+        for (int i = 0; i < Pins.GetLength(0); i++)
+        {
+            for (int j = 0; j < Pins.GetLength(1); j++)
+            {
+                if (Pins[i, j] == PinType.Black)
+                {
+                    HighlightPossibleMoves(new Vector2I(i, j));
 
 				}
 			}
@@ -305,18 +305,18 @@ public class GameBoard
 		if (blackCount == 0 || possibleMoveCount == 0)
 		{
 
-			return true;
-		}
-		clearPossibleMoves();
-		int whiteCount = 0;
-		possibleMoveCount = 0;
-		for (int i = 0; i < Pins.GetLength(0); i++)
-		{
-			for (int j = 0; j < Pins.GetLength(1); j++)
-			{
-				if (Pins[i, j] == PinType.White)
-				{
-					HighlightPossibleMoves(new Vector2I(i, j));
+            return GameResult.Draw;
+        }
+        clearPossibleMoves();
+        int whiteCount = 0;
+        possibleMoveCount = 0;
+        for (int i = 0; i < Pins.GetLength(0); i++)
+        {
+            for (int j = 0; j < Pins.GetLength(1); j++)
+            {
+                if (Pins[i, j] == PinType.White)
+                {
+                    HighlightPossibleMoves(new Vector2I(i, j));
 
 				}
 			}
@@ -330,8 +330,8 @@ public class GameBoard
 		if (whiteCount == 0 || possibleMoveCount == 0)
 		{
 
-			return true;
-		}
+            return GameResult.Draw;
+        }
 
 		string gameState = BoardToString();
 
@@ -349,20 +349,21 @@ public class GameBoard
 		}
 
 
-		return false;
+        return GameResult.NotOver;
 
 	}
 
-	public bool checkWin()
-	{
-		bool[,] searched = new bool[6, 6];
-		bool blackWon = false;
-		bool whiteWon = false;
-		blackWon = checkWin(new Vector2I(0, 0), searched, TileType.Black);
-		whiteWon = checkWin(new Vector2I(5, 0), searched, TileType.White);
-		if (blackWon || whiteWon) { return true; }
-		else { return false; }
-	}
+    public GameResult checkWin()
+    {
+        bool[,] searched = new bool[6, 6];
+        bool blackWon = false;
+        bool whiteWon = false;
+        blackWon = checkWin(new Vector2I(0, 0), searched, TileType.Black);
+        whiteWon = checkWin(new Vector2I(5, 0), searched, TileType.White);
+        if (blackWon) { return GameResult.BlackWin; }
+        else if (whiteWon) { return GameResult.WhiteWin; }
+        else { return GameResult.NotOver; }
+    }
 
 	public bool checkWin(Vector2I currentPos, bool[,] searched, TileType tileToWin)
 	{
