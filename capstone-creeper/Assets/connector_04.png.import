@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://civg1kfcmcbor"
-path="res://.godot/imported/Image-Source-PlusPNG.com.png-a51c487211368748b251ea1f5c316796.ctex"
+uid="uid://b15ccyb2qncad"
+path="res://.godot/imported/connector_04.png-4027ae15bfafbdb228f4014deaf444ee.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Image-Source-PlusPNG.com.png"
-dest_files=["res://.godot/imported/Image-Source-PlusPNG.com.png-a51c487211368748b251ea1f5c316796.ctex"]
+source_file="res://Assets/connector_04.png"
+dest_files=["res://.godot/imported/connector_04.png-4027ae15bfafbdb228f4014deaf444ee.ctex"]
 
 [params]
 
