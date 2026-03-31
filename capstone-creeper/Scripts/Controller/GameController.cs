@@ -151,12 +151,12 @@ public partial class GameController : Node
 					boardView.updateBoard(gameBoard);
 					selectedPin = new Vector2I(-1, -1);
 
-					if (gameBoard.checkWin())
+					if (gameBoard.checkWin() != GameResult.NotOver)
 					{
 						controllerState = ControllerState.GameOver;
 						
 					}
-					else if (gameBoard.checkDraw())
+					else if (gameBoard.checkDraw() == GameResult.Draw)
 					{
 						controllerState = ControllerState.GameOver;
 						
@@ -190,11 +190,11 @@ public partial class GameController : Node
 						gameBoard.clearPossibleMoves();
 						boardView.updateBoard(gameBoard);
 
-						if (gameBoard.checkWin())
+						if (gameBoard.checkWin() != GameResult.NotOver)
 						{
 							controllerState = ControllerState.GameOver;
 						}
-						else if (gameBoard.checkDraw())
+						else if (gameBoard.checkDraw() == GameResult.Draw)
 						{
 							controllerState = ControllerState.GameOver;
 						}
@@ -217,7 +217,7 @@ public partial class GameController : Node
 		}
 	}
 }
-                    if (GameSettings.Mode == GameMode.OnlineMultiplayer)
+/*                    if (GameSettings.Mode == GameMode.OnlineMultiplayer)
                     { // if multiplayer, send the move, and apply locally
                         GetNode<NetworkManager>("/root/Network").SendMove(selectedPin, boardPos);
                     }
@@ -262,4 +262,4 @@ public partial class GameController : Node
             }
         }
     }
-}
+}*/

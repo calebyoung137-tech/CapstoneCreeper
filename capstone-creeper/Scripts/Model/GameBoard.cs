@@ -345,7 +345,7 @@ public class GameBoard
 		}
 		if (gameStateHist[gameState] == 3)
 		{
-			return true;
+			return GameResult.Draw;
 		}
 
 
