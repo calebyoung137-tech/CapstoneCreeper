@@ -173,8 +173,11 @@ public partial class GameController : Node
 					else if (gameBoard.checkDraw() == GameResult.Draw)
 					{
 						controllerState = ControllerState.GameOver;
-						
-					}
+                        
+                        await Task.Delay(1500);
+                        boardView.gameOver(GameResult.Draw);
+
+                    }
 					else if (GameSettings.Mode == GameMode.SinglePlayer) 
 					{
 						// Code for playing against AI opponent
@@ -225,7 +228,11 @@ public partial class GameController : Node
 						else if (gameBoard.checkDraw() == GameResult.Draw)
 						{
 							controllerState = ControllerState.GameOver;
-						}
+                            controllerState = ControllerState.GameOver;
+
+                            await Task.Delay(1500);
+                            boardView.gameOver(GameResult.Draw);
+                        }
 						else
 						{
 							turn = (turn == Turn.White) ? Turn.Black : Turn.White;

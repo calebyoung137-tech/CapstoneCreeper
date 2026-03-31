@@ -570,7 +570,19 @@ public partial class BoardView : Node2D
         PackedScene tutorialScene = GD.Load<PackedScene>("res://Scenes/game_end.tscn");
 
         // Instantiate it
-        Node tutorialInstance = tutorialScene.Instantiate();
+        GameEnd tutorialInstance = tutorialScene.Instantiate<GameEnd>();
+		if (gameResult == GameResult.BlackWin)
+		{
+			tutorialInstance.result = "Blue"; 
+		}
+		if (gameResult == GameResult.WhiteWin)
+		{
+			tutorialInstance.result = "Red";
+		}
+		if (gameResult == GameResult.Draw)
+		{
+			tutorialInstance.result = "Purple"; 
+		}
 
         // Optional: if it's UI, make sure it’s on top by adding to CanvasLayer or at the end of children
         AddChild(tutorialInstance);

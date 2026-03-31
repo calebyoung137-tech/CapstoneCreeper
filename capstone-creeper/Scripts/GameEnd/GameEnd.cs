@@ -4,7 +4,7 @@ using static Godot.Control;
 
 public partial class GameEnd : CanvasLayer
 {
-	public string gameResult = ""; 
+	public string result = ""; 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
@@ -28,11 +28,26 @@ public partial class GameEnd : CanvasLayer
 			2.0f
 		);
 
+		if (result == "")
+		{
+			result = "BlackSword";
+		}
+		else if (result == "Red") {
+			result = "RedSword";
+		}
+		else if (result == "Blue")
+		{
+			result = "BlueSword";
+		}
+		else if (result == "Purple")
+		{
+			result = "PurpleSword";
 
-		TileMapLayer sword = GetNode<TileMapLayer>("BlueSword");
+		}
+		TileMapLayer sword = GetNode<TileMapLayer>(result);
 		sword.ZIndex = 100; 
 		sword.Modulate = new Color(1, 1, 1, 0);
-		sword.Position = sword.Position + new Vector2(0, -770); 
+		sword.Position = sword.Position + new Vector2(0, -swordPosChange(result)); 
 		// Create tween
 		var tween2 = CreateTween();
 
@@ -43,6 +58,7 @@ public partial class GameEnd : CanvasLayer
 			1.0f,
 			2.0f
 		);
+		
 
 
 		TileMapLayer home = GetNode<TileMapLayer>("RedBanner");
@@ -64,5 +80,32 @@ public partial class GameEnd : CanvasLayer
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
+	}
+	public int swordPosChange(string gameResult)
+	{
+
+		if (gameResult == "BlackSword")
+		{
+			return 770 + 3 * 285; 
+		}
+		else if (gameResult == "RedSword")
+		{
+			return 770 + 1 * 285;
+
+		}
+		else if (gameResult == "BlueSword")
+		{
+			return 770 + 0 * 285;
+
+
+		}
+		else if (gameResult == "PurpleSword")
+		{
+			return 770 + 2 * 285;
+		}
+		else
+		{
+			return 0; 
+		}
 	}
 }
