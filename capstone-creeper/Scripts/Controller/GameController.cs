@@ -166,6 +166,7 @@ public partial class GameController : Node
                         boardView.updateBoard(gameBoard);
                         controllerState = ControllerState.GameOver;
 
+                        await Task.Delay(4000);
                         boardView.gameOver(winner);
 
                     }
@@ -217,8 +218,9 @@ public partial class GameController : Node
                             }
                             boardView.updateBoard(gameBoard);
                             controllerState = ControllerState.GameOver;
-							
-							boardView.gameOver(winner); 
+
+                            await Task.Delay(4000);
+                            boardView.gameOver(winner); 
                         }
 						else if (gameBoard.checkDraw() == GameResult.Draw)
 						{

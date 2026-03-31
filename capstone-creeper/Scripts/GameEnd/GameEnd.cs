@@ -4,6 +4,7 @@ using static Godot.Control;
 
 public partial class GameEnd : CanvasLayer
 {
+	public string gameResult = ""; 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
@@ -11,11 +12,12 @@ public partial class GameEnd : CanvasLayer
 		var overlay = new ColorRect();
 		overlay.Color = new Color(0, 0, 0, 0); // start fully transparent
 		overlay.SetAnchorsPreset(LayoutPreset.FullRect);
-		overlay.MouseFilter = Control.MouseFilterEnum.Ignore;
+		overlay.MouseFilter = Control.MouseFilterEnum.Stop;
+		
 
 		AddChild(overlay);
 
-		// Create tween
+		MoveChild(overlay, 0);// Create tween
 		var tween = CreateTween();
 
 		// Fade alpha from 0 → 0.5 over 2 seconds
@@ -42,6 +44,21 @@ public partial class GameEnd : CanvasLayer
 			2.0f
 		);
 
+
+		TileMapLayer home = GetNode<TileMapLayer>("RedBanner");
+		
+		home.Modulate = new Color(1, 1, 1, 0);
+		
+		// Create tween
+		var tween3 = CreateTween();
+
+		// Fade to fully visible over 2 seconds
+		tween3.TweenProperty(
+			home,
+			"modulate:a",
+			1.0f,
+			2.0f
+		);
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.

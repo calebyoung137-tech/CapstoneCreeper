@@ -4,13 +4,13 @@
 [ext_resource type="Texture2D" uid="uid://diookblgdd8" path="res://Assets/Tiny Swords (Free Pack)/Terrain/Decorations/Rocks/Rock2.png" id="2_trj04"]
 [ext_resource type="Texture2D" uid="uid://djmwisigeekjf" path="res://Assets/Tiny Swords (Free Pack)/Terrain/Decorations/Rocks/Rock4.png" id="3_16hvj"]
 [ext_resource type="Texture2D" uid="uid://3vmw0kvy4bhk" path="res://Assets/Tiny Swords (Free Pack)/Terrain/Decorations/Clouds/Clouds_01.png" id="4_vr1f0"]
-[ext_resource type="Script" path="res://Scripts/Clouds01.cs" id="5_5egv6"]
+[ext_resource type="Script" uid="uid://cpof3bemlbge8" path="res://Scripts/Clouds01.cs" id="5_5egv6"]
 [ext_resource type="AudioStream" uid="uid://dsihjd4gchutb" path="res://Assets/Sounds/Collecting Gems.mp3" id="5_8dnnj"]
 [ext_resource type="Texture2D" uid="uid://bs4qgqxexo4q5" path="res://Assets/Tiny Swords (Free Pack)/Terrain/Decorations/Clouds/Clouds_02.png" id="5_t1dhk"]
 [ext_resource type="Texture2D" uid="uid://bdyh183bwkcd" path="res://Assets/Tiny Swords (Free Pack)/Terrain/Tileset/Water Background color.png" id="6_5egv6"]
-[ext_resource type="Script" path="res://Scripts/View/Clouds02.cs" id="7_8dnnj"]
+[ext_resource type="Script" uid="uid://cdgpxjljbugol" path="res://Scripts/View/Clouds02.cs" id="7_8dnnj"]
 [ext_resource type="Texture2D" uid="uid://bqjgwgmv66p4f" path="res://Assets/Tiny Swords (Free Pack)/Terrain/Tileset/Tilemap_color1.png" id="7_vtepg"]
-[ext_resource type="Script" path="res://Scripts/View/homePageKnight.cs" id="8_8dnnj"]
+[ext_resource type="Script" uid="uid://dkl1u25pjh8ux" path="res://Scripts/View/homePageKnight.cs" id="8_8dnnj"]
 [ext_resource type="Texture2D" uid="uid://bi8ti2nfwrvi5" path="res://Assets/Tiny Swords (Free Pack)/Buildings/Blue Buildings/Castle.png" id="9_m3bi6"]
 [ext_resource type="Texture2D" uid="uid://d3lohg3ceaq3e" path="res://Assets/Tiny Swords (Free Pack)/UI Elements/UI Elements/Ribbons/BigRibbons.png" id="10_vr1f0"]
 [ext_resource type="Texture2D" uid="uid://dxpukc7agpesp" path="res://Assets/Tiny Swords (Free Pack)/UI Elements/UI Elements/Icons/Icon_12.png" id="11_t1dhk"]
@@ -1802,7 +1802,7 @@ layout_mode = 0
 offset_left = 863.0
 offset_top = 544.0
 offset_right = 963.0
-offset_bottom = 944.0
+offset_bottom = 944.00006
 
 [node name="PlayButton" type="Button" parent="VBoxContainer" unique_id=558361827]
 layout_mode = 2

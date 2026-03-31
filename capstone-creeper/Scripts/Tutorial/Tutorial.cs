@@ -14,15 +14,16 @@ public partial class Tutorial : CanvasLayer
 		overlay.Color = new Color(0, 0, 0, 0.5f);
 		overlay.SetAnchorsPreset(LayoutPreset.FullRect);
 		overlay.ZIndex = -10;
-		overlay.MouseFilter = Control.MouseFilterEnum.Ignore;
+		overlay.MouseFilter = Control.MouseFilterEnum.Stop;
 		AddChild(overlay);
+        MoveChild(overlay, 0);// Create tween
 
-		Label paragraph = GetNode<Label>("Paragraph");
+        Label paragraph = GetNode<Label>("Paragraph");
 		paragraph.Text = tutorialMessages[slideNumber];
 
-		TextureButton next = GetChild<TextureButton>(4);
-		TextureButton back = GetChild<TextureButton>(5);
-		TextureButton exit = GetChild<TextureButton>(6);
+		TextureButton next = GetChild<TextureButton>(5);
+		TextureButton back = GetChild<TextureButton>(6);
+		TextureButton exit = GetChild<TextureButton>(7);
 		exit.Pressed += Exit;
 		back.Pressed += GoBack;
 		next.Pressed += GoNext;
@@ -41,14 +42,14 @@ public partial class Tutorial : CanvasLayer
 	private void GoBack()
 	{
 		slideNumber--; 
-		TextureButton back = GetChild<TextureButton>(5);
+		TextureButton back = GetChild<TextureButton>(6);
 
 		if (slideNumber == 0)
 		{
 			back.Visible = false; 
 		}
 
-		TextureButton next = GetChild<TextureButton>(4);
+		TextureButton next = GetChild<TextureButton>(5);
 		next.Visible = true;
 		Sprite2D imageHelp = GetNode<Sprite2D>("imageHelp");
 		imageHelp.Texture = GD.Load<Texture2D>(pathsToImages[slideNumber]);
@@ -60,10 +61,10 @@ public partial class Tutorial : CanvasLayer
 	private void GoNext()
 	{
 		slideNumber++;
-		TextureButton back = GetChild<TextureButton>(5);
+		TextureButton back = GetChild<TextureButton>(6);
 		back.Visible = true;
 
-		TextureButton next = GetChild<TextureButton>(4);
+		TextureButton next = GetChild<TextureButton>(5);
 
 		if (slideNumber == 5)
 		{
