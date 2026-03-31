@@ -65,8 +65,8 @@ public partial class Info : TextureButton
 		TileMapLayer paperBackground = GetNode<TileMapLayer>("paperBackground");
 		paperBackground.Visible = false;
 
-        PackedScene tutorialScene = GD.Load<PackedScene>("res://Scenes/tutorial.tscn");
-
+		PackedScene tutorialScene = GD.Load<PackedScene>("res://Scenes/tutorial.tscn");
+		//PackedScene tutorialScene = GD.Load<PackedScene>("res://Scenes/game_end.tscn");
         // Instantiate it
         Node tutorialInstance = tutorialScene.Instantiate();
 

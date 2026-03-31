@@ -486,4 +486,18 @@ public class GameBoard
 		}
 		return gameState;
 	}
+	public void eraseTowers(TileType Loser)
+	{
+        for (int x = 0; x < Tiles.GetLength(0); x++)
+        {
+            for (int y = 0; y < Tiles.GetLength(1); y++)
+            {
+				if (Tiles[x, y] == Loser)
+				{
+					Tiles[x, y] = TileType.Empty;
+				}
+                // Do something with tile
+            }
+        }
+    }
 }

@@ -564,4 +564,15 @@ public partial class BoardView : Node2D
 			await ToSignal(GetTree().CreateTimer(0.05f), "timeout");
 		}
 	}
+
+	public void gameOver(GameResult gameResult)
+	{
+        PackedScene tutorialScene = GD.Load<PackedScene>("res://Scenes/game_end.tscn");
+
+        // Instantiate it
+        Node tutorialInstance = tutorialScene.Instantiate();
+
+        // Optional: if it's UI, make sure it’s on top by adding to CanvasLayer or at the end of children
+        AddChild(tutorialInstance);
+    }
 }

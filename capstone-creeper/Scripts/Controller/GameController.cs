@@ -154,8 +154,21 @@ public partial class GameController : Node
 					if (gameBoard.checkWin() != GameResult.NotOver)
 					{
 						controllerState = ControllerState.GameOver;
-						
-					}
+                        GameResult winner = gameBoard.checkWin();
+                        if (winner == GameResult.BlackWin)
+                        {
+                            gameBoard.eraseTowers(TileType.White);
+                        }
+                        else
+                        {
+                            gameBoard.eraseTowers(TileType.Black);
+                        }
+                        boardView.updateBoard(gameBoard);
+                        controllerState = ControllerState.GameOver;
+
+                        boardView.gameOver(winner);
+
+                    }
 					else if (gameBoard.checkDraw() == GameResult.Draw)
 					{
 						controllerState = ControllerState.GameOver;
@@ -193,7 +206,20 @@ public partial class GameController : Node
 						if (gameBoard.checkWin() != GameResult.NotOver)
 						{
 							controllerState = ControllerState.GameOver;
-						}
+                            GameResult winner = gameBoard.checkWin();
+                            if (winner == GameResult.BlackWin)
+                            {
+                                gameBoard.eraseTowers(TileType.White);
+                            }
+                            else
+                            {
+                                gameBoard.eraseTowers(TileType.Black);
+                            }
+                            boardView.updateBoard(gameBoard);
+                            controllerState = ControllerState.GameOver;
+							
+							boardView.gameOver(winner); 
+                        }
 						else if (gameBoard.checkDraw() == GameResult.Draw)
 						{
 							controllerState = ControllerState.GameOver;
