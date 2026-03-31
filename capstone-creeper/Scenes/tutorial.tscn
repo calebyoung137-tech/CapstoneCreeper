@@ -167,18 +167,18 @@ position = Vector2(1524, 381)
 
 [node name="next" type="TextureButton" parent="." unique_id=1236698608]
 offset_left = 1618.0
-offset_top = 532.0
+offset_top = 764.0
 offset_right = 1682.0
-offset_bottom = 596.0
+offset_bottom = 828.0
 scale = Vector2(2, 2)
 texture_normal = ExtResource("4_p1f1o")
 flip_h = true
 
 [node name="back" type="TextureButton" parent="." unique_id=1680441940]
 offset_left = 1485.0
-offset_top = 530.0
+offset_top = 765.0
 offset_right = 1549.0
-offset_bottom = 611.0
+offset_bottom = 846.0
 scale = Vector2(2, 2)
 texture_normal = ExtResource("4_p1f1o")
 
@@ -192,17 +192,17 @@ texture_normal = ExtResource("5_ys4pu")
 
 [node name="Panel01" type="Sprite2D" parent="." unique_id=808345684]
 z_index = -1
-position = Vector2(1241, 379)
-scale = Vector2(0.6, 0.6)
+position = Vector2(1241, 492.95)
+scale = Vector2(0.6, 0.8332652)
 texture = ExtResource("5_h2ono")
 
 [node name="Connector04" type="Sprite2D" parent="." unique_id=2071785628]
-position = Vector2(667.00006, 697)
-scale = Vector2(1.2574377, 1.0722766)
+position = Vector2(642, 909)
+scale = Vector2(1.7526855, 0.5150859)
 texture = ExtResource("6_on4kn")
 flip_h = true
 
 [node name="Avatars19" type="Sprite2D" parent="." unique_id=1618321336]
-position = Vector2(292, 782)
+position = Vector2(238, 899)
 scale = Vector2(2.4, 2.4)
 texture = ExtResource("7_70gml")

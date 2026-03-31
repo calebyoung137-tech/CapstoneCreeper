@@ -66,7 +66,7 @@ public partial class Tutorial : CanvasLayer
 
 		TextureButton next = GetChild<TextureButton>(5);
 
-		if (slideNumber == 5)
+		if (slideNumber == 2)
 		{
 			next.Visible = false;
 		}
@@ -80,14 +80,11 @@ public partial class Tutorial : CanvasLayer
 	{
 		QueueFree();
 	}
-	string[] tutorialMessages = new string[6]
+	string[] tutorialMessages = new string[3]
 {
-	"Placeholder messagePlaceholder message Placeholder message Placeholder message Placeholder message Placeholder message Placeholder message Placeholder message 1",
-	"Placeholder messagePlaceholder message Placeholder message Placeholder message Placeholder message Placeholder message Placeholder message Placeholder message 2",
-	"Placeholder messagePlaceholder message Placeholder message Placeholder message Placeholder message Placeholder message Placeholder message Placeholder message 3",
-	"Placeholder messagePlaceholder message Placeholder message Placeholder message Placeholder message Placeholder message Placeholder message Placeholder message 4",
-	"Placeholder messagePlaceholder message Placeholder message Placeholder message Placeholder message Placeholder message Placeholder message Placeholder message 5",
-    "Placeholder messagePlaceholder message Placeholder message Placeholder message Placeholder message Placeholder message Placeholder message Placeholder message 6"
+	$"Two rival kingdoms fight to conquer a small island. Each kingdom controls two towers of their own color, on opposite corners of the island. Your goal is to create a continuous path of towers to connect both of your keeps, and establish dominance of the territory. But beware! Diagonal connections don’t count, and your towers can be captured.\n\nEach player starts with 8 knights, with 4 positioned around each keep. On your turn, click a knight to select it. A series of ghosts will appear showing all of its possible moves. Click a ghost to confirm your move, or click the selected knight again to deselect.\n",
+    "Knights can make three types of moves: \r\n1. March: click an adjacent space in a cardinal direction to reposition your knight\r\n2. Tower building/capture: click a diagonally adjacent space to hop your knight over a patch of land, placing one of your towers there. If the land contains an opponent's tower, it is destroyed and replaced with one of yours!\r\n3. Joust: click the empty space on the opposite side of an adjacent opponent’s knight to jump over and defeat that knight, removing them from the game permanently.\r\n",
+    "The first player to create an unbroken path of towers between their two keeps wins! If either player loses all of their knights, the game is declared a draw. A draw can also be agreed upon following a series of repetitive moves.",
 };
 	string[] pathsToImages = new string[6]
 {
