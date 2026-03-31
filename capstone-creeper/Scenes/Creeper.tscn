@@ -1613,10 +1613,10 @@ texture_normal = ExtResource("14_e7how")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="info/paperBackground" unique_id=547583266]
 custom_minimum_size = Vector2(600, 0)
-offset_left = -471.24988
-offset_top = 607.49994
-offset_right = 476.75012
-offset_bottom = 682.49994
+offset_left = -498.74988
+offset_top = 609.99994
+offset_right = 449.25012
+offset_bottom = 684.99994
 
 [node name="Instruction" type="Label" parent="info/paperBackground/HBoxContainer" unique_id=1339713737]
 custom_minimum_size = Vector2(630, 0)
