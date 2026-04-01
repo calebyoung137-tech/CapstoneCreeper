@@ -12,9 +12,9 @@
 [ext_resource type="Script" uid="uid://djkmglffwv8ab" path="res://Scripts/buttons/Info.cs" id="9_vswi4"]
 [ext_resource type="Texture2D" uid="uid://pu2xcjg1uw62" path="res://Assets/Tiny Swords (Free Pack)/Terrain/Decorations/Rubber Duck/Rubber duck.png" id="10_6l5nv"]
 [ext_resource type="Texture2D" uid="uid://bj7u2yo1fm8r6" path="res://Assets/Tiny Swords (Free Pack)/UI Elements/UI Elements/Banners/Banner.png" id="10_rj2hg"]
-[ext_resource type="Script" uid="uid://dlsnn8cphuly5" path="res://Scripts/View/rubberDuck.cs" id="11_247vx"]
-[ext_resource type="Script" uid="uid://c1qnjwho36r7w" path="res://Scripts/View/LeftIcon.cs" id="12_247vx"]
-[ext_resource type="Script" uid="uid://dbvnrfpdc5w1w" path="res://Scripts/View/RightIcon.cs" id="13_kbkxy"]
+[ext_resource type="Script" path="res://Scripts/View/rubberDuck.cs" id="11_247vx"]
+[ext_resource type="Script" path="res://Scripts/View/LeftIcon.cs" id="12_247vx"]
+[ext_resource type="Script" path="res://Scripts/View/RightIcon.cs" id="13_kbkxy"]
 [ext_resource type="Texture2D" uid="uid://df60rk28tol42" path="res://Assets/Tiny Swords (Free Pack)/UI Elements/UI Elements/Icons/Icon_09.png" id="14_e7how"]
 [ext_resource type="Texture2D" uid="uid://di11b1wsqkqv0" path="res://Assets/Tiny Swords (Free Pack)/UI Elements/UI Elements/Icons/Icon_11.png" id="15_hg43c"]
 [ext_resource type="Script" uid="uid://ccsqkawr36gyk" path="res://Scripts/buttons/Exit.cs" id="15_xa52x"]
@@ -24,7 +24,7 @@
 [ext_resource type="Texture2D" uid="uid://di6bjftkok2f0" path="res://Assets/Tiny Swords (Free Pack)/Terrain/Decorations/Rocks in the Water/Water Rocks_02.png" id="19_c8w7p"]
 [ext_resource type="Texture2D" uid="uid://de71afblgc4g2" path="res://Assets/Tiny Swords (Free Pack)/Terrain/Decorations/Rocks in the Water/Water Rocks_03.png" id="20_kqo5d"]
 [ext_resource type="Texture2D" uid="uid://cfq70mpoddb7y" path="res://Assets/Tiny Swords (Free Pack)/Terrain/Decorations/Rocks in the Water/Water Rocks_04.png" id="21_xa52x"]
-[ext_resource type="AudioStream" uid="uid://dcw5o4fgbunqb" path="res://Assets/Sounds/Combat Music.mp3" id="25_rj2hg"]
+[ext_resource type="AudioStream" uid="uid://dcw5o4fgbunqb" path="res://Assets/Sounds/Music/Combat Music.mp3" id="25_rj2hg"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_n3f0c"]
 texture = ExtResource("10_rj2hg")
@@ -794,7 +794,7 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_l5ada"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_rj2hg"]
 texture = ExtResource("8_1x6mx")
 0:1/animation_speed = 3.0
 0:1/animation_frame_0/duration = 1.0
@@ -821,9 +821,9 @@ texture = ExtResource("8_1x6mx")
 0:0/0/modulate = Color(0.568, 1.173, 2.055, 1)
 
 [sub_resource type="TileSet" id="TileSet_6l5nv"]
-sources/0 = SubResource("TileSetAtlasSource_l5ada")
+sources/0 = SubResource("TileSetAtlasSource_rj2hg")
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_itftu"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_wefx8"]
 texture = ExtResource("7_itftu")
 margins = Vector2i(32, 32)
 separation = Vector2i(64, 0)
@@ -857,7 +857,7 @@ texture_region_size = Vector2i(128, 128)
 
 [sub_resource type="TileSet" id="TileSet_2t3qr"]
 tile_size = Vector2i(64, 64)
-sources/0 = SubResource("TileSetAtlasSource_itftu")
+sources/0 = SubResource("TileSetAtlasSource_wefx8")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_3kw1g"]
 texture = ExtResource("8_2t3qr")
@@ -1679,6 +1679,7 @@ script = ExtResource("18_1jl7h")
 
 [node name="RightIcon" type="Sprite2D" parent="NonLogicVisuals" unique_id=1136702320]
 position = Vector2(0, 2)
+flip_h = true
 script = ExtResource("13_kbkxy")
 
 [node name="LeftIcon" type="Sprite2D" parent="NonLogicVisuals" unique_id=1328455739]
@@ -1733,5 +1734,5 @@ tile_set = SubResource("TileSet_itftu")
 
 [node name="Background Music" type="AudioStreamPlayer" parent="." unique_id=121170798]
 stream = ExtResource("25_rj2hg")
-volume_db = -20.0
+volume_db = -22.0
 autoplay = true

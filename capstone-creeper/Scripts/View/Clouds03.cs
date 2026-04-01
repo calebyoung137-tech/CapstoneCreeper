@@ -1,9 +1,9 @@
 using Godot;
 using System;
 
-public partial class Clouds01 : Sprite2D
+public partial class Clouds03 : Sprite2D
 {
-	[Export] public float Speed = 30f;
+	[Export] public float Speed = 15f;
 
 	public override void _Process(double delta)
 	{
