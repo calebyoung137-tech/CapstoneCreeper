@@ -163,7 +163,7 @@ theme_override_font_sizes/font_size = 30
 autowrap_mode = 2
 
 [node name="imageHelp" type="Sprite2D" parent="." unique_id=761794199]
-position = Vector2(1524, 381)
+position = Vector2(1554, 486)
 
 [node name="next" type="TextureButton" parent="." unique_id=1236698608]
 offset_left = 1618.0

@@ -29,8 +29,10 @@ public partial class Tutorial : CanvasLayer
 		next.Pressed += GoNext;
 
 		back.Visible = false; 
-		Sprite2D imageHelp = GetNode<Sprite2D>("imageHelp"); 
-		imageHelp.Texture = GD.Load<Texture2D>(pathsToImages[slideNumber]);
+		Sprite2D imageHelp = GetNode<Sprite2D>("imageHelp");
+        imageHelp.Scale = new Vector2(1.3f, 1.3f);
+
+        imageHelp.Texture = GD.Load<Texture2D>(pathsToImages[slideNumber]);
 
 	}
 
@@ -52,7 +54,8 @@ public partial class Tutorial : CanvasLayer
 		TextureButton next = GetChild<TextureButton>(5);
 		next.Visible = true;
 		Sprite2D imageHelp = GetNode<Sprite2D>("imageHelp");
-		imageHelp.Texture = GD.Load<Texture2D>(pathsToImages[slideNumber]);
+        imageHelp.Scale = new Vector2(1.3f, 1.3f);
+        imageHelp.Texture = GD.Load<Texture2D>(pathsToImages[slideNumber]);
 		Label paragraph = GetNode<Label>("Paragraph");
 		paragraph.Text = tutorialMessages[slideNumber];
 
@@ -72,6 +75,7 @@ public partial class Tutorial : CanvasLayer
 		}
 		Sprite2D imageHelp = GetNode<Sprite2D>("imageHelp");
 		imageHelp.Texture = GD.Load<Texture2D>(pathsToImages[slideNumber]);
+		imageHelp.Scale = new Vector2(1.3f, 1.3f);
 		Label paragraph = GetNode<Label>("Paragraph");
 		paragraph.Text = tutorialMessages[slideNumber];
 
@@ -88,9 +92,9 @@ public partial class Tutorial : CanvasLayer
 };
 	string[] pathsToImages = new string[6]
 {
-	"res://Assets/Tiny Swords (Free Pack)/Buildings/Black Buildings/Barracks.png",
-	"res://Assets/Tiny Swords (Free Pack)/Buildings/Red Buildings/Barracks.png",
-	"res://Assets/Tiny Swords (Free Pack)/Buildings/Blue Buildings/Barracks.png",
+    "res://Assets/TutorialImages/Picture1.png",
+    "res://Assets/TutorialImages/Picture2.png",
+    "res://Assets/TutorialImages/Picture3.png",
 	"res://Assets/Tiny Swords (Free Pack)/Buildings/Purple Buildings/Barracks.png",
 	"res://Assets/Tiny Swords (Free Pack)/Buildings/Black Buildings/Barracks.png",
 	"res://Assets/Tiny Swords (Free Pack)/Buildings/Red Buildings/Barracks.png",
