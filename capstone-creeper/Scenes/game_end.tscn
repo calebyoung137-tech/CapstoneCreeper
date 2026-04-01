@@ -1002,10 +1002,10 @@ tile_map_data = PackedByteArray("AADl/wMAAAABAAMAAADl/wQAAAABAAQAAADl/wUAAAABAAU
 tile_set = SubResource("TileSet_wiu0u")
 
 [node name="Label" type="Label" parent="BlueSword" unique_id=2117040024]
-offset_left = -315.5
-offset_top = 33.0
-offset_right = 20.5
-offset_bottom = 104.0
+offset_left = -283.0
+offset_top = 34.5
+offset_right = 53.0
+offset_bottom = 105.5
 theme_override_colors/font_color = Color(0.24313726, 0.5254902, 0.59607846, 1)
 theme_override_font_sizes/font_size = 64
 text = "Blue Team Wins!"
@@ -1017,10 +1017,10 @@ tile_map_data = PackedByteArray("AADl/wMAAAABAAsAAADl/wQAAAABAAwAAADl/wUAAAABAA0
 tile_set = SubResource("TileSet_wiu0u")
 
 [node name="Label" type="Label" parent="RedSword" unique_id=1405600519]
-offset_left = -315.5
-offset_top = 33.0
-offset_right = 20.5
-offset_bottom = 104.0
+offset_left = -274.0
+offset_top = 37.0
+offset_right = 62.0
+offset_bottom = 108.0
 theme_override_colors/font_color = Color(0.654902, 0.30980393, 0.30980393, 1)
 theme_override_font_sizes/font_size = 64
 text = "Red Team Wins!"
@@ -1032,10 +1032,10 @@ tile_map_data = PackedByteArray("AADl/wMAAAABABsAAADl/wQAAAABABwAAADl/wUAAAABAB0
 tile_set = SubResource("TileSet_wiu0u")
 
 [node name="Label" type="Label" parent="PurpleSword" unique_id=1171960599]
-offset_left = -323.0
-offset_top = 33.0
-offset_right = 101.0
-offset_bottom = 104.0
+offset_left = -296.5
+offset_top = 18.0
+offset_right = 127.5
+offset_bottom = 105.0
 theme_override_colors/font_color = Color(0.45490196, 0.36078432, 0.47058824, 1)
 theme_override_font_sizes/font_size = 64
 text = "Draw... do better"
@@ -1047,10 +1047,10 @@ tile_map_data = PackedByteArray("AADl/wMAAAABACMAAADl/wQAAAABACQAAADl/wUAAAABACU
 tile_set = SubResource("TileSet_wiu0u")
 
 [node name="Label" type="Label" parent="BlackSword" unique_id=37672628]
-offset_left = -339.5
-offset_top = 39.0
-offset_right = 101.0
-offset_bottom = 104.0
+offset_left = -307.0
+offset_top = 40.5
+offset_right = 133.5
+offset_bottom = 105.5
 theme_override_colors/font_color = Color(0.35686275, 0.40392157, 0.45882353, 1)
 theme_override_font_sizes/font_size = 48
 text = "Unexpected Disconnection"

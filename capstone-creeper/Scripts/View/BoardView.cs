@@ -219,10 +219,10 @@ public partial class BoardView : Node2D
 						{
 							if (tile.towerTeam == "Red" || tile.towerTeam == "Blue")
 							{
-                                PlayTowerExplosion(tile.Position);
-                                await ToSignal(GetTree().CreateTimer(0.33f), "timeout");
-                                tile.Texture = null;
-                            }
+								PlayTowerExplosion(tile.Position);
+								await ToSignal(GetTree().CreateTimer(0.33f), "timeout");
+								tile.Texture = null;
+							}
 							tile.Texture = null;
 							tile.towerTeam = null;
 						}
@@ -567,10 +567,10 @@ public partial class BoardView : Node2D
 
 	public void gameOver(GameResult gameResult)
 	{
-        PackedScene tutorialScene = GD.Load<PackedScene>("res://Scenes/game_end.tscn");
+		PackedScene tutorialScene = GD.Load<PackedScene>("res://Scenes/game_end.tscn");
 
-        // Instantiate it
-        GameEnd tutorialInstance = tutorialScene.Instantiate<GameEnd>();
+		// Instantiate it
+		GameEnd tutorialInstance = tutorialScene.Instantiate<GameEnd>();
 		if (gameResult == GameResult.BlackWin)
 		{
 			tutorialInstance.result = "Blue"; 
@@ -584,7 +584,7 @@ public partial class BoardView : Node2D
 			tutorialInstance.result = "Purple"; 
 		}
 
-        // Optional: if it's UI, make sure it’s on top by adding to CanvasLayer or at the end of children
-        AddChild(tutorialInstance);
-    }
+		// Optional: if it's UI, make sure it’s on top by adding to CanvasLayer or at the end of children
+		AddChild(tutorialInstance);
+	}
 }

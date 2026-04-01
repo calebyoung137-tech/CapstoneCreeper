@@ -22,8 +22,8 @@ public partial class GameController : Node
 	}
 	public Turn turn { get; private set; }
 	public ControllerState controllerState { get; private set; }
-	public GameBoard gameBoard;
-	public BoardView boardView;
+	public  GameBoard gameBoard;
+	public static BoardView boardView;
 	public Vector2I selectedPin { get; private set; }
 	public string NetworkGameOver = ""; 
 	public static GameController Controller { get; set; }
@@ -250,6 +250,15 @@ public partial class GameController : Node
 				}
 			}
 		}
+	}
+
+	public void eraseTowers(TileType loser)
+	{
+		gameBoard.eraseTowers(loser); 
+	}
+	public void updateBoard()
+	{
+		boardView.updateBoard(gameBoard); 
 	}
 }
 /*                    if (GameSettings.Mode == GameMode.OnlineMultiplayer)

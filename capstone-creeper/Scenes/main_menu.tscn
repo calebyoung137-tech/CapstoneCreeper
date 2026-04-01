@@ -2128,7 +2128,7 @@ script = ExtResource("7_8dnnj")
 
 [node name="Clouds03" type="Sprite2D" parent="." unique_id=450126647]
 z_index = -10
-position = Vector2(872, 621)
+position = Vector2(621.00006, 621)
 scale = Vector2(0.7673611, 0.86328125)
 texture = ExtResource("11_mkpwh")
 script = ExtResource("12_4nkqq")
