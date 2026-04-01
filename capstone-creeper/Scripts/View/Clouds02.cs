@@ -3,7 +3,7 @@ using System;
 
 public partial class Clouds02 : Sprite2D
 {
-	[Export] public float Speed = 50f;
+	[Export] public float Speed = 40f;
 
 	public override void _Process(double delta)
 	{
