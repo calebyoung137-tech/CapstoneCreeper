@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://h1a4fr78n7ku"]
+
+[ext_resource type="Script" uid="uid://cd4wb2idwoc4" path="res://Scripts/buttons/Easy.cs" id="1_m8dcb"]
+[ext_resource type="Script" uid="uid://blkeqpx72si5u" path="res://Scripts/buttons/Hard.cs" id="2_aaklq"]
+
+[node name="AIDifficultySelect" type="Node2D" unique_id=564447436]
+
+[node name="Easy" type="Button" parent="." unique_id=65600180]
+offset_left = 465.0
+offset_top = 403.0
+offset_right = 593.0
+offset_bottom = 511.0
+theme_override_font_sizes/font_size = 100
+text = "Easy"
+script = ExtResource("1_m8dcb")
+
+[node name="Hard" type="Button" parent="." unique_id=1315117438]
+offset_left = 1303.0
+offset_top = 413.0
+offset_right = 1434.0
+offset_bottom = 521.0
+theme_override_font_sizes/font_size = 100
+text = "Hard"
+script = ExtResource("2_aaklq")
