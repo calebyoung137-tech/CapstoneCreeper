@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bmk044fflwqau" path="res://Scripts/View/MainMenu.cs" id="1_28flt"]
 [ext_resource type="Texture2D" uid="uid://3vmw0kvy4bhk" path="res://Assets/Tiny Swords (Free Pack)/Terrain/Decorations/Clouds/Clouds_01.png" id="4_vr1f0"]
-[ext_resource type="Script" uid="uid://cpof3bemlbge8" path="res://Scripts/Clouds01.cs" id="5_5egv6"]
+[ext_resource type="Script" uid="uid://cpof3bemlbge8" path="res://Scripts/View/Clouds01.cs" id="5_5egv6"]
 [ext_resource type="Texture2D" uid="uid://bdyh183bwkcd" path="res://Assets/Tiny Swords (Free Pack)/Terrain/Tileset/Water Background color.png" id="6_5egv6"]
 [ext_resource type="Script" uid="uid://cdgpxjljbugol" path="res://Scripts/View/Clouds02.cs" id="7_8dnnj"]
 [ext_resource type="Texture2D" uid="uid://bqjgwgmv66p4f" path="res://Assets/Tiny Swords (Free Pack)/Terrain/Tileset/Tilemap_color1.png" id="7_vtepg"]
@@ -2060,10 +2060,10 @@ tile_set = SubResource("TileSet_vtepg")
 
 [node name="Title Text" type="Label" parent="." unique_id=25514206]
 layout_mode = 0
-offset_left = 581.0
-offset_top = 269.0
-offset_right = 1763.0
-offset_bottom = 542.0
+offset_left = 641.0
+offset_top = 282.0
+offset_right = 1823.0
+offset_bottom = 555.0
 theme_override_font_sizes/font_size = 200
 text = "Castle Craze"
 
@@ -2076,10 +2076,10 @@ tile_set = SubResource("TileSet_t1dhk")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1824980172]
 layout_mode = 0
-offset_left = 863.0
-offset_top = 544.0
-offset_right = 963.0
-offset_bottom = 944.00006
+offset_left = 885.0
+offset_top = 557.0
+offset_right = 985.0
+offset_bottom = 957.00006
 
 [node name="PlayButton" type="Button" parent="VBoxContainer" unique_id=558361827]
 layout_mode = 2

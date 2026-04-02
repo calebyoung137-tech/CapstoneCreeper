@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://qshkm1k31xo3" path="res://Scripts/Model/OnlineMultiplayerMenu.cs" id="1_s7uw5"]
 [ext_resource type="Texture2D" uid="uid://bdyh183bwkcd" path="res://Assets/Tiny Swords (Free Pack)/Terrain/Tileset/Water Background color.png" id="2_6gc7j"]
 [ext_resource type="Texture2D" uid="uid://dgqopc72gcwdo" path="res://Assets/Tiny Swords (Free Pack)/Buildings/Red Buildings/Castle.png" id="3_4c8bh"]
-[ext_resource type="Script" uid="uid://dkl1u25pjh8ux" path="res://Scripts/View/homePageKnight.cs" id="4_xvpco"]
+[ext_resource type="Script" uid="uid://bx3m1nj101lar" path="res://Scripts/View/onlineMenuKnight.cs" id="4_xvpco"]
 [ext_resource type="Texture2D" uid="uid://hf8uqypbl5yy" path="res://Assets/Tiny Swords (Free Pack)/UI Elements/UI Elements/Icons/Icon_08.png" id="5_seq8k"]
 [ext_resource type="Texture2D" uid="uid://di11b1wsqkqv0" path="res://Assets/Tiny Swords (Free Pack)/UI Elements/UI Elements/Icons/Icon_11.png" id="6_6s67w"]
 [ext_resource type="Texture2D" uid="uid://d3lohg3ceaq3e" path="res://Assets/Tiny Swords (Free Pack)/UI Elements/UI Elements/Ribbons/BigRibbons.png" id="7_hctmq"]
@@ -543,7 +543,8 @@ scale = Vector2(30.65625, 17.796875)
 texture = ExtResource("2_6gc7j")
 
 [node name="Castle" type="Sprite2D" parent="." unique_id=893059909]
-position = Vector2(581, 585)
+position = Vector2(581.00006, 506)
+scale = Vector2(1.496875, 1.484375)
 texture = ExtResource("3_4c8bh")
 
 [node name="IdleKnight1" type="TextureRect" parent="." unique_id=164410480]
