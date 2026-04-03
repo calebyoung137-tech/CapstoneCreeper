@@ -32,7 +32,6 @@ public partial class PlayMenu : Control
 	private void OnAIVAI()
 	{
 		GameSettings.Mode = GameMode.AIVAI;
-		GD.Print("changed scene");
 		GetTree().ChangeSceneToFile("res://scenes/AIVAI.tscn");
 	}
 
