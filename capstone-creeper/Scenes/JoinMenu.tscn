@@ -10,10 +10,10 @@
 [ext_resource type="Texture2D" uid="uid://bj7u2yo1fm8r6" path="res://Assets/Tiny Swords (Free Pack)/UI Elements/UI Elements/Banners/Banner.png" id="9_j6454"]
 [ext_resource type="Texture2D" uid="uid://df60rk28tol42" path="res://Assets/Tiny Swords (Free Pack)/UI Elements/UI Elements/Icons/Icon_09.png" id="10_tliuu"]
 [ext_resource type="Texture2D" uid="uid://d3lohg3ceaq3e" path="res://Assets/Tiny Swords (Free Pack)/UI Elements/UI Elements/Ribbons/BigRibbons.png" id="11_848nu"]
+[ext_resource type="Script" uid="uid://b16ifqi7bxhly" path="res://Scripts/buttons/BackJoinOnline.cs" id="12_bpd5b"]
 [ext_resource type="AudioStream" uid="uid://cakkv41vah2cg" path="res://Assets/Sounds/Music/Menu Music.mp3" id="13_j6454"]
-[ext_resource type="Script" uid="uid://ccsqkawr36gyk" path="res://Scripts/buttons/Exit.cs" id="13_tliuu"]
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1bxs6"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_bpd5b"]
 texture = ExtResource("3_5eenc")
 0:1/animation_speed = 3.0
 0:1/animation_frame_0/duration = 1.0
@@ -40,7 +40,7 @@ texture = ExtResource("3_5eenc")
 0:0/0/modulate = Color(0.568, 1.173, 2.055, 1)
 
 [sub_resource type="TileSet" id="TileSet_h0mqp"]
-sources/0 = SubResource("TileSetAtlasSource_1bxs6")
+sources/0 = SubResource("TileSetAtlasSource_bpd5b")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_hfa8s"]
 texture = ExtResource("11_848nu")
@@ -815,7 +815,7 @@ sources/0 = SubResource("TileSetAtlasSource_av4j3")
 script = ExtResource("1_7be0v")
 
 [node name="Water" type="Sprite2D" parent="." unique_id=807286789]
-z_index = -17
+z_index = -25
 position = Vector2(960, 538.5)
 scale = Vector2(30.65625, 17.796875)
 texture = ExtResource("2_4atuy")
@@ -907,13 +907,14 @@ offset_right = 69.0
 offset_bottom = 65.0
 scale = Vector2(2, 2)
 texture_normal = ExtResource("6_e66c1")
-script = ExtResource("13_tliuu")
+script = ExtResource("12_bpd5b")
 
 [node name="RichTextLabel" type="RichTextLabel" parent="." unique_id=385312417]
 z_index = 10
 offset_left = 670.0
-offset_top = 600.0
+offset_top = 510.0
 offset_right = 1201.0
 offset_bottom = 736.0
 theme_override_font_sizes/normal_font_size = 125
-text = "Enter IP to Join"
+text = "Enter IP Address to Join"
+horizontal_alignment = 1
