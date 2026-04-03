@@ -16,6 +16,7 @@ public partial class Easy : Button
 	public void goToEasy()
 	{
 		GameSettings.Mode = GameMode.SinglePlayer;
+		GameSettings.Difficulty = AIDifficulty.Easy;
 
 		GetTree().ChangeSceneToFile("res://Scenes/Creeper.tscn");
 	}

@@ -189,10 +189,21 @@ public partial class GameController : Node
 						string state = gameBoard.BoardToAIState();
 						state += (turn == Turn.White) ? "x" : "o";
 
-						Move aiMove = ai.GetEasyMove(state);
+						Move aiMove;
+						if (GameSettings.Difficulty == AIDifficulty.Easy)
+						{
+                            aiMove = ai.GetEasyMove(state);
+							GD.Print("Difficulty: easy");
+                        }
+						else
+						{
+							aiMove = ai.GetBestMove(state);
+                            GD.Print("Difficulty: hard");
+                        }
 
 						await Task.Delay(800);
 
+						// Highlights pin to be moved
 						selectedPin = new Vector2I(aiMove.start.Y, aiMove.start.X);
 						controllerState = ControllerState.MakingMove;
 						boardView.updateBoard(gameBoard);
