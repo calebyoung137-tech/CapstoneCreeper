@@ -16,7 +16,8 @@ public partial class Hard : Button
 	public void goToHard()
 	{
 		GameSettings.Mode = GameMode.SinglePlayer;
+        GameSettings.Difficulty = AIDifficulty.Hard;
 
-		GetTree().ChangeSceneToFile("res://Scenes/Creeper.tscn");
+        GetTree().ChangeSceneToFile("res://Scenes/Creeper.tscn");
 	}
 }
