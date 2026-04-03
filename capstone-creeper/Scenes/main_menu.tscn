@@ -3,12 +3,11 @@
 [ext_resource type="Script" uid="uid://bmk044fflwqau" path="res://Scripts/View/MainMenu.cs" id="1_28flt"]
 [ext_resource type="FontFile" uid="uid://w5xmayfwnnuh" path="res://Assets/Fonts/Forgore.otf" id="4_4nkqq"]
 [ext_resource type="Texture2D" uid="uid://3vmw0kvy4bhk" path="res://Assets/Tiny Swords (Free Pack)/Terrain/Decorations/Clouds/Clouds_01.png" id="4_vr1f0"]
-[ext_resource type="Script" uid="uid://cpof3bemlbge8" path="res://Scripts/View/Clouds01.cs" id="5_5egv6"]
 [ext_resource type="Texture2D" uid="uid://bdyh183bwkcd" path="res://Assets/Tiny Swords (Free Pack)/Terrain/Tileset/Water Background color.png" id="6_5egv6"]
 [ext_resource type="Script" uid="uid://cdgpxjljbugol" path="res://Scripts/View/Clouds02.cs" id="7_8dnnj"]
 [ext_resource type="Texture2D" uid="uid://bqjgwgmv66p4f" path="res://Assets/Tiny Swords (Free Pack)/Terrain/Tileset/Tilemap_color1.png" id="7_vtepg"]
 [ext_resource type="Script" uid="uid://dkl1u25pjh8ux" path="res://Scripts/View/homePageKnight.cs" id="8_8dnnj"]
-[ext_resource type="Script" path="res://Scripts/View/Clouds01.cs" id="8_mkpwh"]
+[ext_resource type="Script" uid="uid://ba62dx88famst" path="res://Scripts/View/Clouds01.cs" id="8_mkpwh"]
 [ext_resource type="Texture2D" uid="uid://bi8ti2nfwrvi5" path="res://Assets/Tiny Swords (Free Pack)/Buildings/Blue Buildings/Castle.png" id="9_m3bi6"]
 [ext_resource type="Texture2D" uid="uid://dk4mn2pg6c5m" path="res://Assets/Tiny Swords (Free Pack)/Terrain/Decorations/Clouds/Clouds_05.png" id="9_ujyyl"]
 [ext_resource type="Texture2D" uid="uid://d3lohg3ceaq3e" path="res://Assets/Tiny Swords (Free Pack)/UI Elements/UI Elements/Ribbons/BigRibbons.png" id="10_vr1f0"]
@@ -1736,7 +1735,7 @@ texture = ExtResource("7_vtepg")
 [sub_resource type="TileSet" id="TileSet_ujyyl"]
 sources/0 = SubResource("TileSetAtlasSource_wyh8j")
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ujyyl"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_4nkqq"]
 texture = ExtResource("16_m3bi6")
 0:1/animation_speed = 3.0
 0:1/animation_frame_0/duration = 1.0
@@ -1763,7 +1762,7 @@ texture = ExtResource("16_m3bi6")
 0:0/0/modulate = Color(0.568, 1.173, 2.055, 1)
 
 [sub_resource type="TileSet" id="TileSet_mkpwh"]
-sources/0 = SubResource("TileSetAtlasSource_ujyyl")
+sources/0 = SubResource("TileSetAtlasSource_4nkqq")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_mkpwh"]
 texture = ExtResource("16_wyh8j")
@@ -2066,6 +2065,7 @@ offset_left = 581.0
 offset_top = 269.0
 offset_right = 1763.0
 offset_bottom = 542.0
+theme_override_fonts/font = ExtResource("4_4nkqq")
 theme_override_font_sizes/font_size = 200
 text = "Castle Craze"
 
@@ -2116,20 +2116,20 @@ offset_right = 735.0
 offset_bottom = 887.0
 script = ExtResource("8_8dnnj")
 
-[node name="Clouds01" type="Sprite2D" parent="." unique_id=1633986252]
+[node name="Clouds1" type="Sprite2D" parent="." unique_id=1633986252]
 position = Vector2(211.99998, 157)
 scale = Vector2(0.7274306, 0.7109375)
 texture = ExtResource("4_vr1f0")
 script = ExtResource("8_mkpwh")
 
-[node name="Clouds02" type="Sprite2D" parent="." unique_id=878075132]
+[node name="Clouds2" type="Sprite2D" parent="." unique_id=878075132]
 z_index = -6
 position = Vector2(1636, 522)
 scale = Vector2(0.7673611, 0.86328125)
 texture = ExtResource("9_ujyyl")
 script = ExtResource("7_8dnnj")
 
-[node name="Clouds03" type="Sprite2D" parent="." unique_id=450126647]
+[node name="Clouds3" type="Sprite2D" parent="." unique_id=450126647]
 z_index = -10
 position = Vector2(582, 695)
 scale = Vector2(0.7673611, 0.86328125)
@@ -2155,8 +2155,8 @@ tile_set = SubResource("TileSet_mkpwh")
 [node name="seafoam" type="TileMapLayer" parent="." unique_id=1874891321]
 z_index = -5
 position = Vector2(-12, -36)
-scale = Vector2(1.01, 1.01)
-tile_map_data = PackedByteArray("AAAJAAsAAAAAAAAAAAAJAAwAAAAAAAAAAAAJAA0AAAAAAAAAAAAJAA4AAAAAAAAAAAAJAA8AAAAAAAAAAAAJABAAAAAAAAAAAAAKABAAAAAAAAAAAAALABAAAAAAAAAAAAAMABAAAAAAAAAAAAANABAAAAAAAAAAAAAOABAAAAAAAAAAAAAPABAAAAAAAAAAAAAQABAAAAAAAAAAAAARABAAAAAAAAAAAAASABAAAAAAAAAAAAATABAAAAAAAAAAAAAVAAsAAAAAAAAAAAAVAAwAAAAAAAAAAAAVAA0AAAAAAAAAAAAVAA4AAAAAAAAAAAAVAA8AAAAAAAAAAAAVABAAAAAAAAAAAAAUABAAAAAAAAAAAAA=")
+scale = Vector2(0.5, 0.5)
+tile_map_data = PackedByteArray("AAARABwAAAAAAAAAAAARAB0AAAAAAAAAAAARAB4AAAAAAAAAAAARAB8AAAAAAAAAAAARACAAAAAAAAAAAAARACEAAAAAAAAAAAASACEAAAAAAAAAAAATACEAAAAAAAAAAAAUACEAAAAAAAAAAAAVACEAAAAAAAAAAAAWACEAAAAAAAAAAAAXACEAAAAAAAAAAAAYACEAAAAAAAAAAAAZACEAAAAAAAAAAAAaACEAAAAAAAAAAAArABwAAAAAAAAAAAArAB0AAAAAAAAAAAArAB4AAAAAAAAAAAArAB8AAAAAAAAAAAArACAAAAAAAAAAAAArACEAAAAAAAAAAAApACEAAAAAAAAAAAAqACEAAAAAAAAAAAAnACEAAAAAAAAAAAAoACEAAAAAAAAAAAAlACEAAAAAAAAAAAAmACEAAAAAAAAAAAAjACEAAAAAAAAAAAAkACEAAAAAAAAAAAAbACEAAAAAAAAAAAAcACEAAAAAAAAAAAAdACEAAAAAAAAAAAAeACEAAAAAAAAAAAAfACEAAAAAAAAAAAAgACEAAAAAAAAAAAAhACEAAAAAAAAAAAAiACEAAAAAAAAAAAA=")
 tile_set = SubResource("TileSet_4nkqq")
 
 [node name="rock2" type="AnimatedSprite2D" parent="." unique_id=346683203]

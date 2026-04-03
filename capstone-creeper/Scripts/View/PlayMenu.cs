@@ -6,7 +6,6 @@ public partial class PlayMenu : Control
 	private Button _singlePlayerButton;
 	private Button _localMultiplayerButton;
 	private Button _onlineMultiplayerButton;
-	private Button _backButton;
 
 	public override void _Ready()
 	{
@@ -14,19 +13,16 @@ public partial class PlayMenu : Control
 		_singlePlayerButton = GetNode<Button>("HBoxContainer/SinglePlayerButton");
 		_localMultiplayerButton = GetNode<Button>("HBoxContainer/LocalMultiplayerButton");
 		_onlineMultiplayerButton = GetNode<Button>("HBoxContainer/OnlineMultiplayerButton");
-		_backButton = GetNode<Button>("HBoxContainer/BackButton");
 
 		_aiVAIButton.Text = "AI vs AI";
 		_singlePlayerButton.Text = "Single Player";
 		_localMultiplayerButton.Text = "Multiplayer";
 		_onlineMultiplayerButton.Text = "Online Multiplayer";
-		_backButton.Text = "Back";
 
 		_aiVAIButton.Pressed += OnAIVAI;
 		_singlePlayerButton.Pressed += OnSinglePlayer;
 		_localMultiplayerButton.Pressed += OnLocalMultiplayer;
 		_onlineMultiplayerButton.Pressed += OnOnlineMultiplayer;
-		_backButton.Pressed += OnBack;
 	}
 
 	private void OnAIVAI()
@@ -51,10 +47,5 @@ public partial class PlayMenu : Control
 		GameSettings.Mode = GameMode.OnlineMultiplayer;
 		GD.Print("Online Multiplayer selected");
 		GetTree().ChangeSceneToFile("res://scenes/online_multiplayer_menu.tscn");
-	}
-
-	private void OnBack()
-	{
-		GetTree().ChangeSceneToFile("res://scenes/main_menu.tscn");
 	}
 }

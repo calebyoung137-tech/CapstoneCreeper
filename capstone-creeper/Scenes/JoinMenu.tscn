@@ -4,15 +4,15 @@
 [ext_resource type="Texture2D" uid="uid://bdyh183bwkcd" path="res://Assets/Tiny Swords (Free Pack)/Terrain/Tileset/Water Background color.png" id="2_4atuy"]
 [ext_resource type="Texture2D" uid="uid://dreqjlc2g8tkd" path="res://Assets/Tiny Swords (Free Pack)/Terrain/Tileset/summer water sparkles B 16x16.png" id="3_5eenc"]
 [ext_resource type="Texture2D" uid="uid://3vmw0kvy4bhk" path="res://Assets/Tiny Swords (Free Pack)/Terrain/Decorations/Clouds/Clouds_01.png" id="3_iwfl7"]
-[ext_resource type="Script" uid="uid://cpof3bemlbge8" path="res://Scripts/Clouds01.cs" id="4_h2gi5"]
+[ext_resource type="Script" uid="uid://ba62dx88famst" path="res://Scripts/View/Clouds01.cs" id="4_h2gi5"]
 [ext_resource type="Texture2D" uid="uid://hf8uqypbl5yy" path="res://Assets/Tiny Swords (Free Pack)/UI Elements/UI Elements/Icons/Icon_08.png" id="6_e66c1"]
-[ext_resource type="Texture2D" uid="uid://di11b1wsqkqv0" path="res://Assets/Tiny Swords (Free Pack)/UI Elements/UI Elements/Icons/Icon_11.png" id="7_25a4j"]
 [ext_resource type="Texture2D" uid="uid://dgqopc72gcwdo" path="res://Assets/Tiny Swords (Free Pack)/Buildings/Red Buildings/Castle.png" id="8_bpd5b"]
 [ext_resource type="Texture2D" uid="uid://bj7u2yo1fm8r6" path="res://Assets/Tiny Swords (Free Pack)/UI Elements/UI Elements/Banners/Banner.png" id="9_j6454"]
 [ext_resource type="Texture2D" uid="uid://df60rk28tol42" path="res://Assets/Tiny Swords (Free Pack)/UI Elements/UI Elements/Icons/Icon_09.png" id="10_tliuu"]
 [ext_resource type="Texture2D" uid="uid://d3lohg3ceaq3e" path="res://Assets/Tiny Swords (Free Pack)/UI Elements/UI Elements/Ribbons/BigRibbons.png" id="11_848nu"]
 [ext_resource type="Script" uid="uid://dp0xtr1txfns6" path="res://Scripts/buttons/ReturnHome.cs" id="12_nc1gr"]
 [ext_resource type="AudioStream" uid="uid://cakkv41vah2cg" path="res://Assets/Sounds/Music/Menu Music.mp3" id="13_j6454"]
+[ext_resource type="Script" uid="uid://ccsqkawr36gyk" path="res://Scripts/buttons/Exit.cs" id="13_tliuu"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1bxs6"]
 texture = ExtResource("3_5eenc")
@@ -842,22 +842,15 @@ offset_bottom = 951.0
 
 [node name="Label" type="Label" parent="JoinContainer" unique_id=2083010473]
 layout_mode = 2
+theme_override_font_sizes/font_size = 150
 
 [node name="IPINFO" type="LineEdit" parent="JoinContainer" unique_id=1097405424]
 layout_mode = 2
+theme_override_font_sizes/font_size = 150
 
 [node name="Button" type="Button" parent="JoinContainer" unique_id=1496357981]
 layout_mode = 2
-
-[node name="Back" type="Sprite2D" parent="." unique_id=627491816]
-position = Vector2(69, 43)
-scale = Vector2(2, 2)
-texture = ExtResource("6_e66c1")
-
-[node name="Info" type="Sprite2D" parent="." unique_id=1542410394]
-position = Vector2(1857, 39)
-scale = Vector2(2, 2)
-texture = ExtResource("7_25a4j")
+theme_override_font_sizes/font_size = 150
 
 [node name="Castle" type="Sprite2D" parent="." unique_id=2054167488]
 position = Vector2(947, 248)
@@ -916,3 +909,18 @@ text = "Replay Tutorial"
 stream = ExtResource("13_j6454")
 volume_db = -20.0
 autoplay = true
+
+[node name="Back" type="TextureButton" parent="." unique_id=1466176538]
+offset_left = 5.0
+offset_top = 1.0
+offset_right = 69.0
+offset_bottom = 65.0
+scale = Vector2(2, 2)
+texture_normal = ExtResource("6_e66c1")
+script = ExtResource("13_tliuu")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="." unique_id=385312417]
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_font_sizes/normal_font_size = 100
+text = "Enter IP to Join"
