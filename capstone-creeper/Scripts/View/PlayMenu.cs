@@ -32,14 +32,12 @@ public partial class PlayMenu : Control
 	private void OnAIVAI()
 	{
 		GameSettings.Mode = GameMode.AIVAI;
-		GD.Print("changed scene");
 		GetTree().ChangeSceneToFile("res://scenes/AIVAI.tscn");
 	}
 
 	private void OnSinglePlayer()
 	{
-		GameSettings.Mode = GameMode.SinglePlayer;
-		GetTree().ChangeSceneToFile("res://scenes/Creeper.tscn");
+		GetTree().ChangeSceneToFile("res://Scenes/AIDifficultySelect.tscn");
 	}
 
 	private void OnLocalMultiplayer()
