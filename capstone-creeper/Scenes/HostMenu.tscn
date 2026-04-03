@@ -5,8 +5,8 @@
 [ext_resource type="Texture2D" uid="uid://dreqjlc2g8tkd" path="res://Assets/Tiny Swords (Free Pack)/Terrain/Tileset/summer water sparkles B 16x16.png" id="3_fujhq"]
 [ext_resource type="Texture2D" uid="uid://d3lohg3ceaq3e" path="res://Assets/Tiny Swords (Free Pack)/UI Elements/UI Elements/Ribbons/BigRibbons.png" id="6_rsxax"]
 [ext_resource type="Script" uid="uid://dp0xtr1txfns6" path="res://Scripts/buttons/ReturnHome.cs" id="7_btds8"]
+[ext_resource type="Script" uid="uid://ccsqkawr36gyk" path="res://Scripts/buttons/Exit.cs" id="7_df4cs"]
 [ext_resource type="Texture2D" uid="uid://hf8uqypbl5yy" path="res://Assets/Tiny Swords (Free Pack)/UI Elements/UI Elements/Icons/Icon_08.png" id="8_moh1u"]
-[ext_resource type="Texture2D" uid="uid://di11b1wsqkqv0" path="res://Assets/Tiny Swords (Free Pack)/UI Elements/UI Elements/Icons/Icon_11.png" id="9_lwccl"]
 [ext_resource type="Texture2D" uid="uid://dgqopc72gcwdo" path="res://Assets/Tiny Swords (Free Pack)/Buildings/Red Buildings/Castle.png" id="10_jprlx"]
 [ext_resource type="AudioStream" uid="uid://cakkv41vah2cg" path="res://Assets/Sounds/Music/Menu Music.mp3" id="11_b536v"]
 
@@ -583,15 +583,14 @@ theme_override_font_sizes/font_size = 50
 text = "Return Home"
 script = ExtResource("7_btds8")
 
-[node name="Back" type="Sprite2D" parent="." unique_id=927042626]
-position = Vector2(69, 43)
+[node name="Back" type="TextureButton" parent="." unique_id=155714334]
+offset_left = 5.0
+offset_top = 1.0
+offset_right = 69.0
+offset_bottom = 65.0
 scale = Vector2(2, 2)
-texture = ExtResource("8_moh1u")
-
-[node name="Info" type="Sprite2D" parent="." unique_id=35950600]
-position = Vector2(1857, 39)
-scale = Vector2(2, 2)
-texture = ExtResource("9_lwccl")
+texture_normal = ExtResource("8_moh1u")
+script = ExtResource("7_df4cs")
 
 [node name="Castle" type="Sprite2D" parent="." unique_id=365702970]
 position = Vector2(947, 248)
