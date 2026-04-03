@@ -1058,20 +1058,17 @@ offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("1_s7uw5")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=722108423]
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1007455703]
 layout_mode = 0
 offset_left = 913.0
-offset_top = 813.0
+offset_top = 849.0
 offset_right = 953.0
-offset_bottom = 853.0
+offset_bottom = 849.0
 
-[node name="HostButton" type="Button" parent="VBoxContainer" unique_id=1615948239]
+[node name="HostButton" type="Button" parent="HBoxContainer" unique_id=1615948239]
 layout_mode = 2
 
-[node name="JoinButton" type="Button" parent="VBoxContainer" unique_id=1985518666]
-layout_mode = 2
-
-[node name="BackButton" type="Button" parent="VBoxContainer" unique_id=1274600609]
+[node name="JoinButton" type="Button" parent="HBoxContainer" unique_id=1985518666]
 layout_mode = 2
 
 [node name="Water" type="Sprite2D" parent="." unique_id=691832147]
@@ -1124,12 +1121,12 @@ autoplay = true
 
 [node name="Label" type="Label" parent="." unique_id=1327970734]
 layout_mode = 0
-offset_left = 870.0
-offset_top = 87.0
-offset_right = 1310.5
-offset_bottom = 152.0
-theme_override_colors/font_color = Color(0.35686275, 0.40392157, 0.45882353, 1)
-theme_override_font_sizes/font_size = 48
+offset_left = 763.0
+offset_top = 60.0
+offset_right = 1203.5
+offset_bottom = 186.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 125
 text = "Online Menu"
 
 [node name="Label2" type="Label" parent="." unique_id=731569957]

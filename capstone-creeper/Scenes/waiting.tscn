@@ -519,10 +519,10 @@ tile_map_data = PackedByteArray("AADl/wMAAAABAAMAAADl/wQAAAABAAQAAADl/wUAAAABAAU
 tile_set = SubResource("TileSet_ourl4")
 
 [node name="Label" type="Label" parent="BlueSword" unique_id=2041616405]
-offset_left = -315.5
-offset_top = 33.0
-offset_right = 20.5
-offset_bottom = 104.0
+offset_left = -295.0
+offset_top = 16.5
+offset_right = 41.0
+offset_bottom = 103.5
 theme_override_colors/font_color = Color(0.24313726, 0.5254902, 0.59607846, 1)
 theme_override_font_sizes/font_size = 64
 text = "Waiting..."
