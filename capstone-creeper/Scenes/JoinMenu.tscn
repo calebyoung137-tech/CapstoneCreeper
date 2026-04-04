@@ -1809,9 +1809,9 @@ tile_set = SubResource("TileSet_txeuu")
 [node name="Label 2" type="RichTextLabel" parent="." unique_id=385312417]
 z_index = 10
 offset_left = 671.0
-offset_top = 500.0
+offset_top = 501.0
 offset_right = 1202.0
-offset_bottom = 762.0
+offset_bottom = 763.0
 theme_override_font_sizes/normal_font_size = 125
 text = "Enter an IP address to join"
 horizontal_alignment = 1
