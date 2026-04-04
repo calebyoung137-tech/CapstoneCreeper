@@ -11,6 +11,7 @@
 [ext_resource type="AudioStream" uid="uid://cakkv41vah2cg" path="res://Assets/Sounds/Music/Menu Music.mp3" id="10_o4ias"]
 [ext_resource type="Texture2D" uid="uid://dwcjx2p20usmp" path="res://Assets/Tiny Swords (Free Pack)/Terrain/Decorations/Clouds/Clouds_08.png" id="10_wxhtu"]
 [ext_resource type="Texture2D" uid="uid://dreqjlc2g8tkd" path="res://Assets/Tiny Swords (Free Pack)/Terrain/Tileset/summer water sparkles B 16x16.png" id="11_6hlfh"]
+[ext_resource type="Script" uid="uid://cdgpxjljbugol" path="res://Scripts/View/Clouds02.cs" id="11_qqcxt"]
 [ext_resource type="Texture2D" uid="uid://d3lohg3ceaq3e" path="res://Assets/Tiny Swords (Free Pack)/UI Elements/UI Elements/Ribbons/BigRibbons.png" id="11_wnq3u"]
 [ext_resource type="Texture2D" uid="uid://hf8uqypbl5yy" path="res://Assets/Tiny Swords (Free Pack)/UI Elements/UI Elements/Icons/Icon_08.png" id="12_b6o37"]
 [ext_resource type="FontFile" uid="uid://w5xmayfwnnuh" path="res://Assets/Fonts/Forgore.otf" id="13_ditub"]
@@ -1445,7 +1446,7 @@ script = ExtResource("15_ditub")
 position = Vector2(1676, 77)
 scale = Vector2(1.081516, 1.1588287)
 texture = ExtResource("10_wxhtu")
-script = ExtResource("4_0whqw")
+script = ExtResource("11_qqcxt")
 
 [node name="Avatars" type="Node2D" parent="." unique_id=911931862]
 position = Vector2(-3, -25)

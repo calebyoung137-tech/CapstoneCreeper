@@ -7,7 +7,7 @@ public partial class onlineMenuKnight : TextureRect
 	public override void _Ready()
 	{
 		IdleKnight knight = new IdleKnight();
-		knight.Scale = new Vector2(5f, 5f); 
+		knight.Scale = new Vector2(4.5f, 4.5f); 
 		AddChild(knight);
 	}
 
