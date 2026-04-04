@@ -12,6 +12,8 @@
 [ext_resource type="Texture2D" uid="uid://di6bjftkok2f0" path="res://Assets/Tiny Swords (Free Pack)/Terrain/Decorations/Rocks in the Water/Water Rocks_02.png" id="10_61b3i"]
 [ext_resource type="Script" uid="uid://3oy7jyrsyoh5" path="res://Scripts/View/Shrubs/Rock.cs" id="11_44dib"]
 [ext_resource type="Texture2D" uid="uid://cfq70mpoddb7y" path="res://Assets/Tiny Swords (Free Pack)/Terrain/Decorations/Rocks in the Water/Water Rocks_04.png" id="12_frmm4"]
+[ext_resource type="Texture2D" uid="uid://hf8uqypbl5yy" path="res://Assets/Tiny Swords (Free Pack)/UI Elements/UI Elements/Icons/Icon_08.png" id="13_frmm4"]
+[ext_resource type="Script" uid="uid://cm8vv0ii3wpyk" path="res://Scripts/buttons/BackDifficultyPlay.cs" id="14_klbah"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_r3eea"]
 texture = ExtResource("2_rknw4")
@@ -1397,3 +1399,12 @@ position = Vector2(1700, 996.00006)
 scale = Vector2(4.218751, 2.5078115)
 sprite_frames = SubResource("SpriteFrames_20twe")
 script = ExtResource("11_44dib")
+
+[node name="Back" type="TextureButton" parent="." unique_id=1877798437]
+offset_left = 5.0
+offset_top = 1.0
+offset_right = 69.0
+offset_bottom = 65.0
+scale = Vector2(2, 2)
+texture_normal = ExtResource("13_frmm4")
+script = ExtResource("14_klbah")
