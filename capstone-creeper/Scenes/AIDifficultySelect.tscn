@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://d2sym0adx36j4" path="res://Assets/Tiny Swords (Free Pack)/UI Elements/UI Elements/Human Avatars/Avatars_06.png" id="6_5vpli"]
 [ext_resource type="Texture2D" uid="uid://d3lohg3ceaq3e" path="res://Assets/Tiny Swords (Free Pack)/UI Elements/UI Elements/Ribbons/BigRibbons.png" id="9_5vpli"]
 [ext_resource type="Texture2D" uid="uid://di6bjftkok2f0" path="res://Assets/Tiny Swords (Free Pack)/Terrain/Decorations/Rocks in the Water/Water Rocks_02.png" id="10_61b3i"]
+[ext_resource type="FontFile" uid="uid://w5xmayfwnnuh" path="res://Assets/Fonts/Forgore.otf" id="10_klbah"]
 [ext_resource type="Script" uid="uid://3oy7jyrsyoh5" path="res://Scripts/View/Shrubs/Rock.cs" id="11_44dib"]
 [ext_resource type="Texture2D" uid="uid://cfq70mpoddb7y" path="res://Assets/Tiny Swords (Free Pack)/Terrain/Decorations/Rocks in the Water/Water Rocks_04.png" id="12_frmm4"]
 [ext_resource type="Texture2D" uid="uid://hf8uqypbl5yy" path="res://Assets/Tiny Swords (Free Pack)/UI Elements/UI Elements/Icons/Icon_08.png" id="13_frmm4"]
@@ -1366,12 +1367,13 @@ tile_set = SubResource("TileSet_61b3i")
 
 [node name="Header" type="Label" parent="." unique_id=1524961139]
 z_index = 10
-offset_left = 515.0
-offset_top = 50.0
-offset_right = 1399.0
-offset_bottom = 214.0
+offset_left = 490.0
+offset_top = 53.0
+offset_right = 1374.0
+offset_bottom = 217.0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_font_sizes/font_size = 164
+theme_override_fonts/font = ExtResource("10_klbah")
+theme_override_font_sizes/font_size = 134
 text = "Choose a Difficulty"
 
 [node name="Red Banner" type="TileMapLayer" parent="." unique_id=529370063]

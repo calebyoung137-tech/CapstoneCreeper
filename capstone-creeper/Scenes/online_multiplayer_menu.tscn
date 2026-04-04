@@ -10,6 +10,18 @@
 [ext_resource type="Script" uid="uid://jdo6eangovir" path="res://Scripts/buttons/BackOnlinePlay.cs" id="9_6s67w"]
 [ext_resource type="Texture2D" uid="uid://dreqjlc2g8tkd" path="res://Assets/Tiny Swords (Free Pack)/Terrain/Tileset/summer water sparkles B 16x16.png" id="9_seq8k"]
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_seq8k"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6s67w"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_hctmq"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ussec"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8gyb4"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1drrj"]
+
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ussec"]
 texture = ExtResource("7_hctmq")
 5:1/0 = 0
@@ -1061,18 +1073,26 @@ script = ExtResource("1_s7uw5")
 [node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1007455703]
 layout_mode = 0
 offset_left = 524.0
-offset_top = 791.0
-offset_right = 665.0
-offset_bottom = 799.0
-theme_override_constants/separation = 160
+offset_top = 780.0
+offset_right = 799.0
+offset_bottom = 788.0
+theme_override_constants/separation = 275
 
 [node name="HostButton" type="Button" parent="HBoxContainer" unique_id=1615948239]
 layout_mode = 2
+theme_override_colors/font_hover_color = Color(0.9490196, 0.9490196, 0, 1)
 theme_override_font_sizes/font_size = 100
+theme_override_styles/normal = SubResource("StyleBoxEmpty_seq8k")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_6s67w")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_hctmq")
 
 [node name="JoinButton" type="Button" parent="HBoxContainer" unique_id=1985518666]
 layout_mode = 2
+theme_override_colors/font_hover_color = Color(0.9490196, 0.9490196, 0, 1)
 theme_override_font_sizes/font_size = 100
+theme_override_styles/normal = SubResource("StyleBoxEmpty_ussec")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_8gyb4")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_1drrj")
 
 [node name="Water" type="Sprite2D" parent="." unique_id=691832147]
 z_index = -25
