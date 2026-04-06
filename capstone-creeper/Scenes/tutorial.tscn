@@ -1,9 +1,10 @@
-[gd_scene format=4 uid="uid://c1xojd8218t3n"]
+[gd_scene format=4 uid="uid://bvu4nexw6eenp"]
 
 [ext_resource type="Script" uid="uid://c7jcdbd231bnf" path="res://Scripts/Tutorial/Tutorial.cs" id="1_feyax"]
 [ext_resource type="Texture2D" uid="uid://bo76p2a4only4" path="res://Assets/Tiny Swords (Free Pack)/UI Elements/UI Elements/Papers/RegularPaper.png" id="3_p8jf4"]
 [ext_resource type="Texture2D" uid="uid://hf8uqypbl5yy" path="res://Assets/Tiny Swords (Free Pack)/UI Elements/UI Elements/Icons/Icon_08.png" id="4_p1f1o"]
 [ext_resource type="Texture2D" uid="uid://eheqgcjylano" path="res://Assets/panel_01.png" id="5_h2ono"]
+[ext_resource type="Script" uid="uid://dhb47gfsk6vr5" path="res://Scripts/buttons/BackTutorialPlay.cs" id="5_on4kn"]
 [ext_resource type="Texture2D" uid="uid://df60rk28tol42" path="res://Assets/Tiny Swords (Free Pack)/UI Elements/UI Elements/Icons/Icon_09.png" id="5_ys4pu"]
 [ext_resource type="Texture2D" uid="uid://b15ccyb2qncad" path="res://Assets/connector_04.png" id="6_on4kn"]
 [ext_resource type="Texture2D" uid="uid://d1o27xbnaw81" path="res://Assets/Tiny Swords (Free Pack)/UI Elements/UI Elements/Human Avatars/Avatars_19.png" id="7_70gml"]
@@ -189,6 +190,7 @@ offset_right = 1680.0
 offset_bottom = 159.0
 scale = Vector2(2, 2)
 texture_normal = ExtResource("5_ys4pu")
+script = ExtResource("5_on4kn")
 
 [node name="Panel01" type="Sprite2D" parent="." unique_id=808345684]
 z_index = -1

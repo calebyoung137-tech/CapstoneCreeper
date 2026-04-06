@@ -5,6 +5,8 @@
 [ext_resource type="Texture2D" uid="uid://dreqjlc2g8tkd" path="res://Assets/Tiny Swords (Free Pack)/Terrain/Tileset/summer water sparkles B 16x16.png" id="3_uhan5"]
 [ext_resource type="Texture2D" uid="uid://pu2xcjg1uw62" path="res://Assets/Tiny Swords (Free Pack)/Terrain/Decorations/Rubber Duck/Rubber duck.png" id="4_gaoht"]
 [ext_resource type="Script" uid="uid://dlsnn8cphuly5" path="res://Scripts/View/rubberDuck.cs" id="5_qqfb4"]
+[ext_resource type="Texture2D" uid="uid://hf8uqypbl5yy" path="res://Assets/Tiny Swords (Free Pack)/UI Elements/UI Elements/Icons/Icon_08.png" id="6_1qr44"]
+[ext_resource type="Script" uid="uid://cbx2p5oo0ngy6" path="res://Scripts/buttons/BackTournamentPlay.cs" id="7_n2yl6"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_gaoht"]
 texture = ExtResource("3_uhan5")
@@ -153,3 +155,12 @@ scale = Vector2(1.34375, 1)
 sprite_frames = SubResource("SpriteFrames_btdl3")
 animation = &"swim"
 script = ExtResource("5_qqfb4")
+
+[node name="Back" type="TextureButton" parent="." unique_id=71911468]
+offset_left = 5.0
+offset_top = 1.0
+offset_right = 69.0
+offset_bottom = 65.0
+scale = Vector2(2, 2)
+texture_normal = ExtResource("6_1qr44")
+script = ExtResource("7_n2yl6")
