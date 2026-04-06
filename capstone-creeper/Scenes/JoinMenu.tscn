@@ -16,6 +16,7 @@
 [ext_resource type="Script" uid="uid://3oy7jyrsyoh5" path="res://Scripts/View/Shrubs/Rock.cs" id="13_848nu"]
 [ext_resource type="AudioStream" uid="uid://cakkv41vah2cg" path="res://Assets/Sounds/Music/Menu Music.mp3" id="13_j6454"]
 [ext_resource type="Texture2D" uid="uid://cfq70mpoddb7y" path="res://Assets/Tiny Swords (Free Pack)/Terrain/Decorations/Rocks in the Water/Water Rocks_04.png" id="14_nc1gr"]
+[ext_resource type="Texture2D" uid="uid://couume0sav0qw" path="res://Assets/Tiny Swords (Free Pack)/Terrain/Tileset/Water Foam.png" id="17_av4j3"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_bpd5b"]
 texture = ExtResource("3_5eenc")
@@ -1756,6 +1757,42 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_hfa8s"]
+texture = ExtResource("17_av4j3")
+margins = Vector2i(32, 32)
+separation = Vector2i(64, 0)
+texture_region_size = Vector2i(128, 128)
+0:0/next_alternative_id = 7
+0:0/animation_columns = 16
+0:0/animation_speed = 8.0
+0:0/animation_frame_0/duration = 1.0
+0:0/animation_frame_1/duration = 1.0
+0:0/animation_frame_2/duration = 1.0
+0:0/animation_frame_3/duration = 1.0
+0:0/animation_frame_4/duration = 1.0
+0:0/animation_frame_5/duration = 1.0
+0:0/animation_frame_6/duration = 1.0
+0:0/animation_frame_7/duration = 1.0
+0:0/animation_frame_8/duration = 1.0
+0:0/animation_frame_9/duration = 1.0
+0:0/animation_frame_10/duration = 1.0
+0:0/animation_frame_11/duration = 1.0
+0:0/animation_frame_12/duration = 1.0
+0:0/animation_frame_13/duration = 1.0
+0:0/animation_frame_14/duration = 1.0
+0:0/animation_frame_15/duration = 1.0
+0:0/0 = 0
+0:0/1 = 1
+0:0/2 = 2
+0:0/3 = 3
+0:0/4 = 4
+0:0/5 = 5
+0:0/6 = 6
+
+[sub_resource type="TileSet" id="TileSet_nqw7v"]
+tile_size = Vector2i(64, 64)
+sources/0 = SubResource("TileSetAtlasSource_hfa8s")
+
 [node name="JoinMenu" type="CanvasLayer" unique_id=195667042]
 script = ExtResource("1_7be0v")
 
@@ -1877,3 +1914,10 @@ position = Vector2(1700, 996.00006)
 scale = Vector2(4.218751, 2.5078115)
 sprite_frames = SubResource("SpriteFrames_txeuu")
 script = ExtResource("13_848nu")
+
+[node name="Sea Foam (Scale 0_9)" type="TileMapLayer" parent="." unique_id=1783345286]
+z_index = -5
+position = Vector2(-779.00006, -1699)
+scale = Vector2(0.9, 0.9)
+tile_map_data = PackedByteArray("AAAZACUAAAAAAAAAAAAaACUAAAAAAAAAAAAbACUAAAAAAAAAAAAcACUAAAAAAAAAAAAdACUAAAAAAAAAAAAeACUAAAAAAAAAAAAfACUAAAAAAAAAAAAgACUAAAAAAAAAAAAhACUAAAAAAAAAAAAiACUAAAAAAAAAAAAjACUAAAAAAAAAAAAkACIAAAAAAAAAAAAkACMAAAAAAAAAAAAkACQAAAAAAAAAAAAkACUAAAAAAAAAAAAXACIAAAAAAAAAAAAXACMAAAAAAAAAAAAXACQAAAAAAAAAAAAXACUAAAAAAAAAAAAYACUAAAAAAAAAAAA=")
+tile_set = SubResource("TileSet_nqw7v")

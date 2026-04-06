@@ -16,6 +16,7 @@
 [ext_resource type="Texture2D" uid="uid://3vmw0kvy4bhk" path="res://Assets/Tiny Swords (Free Pack)/Terrain/Decorations/Clouds/Clouds_01.png" id="13_tjel8"]
 [ext_resource type="Texture2D" uid="uid://bp6pult3120k1" path="res://Assets/Tiny Swords (Free Pack)/Terrain/Decorations/Clouds/Clouds_06.png" id="14_ur6j4"]
 [ext_resource type="Script" uid="uid://m54lmcte743i" path="res://Scripts/View/Clouds03.cs" id="15_ys4mg"]
+[ext_resource type="Texture2D" uid="uid://couume0sav0qw" path="res://Assets/Tiny Swords (Free Pack)/Terrain/Tileset/Water Foam.png" id="17_tjel8"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_seq8k"]
 
@@ -2275,6 +2276,42 @@ texture = ExtResource("5_6s67w")
 [sub_resource type="TileSet" id="TileSet_ussec"]
 sources/0 = SubResource("TileSetAtlasSource_hctmq")
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ys4mg"]
+texture = ExtResource("17_tjel8")
+margins = Vector2i(32, 32)
+separation = Vector2i(64, 0)
+texture_region_size = Vector2i(128, 128)
+0:0/next_alternative_id = 7
+0:0/animation_columns = 16
+0:0/animation_speed = 8.0
+0:0/animation_frame_0/duration = 1.0
+0:0/animation_frame_1/duration = 1.0
+0:0/animation_frame_2/duration = 1.0
+0:0/animation_frame_3/duration = 1.0
+0:0/animation_frame_4/duration = 1.0
+0:0/animation_frame_5/duration = 1.0
+0:0/animation_frame_6/duration = 1.0
+0:0/animation_frame_7/duration = 1.0
+0:0/animation_frame_8/duration = 1.0
+0:0/animation_frame_9/duration = 1.0
+0:0/animation_frame_10/duration = 1.0
+0:0/animation_frame_11/duration = 1.0
+0:0/animation_frame_12/duration = 1.0
+0:0/animation_frame_13/duration = 1.0
+0:0/animation_frame_14/duration = 1.0
+0:0/animation_frame_15/duration = 1.0
+0:0/0 = 0
+0:0/1 = 1
+0:0/2 = 2
+0:0/3 = 3
+0:0/4 = 4
+0:0/5 = 5
+0:0/6 = 6
+
+[sub_resource type="TileSet" id="TileSet_mropp"]
+tile_size = Vector2i(64, 64)
+sources/0 = SubResource("TileSetAtlasSource_ys4mg")
+
 [node name="OnlineMultiplayerMenu" type="Control" unique_id=512088925]
 layout_mode = 3
 anchors_preset = 0
@@ -2418,3 +2455,17 @@ position = Vector2(1162, 562.00006)
 scale = Vector2(0.7673611, 0.86328125)
 texture = ExtResource("14_ur6j4")
 script = ExtResource("15_ys4mg")
+
+[node name="Sea Foam (Scale 0_9)" type="TileMapLayer" parent="." unique_id=2038943504]
+z_index = -20
+position = Vector2(-1151, -1467.0001)
+scale = Vector2(0.9, 0.9)
+tile_map_data = PackedByteArray("AAAZACUAAAAAAAAAAAAaACUAAAAAAAAAAAAbACUAAAAAAAAAAAAcACUAAAAAAAAAAAAdACUAAAAAAAAAAAAeACUAAAAAAAAAAAAfACUAAAAAAAAAAAAgACUAAAAAAAAAAAAhACUAAAAAAAAAAAAiACUAAAAAAAAAAAAZACIAAAAAAAAAAAAZACMAAAAAAAAAAAAZACQAAAAAAAAAAAAiACIAAAAAAAAAAAAiACMAAAAAAAAAAAAiACQAAAAAAAAAAAA=")
+tile_set = SubResource("TileSet_mropp")
+
+[node name="Sea Foam (Scale 0_9)2" type="TileMapLayer" parent="." unique_id=132916513]
+z_index = -20
+position = Vector2(-162.00012, -1267)
+scale = Vector2(0.80999994, 0.80999994)
+tile_map_data = PackedByteArray("AAAZACUAAAAAAAAAAAAaACUAAAAAAAAAAAAbACUAAAAAAAAAAAAcACUAAAAAAAAAAAAdACUAAAAAAAAAAAAeACUAAAAAAAAAAAAfACUAAAAAAAAAAAAZACIAAAAAAAAAAAAZACMAAAAAAAAAAAAZACQAAAAAAAAAAAAfACIAAAAAAAAAAAAfACMAAAAAAAAAAAAfACQAAAAAAAAAAAA=")
+tile_set = SubResource("TileSet_mropp")
