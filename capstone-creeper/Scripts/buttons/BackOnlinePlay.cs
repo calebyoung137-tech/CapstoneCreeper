@@ -15,6 +15,11 @@ public partial class BackOnlinePlay : TextureButton
 	}
 	public void goToPlay()
 	{
-		GetTree().ChangeSceneToFile("res://Scenes/play_menu.tscn");
+		// I need to find out where the code for the button in the network menu is.
+		// Once host has been pressed, leaving the screen requires network cleanup, the same is true for join. 
+    var network = GetNode<NetworkManager>("/root/Network"); 
+    network.LeaveGame();
+	network.Cleanup();
+    GetTree().ChangeSceneToFile("res://Scenes/play_menu.tscn");
 	}
    }

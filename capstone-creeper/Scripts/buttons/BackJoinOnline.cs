@@ -15,6 +15,8 @@ public partial class BackJoinOnline : TextureButton
 	}
 	public void goToOnline()
 	{
-		GetTree().ChangeSceneToFile("res://Scenes/online_multiplayer_menu.tscn");
+        var network = GetNode<NetworkManager>("/root/Network");
+        network.LeaveGame();
+        GetTree().ChangeSceneToFile("res://Scenes/online_multiplayer_menu.tscn");
 	}
    }

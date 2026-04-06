@@ -51,12 +51,12 @@ public partial class NetworkManager : Node
 
 			var status = Multiplayer.MultiplayerPeer.GetConnectionStatus();
 
-			if (status != MultiplayerPeer.ConnectionStatus.Connected)
-			{
-				GD.Print("Lost connection to host!");
-				Cleanup();
-				GetTree().ChangeSceneToFile("res://Scenes/main_menu.tscn");
-			}
+			//if (status != MultiplayerPeer.ConnectionStatus.Connected)
+			//{
+			//	GD.Print("Lost connection to host!");
+			//	Cleanup();
+			//	GetTree().ChangeSceneToFile("res://Scenes/main_menu.tscn");
+			//}
 		}
 	}
 
@@ -68,10 +68,11 @@ public partial class NetworkManager : Node
 			Multiplayer.MultiplayerPeer = null;
 		}
 
-		GetTree().ChangeSceneToFile("res://Scenes/main_menu.tscn");
+		
 	}
 	public Error HostGame(int port = 9999)
 	{ // from godot docs, This code established a server, or returns an error
+		_cleanedUp = false;
 		var addresses = IP.GetLocalAddresses();
 		//this logic for the hostip works in the computer lab, not laptops
 		HostIp = addresses.Where(ip => ip.Contains(".") && ip.StartsWith("10")).FirstOrDefault();
@@ -97,6 +98,7 @@ public partial class NetworkManager : Node
 	}
 	public Error JoinGame(string address, int port = 9999)
 	{  //from godot docs, this joins the server, and creates a client
+		_cleanedUp = false;
 		peer = new ENetMultiplayerPeer();
 		var error = peer.CreateClient(address, port, 0, 0, 2);
 		if (error != Error.Ok)
@@ -110,7 +112,7 @@ public partial class NetworkManager : Node
 		Role = MultiplayerRole.Client;
 		return Error.Ok;
 	}
-	private void Cleanup()
+	public void Cleanup()
 	{
 		if (_cleanedUp)
 			return;
@@ -137,18 +139,26 @@ public partial class NetworkManager : Node
 	private void PeerDisconnected(long id)
 	{
 		GD.Print("Player disconnected: " + id.ToString());
+		//Cleanup();
+		//if (IsInsideTree()) // for whatever reason, this is being executed in some instances where the tree has been disposed of ?
+		//	GetTree().ChangeSceneToFile("res://Scenes/main_menu.tscn");
+		if (!Multiplayer.IsServer())
+			return;
 		Cleanup();
-		if (IsInsideTree()) // for whatever reason, this is being executed in some instances where the tree has been disposed of ?
+		CallDeferred(nameof(ReturnToMenu));
+	}
+	private void ReturnToMenu() {
+		if (IsInsideTree()) { 
 			GetTree().ChangeSceneToFile("res://Scenes/main_menu.tscn");
+        }
 	}
 	private void ServerDisconnected()
 	{
 
 		GD.Print("SERVER DISCONNECTED");
 		Cleanup();
-		//should be an error screen
-		GetTree().ChangeSceneToFile("res://Scenes/main_menu.tscn");
-	}
+        CallDeferred(nameof(ReturnToMenu));
+    }
 	private void OnPeerConnected(long id)
 	{
 
