@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://fmmde0khk28b"
-path="res://.godot/imported/Lumos.ttf-f305a50257392a4c94a232727aa1d5d6.fontdata"
+uid="uid://b06ny37uvv8kf"
+path="res://.godot/imported/Times New Roman.ttf-18b377750b3834366be4d9f0750358d6.fontdata"
 
 [deps]
 
-source_file="res://Assets/Fonts/Lumos.ttf"
-dest_files=["res://.godot/imported/Lumos.ttf-f305a50257392a4c94a232727aa1d5d6.fontdata"]
+source_file="res://Assets/Fonts/Times New Roman.ttf"
+dest_files=["res://.godot/imported/Times New Roman.ttf-18b377750b3834366be4d9f0750358d6.fontdata"]
 
 [params]
 

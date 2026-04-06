@@ -1,8 +1,6 @@
 [gd_scene format=4 uid="uid://bnj3p2re7n4o8"]
 
 [ext_resource type="Texture2D" uid="uid://bdyh183bwkcd" path="res://Assets/Tiny Swords (Free Pack)/Terrain/Tileset/Water Background color.png" id="1_iypli"]
-[ext_resource type="Texture2D" uid="uid://3vmw0kvy4bhk" path="res://Assets/Tiny Swords (Free Pack)/Terrain/Decorations/Clouds/Clouds_01.png" id="2_8qbyd"]
-[ext_resource type="Script" uid="uid://cpof3bemlbge8" path="res://Scripts/Clouds01.cs" id="3_tg1gd"]
 [ext_resource type="Texture2D" uid="uid://buiwxyvv2binw" path="res://Assets/Tiny Swords (Free Pack)/UI Elements/UI Elements/Swords/Swords.png" id="4_tg1gd"]
 
 [sub_resource type="CSharpScript" id="CSharpScript_cnjqf"]
@@ -508,17 +506,11 @@ script = SubResource("CSharpScript_cnjqf")
 offset_right = 40.0
 offset_bottom = 23.0
 
-[node name="Sky" type="Sprite2D" parent="." unique_id=1631903198]
+[node name="Water" type="Sprite2D" parent="." unique_id=1631903198]
 z_index = -17
 position = Vector2(960, 538.5)
 scale = Vector2(30.65625, 17.796875)
 texture = ExtResource("1_iypli")
-
-[node name="Cloud" type="Sprite2D" parent="." unique_id=1033661069]
-position = Vector2(156.5, 80)
-scale = Vector2(0.515625, 0.4765625)
-texture = ExtResource("2_8qbyd")
-script = ExtResource("3_tg1gd")
 
 [node name="BlueSword" type="TileMapLayer" parent="." unique_id=734754451]
 position = Vector2(1229, 438)
@@ -527,10 +519,10 @@ tile_map_data = PackedByteArray("AADl/wMAAAABAAMAAADl/wQAAAABAAQAAADl/wUAAAABAAU
 tile_set = SubResource("TileSet_ourl4")
 
 [node name="Label" type="Label" parent="BlueSword" unique_id=2041616405]
-offset_left = -315.5
-offset_top = 33.0
-offset_right = 20.5
-offset_bottom = 104.0
+offset_left = -295.0
+offset_top = 16.5
+offset_right = 41.0
+offset_bottom = 103.5
 theme_override_colors/font_color = Color(0.24313726, 0.5254902, 0.59607846, 1)
 theme_override_font_sizes/font_size = 64
 text = "Waiting..."

@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://momr72h210bw"
+path="res://.godot/imported/Build Finish.wav-13ef663099d868d5a6ec0c4fbf2fd207.sample"
+
+[deps]
+
+source_file="res://Assets/Sounds/Build Finish.wav"
+dest_files=["res://.godot/imported/Build Finish.wav-13ef663099d868d5a6ec0c4fbf2fd207.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

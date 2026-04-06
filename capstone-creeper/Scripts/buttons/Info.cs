@@ -67,12 +67,12 @@ public partial class Info : TextureButton
 
 		PackedScene tutorialScene = GD.Load<PackedScene>("res://Scenes/tutorial.tscn");
 		//PackedScene tutorialScene = GD.Load<PackedScene>("res://Scenes/game_end.tscn");
-        // Instantiate it
-        Node tutorialInstance = tutorialScene.Instantiate();
+		// Instantiate it
+		Node tutorialInstance = tutorialScene.Instantiate();
 
-        // Optional: if it's UI, make sure it’s on top by adding to CanvasLayer or at the end of children
-        AddChild(tutorialInstance);
-    }
+		// Optional: if it's UI, make sure it’s on top by adding to CanvasLayer or at the end of children
+		AddChild(tutorialInstance);
+	}
 
 	public void fadeIn(TileMapLayer paperBackground)
 	{
