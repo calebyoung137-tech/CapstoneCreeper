@@ -2396,7 +2396,7 @@ tile_map_data = PackedByteArray("AAAnADQAAAABAAcAAAAoAC8AAAACAAIAAAAoADAAAAACAAM
 tile_set = SubResource("TileSet_tjel8")
 
 [node name="Header" type="Node2D" parent="." unique_id=1295561848]
-position = Vector2(-19, 31)
+position = Vector2(13, 31)
 
 [node name="Main Banner" type="TileMapLayer" parent="Header" unique_id=1802576096]
 position = Vector2(-1071, -757)
@@ -2438,11 +2438,12 @@ tile_map_data = PackedByteArray("AAABABkAAAAAAAAAAAABABoAAAAAAAAAAAACABoAAAAAAAE
 tile_set = SubResource("TileSet_hctmq")
 
 [node name="Castle" type="Sprite2D" parent="." unique_id=893059909]
-position = Vector2(585, 474)
+position = Vector2(593.00006, 532)
 scale = Vector2(1.6984377, 1.6562501)
 texture = ExtResource("3_4c8bh")
 
 [node name="Island" type="TileMapLayer" parent="." unique_id=853575704]
+visible = false
 z_index = -18
 position = Vector2(-50.999992, 88.99997)
 scale = Vector2(0.7, 0.7)
@@ -2451,13 +2452,14 @@ tile_set = SubResource("TileSet_ussec")
 
 [node name="Knight" type="TextureRect" parent="." unique_id=164410480]
 layout_mode = 0
-offset_left = 1299.0
-offset_top = 516.0
-offset_right = 1339.0
-offset_bottom = 556.0
+offset_left = 1302.0
+offset_top = 583.0
+offset_right = 1342.0
+offset_bottom = 623.0
 script = ExtResource("4_xvpco")
 
 [node name="Island2" type="TileMapLayer" parent="." unique_id=1397027237]
+visible = false
 z_index = -18
 position = Vector2(895.99994, 244.99998)
 scale = Vector2(0.48999998, 0.48999998)
@@ -2493,21 +2495,15 @@ texture = ExtResource("14_ur6j4")
 script = ExtResource("15_ys4mg")
 
 [node name="Sea Foam (Scale 0_9)" type="TileMapLayer" parent="." unique_id=2038943504]
+visible = false
 z_index = -20
 position = Vector2(-1151, -1467.0001)
 scale = Vector2(0.9, 0.9)
 tile_map_data = PackedByteArray("AAAZACUAAAAAAAAAAAAaACUAAAAAAAAAAAAbACUAAAAAAAAAAAAcACUAAAAAAAAAAAAdACUAAAAAAAAAAAAeACUAAAAAAAAAAAAfACUAAAAAAAAAAAAgACUAAAAAAAAAAAAhACUAAAAAAAAAAAAiACUAAAAAAAAAAAAZACIAAAAAAAAAAAAZACMAAAAAAAAAAAAZACQAAAAAAAAAAAAiACIAAAAAAAAAAAAiACMAAAAAAAAAAAAiACQAAAAAAAAAAAA=")
 tile_set = SubResource("TileSet_mropp")
 
-[node name="Sea Foam (Scale 0_9)2" type="TileMapLayer" parent="." unique_id=132916513]
-visible = false
-z_index = -20
-position = Vector2(-162.00012, -1267)
-scale = Vector2(0.80999994, 0.80999994)
-tile_map_data = PackedByteArray("AAAZACUAAAAAAAAAAAAaACUAAAAAAAAAAAAbACUAAAAAAAAAAAAcACUAAAAAAAAAAAAdACUAAAAAAAAAAAAeACUAAAAAAAAAAAAfACUAAAAAAAAAAAAZACIAAAAAAAAAAAAZACMAAAAAAAAAAAAZACQAAAAAAAAAAAAfACIAAAAAAAAAAAAfACMAAAAAAAAAAAAfACQAAAAAAAAAAAA=")
-tile_set = SubResource("TileSet_mropp")
-
 [node name="Sea Foam (Scale 0_5)" type="TileMapLayer" parent="." unique_id=1394297427]
+visible = false
 z_index = -20
 position = Vector2(-201, -177)
 scale = Vector2(0.5, 0.5)

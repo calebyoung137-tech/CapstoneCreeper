@@ -8,7 +8,7 @@ public partial class GameEnd : CanvasLayer
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-
+		// Here is where you would put a victory sound
 		var overlay = new ColorRect();
 		overlay.Color = new Color(0, 0, 0, 0); // start fully transparent
 		overlay.SetAnchorsPreset(LayoutPreset.FullRect);

@@ -441,6 +441,8 @@ public partial class BoardView : Node2D
 	}
 	private void towerGrowingAnimation(Tile tower)
 	{
+		// Here is where you will make a building sound effect. 
+
 		tower.Scale = new Vector2(0.05f, 0.05f); // start very small
 
 		var tween = CreateTween();
@@ -539,6 +541,11 @@ public partial class BoardView : Node2D
 	
 	async void PlayTowerExplosion(Vector2 towerPosition)
 	{
+
+		// Right here you should make a explosion sound effect and play it. 
+		// Use ChatGPT to help, and make sure that the sound only plays once. 
+
+
 		Vector2[] offsetsA =
 		{
 		new Vector2(-20, -20),

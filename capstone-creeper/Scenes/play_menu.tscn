@@ -1366,9 +1366,9 @@ script = ExtResource("1_40c3s")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=2082043918]
 layout_mode = 0
-offset_left = 110.0
+offset_left = 100.0
 offset_top = 770.0
-offset_right = 892.0
+offset_right = 882.0
 offset_bottom = 941.0
 theme_override_constants/separation = 243
 

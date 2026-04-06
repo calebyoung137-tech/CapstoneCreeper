@@ -3,7 +3,6 @@
 [ext_resource type="Script" uid="uid://bmk044fflwqau" path="res://Scripts/View/MainMenu.cs" id="1_28flt"]
 [ext_resource type="FontFile" uid="uid://w5xmayfwnnuh" path="res://Assets/Fonts/Forgore.otf" id="4_4nkqq"]
 [ext_resource type="Texture2D" uid="uid://3vmw0kvy4bhk" path="res://Assets/Tiny Swords (Free Pack)/Terrain/Decorations/Clouds/Clouds_01.png" id="4_vr1f0"]
-[ext_resource type="Script" path="res://Scripts/Clouds01.cs" id="5_5egv6"]
 [ext_resource type="Texture2D" uid="uid://bdyh183bwkcd" path="res://Assets/Tiny Swords (Free Pack)/Terrain/Tileset/Water Background color.png" id="6_5egv6"]
 [ext_resource type="Script" uid="uid://cdgpxjljbugol" path="res://Scripts/View/Clouds02.cs" id="7_8dnnj"]
 [ext_resource type="Texture2D" uid="uid://bqjgwgmv66p4f" path="res://Assets/Tiny Swords (Free Pack)/Terrain/Tileset/Tilemap_color1.png" id="7_vtepg"]
@@ -2101,7 +2100,7 @@ texture = ExtResource("9_m3bi6")
 
 [node name="Sea Foam (Scale 0_9)" type="TileMapLayer" parent="Elements" unique_id=2069491125]
 z_index = -5
-position = Vector2(-760.00006, -1145)
+position = Vector2(-760, -1140)
 scale = Vector2(0.9, 0.9)
 tile_map_data = PackedByteArray("AAAYACUAAAAAAAAAAAAZACUAAAAAAAAAAAAaACUAAAAAAAAAAAAbACUAAAAAAAAAAAAcACUAAAAAAAAAAAAdACUAAAAAAAAAAAAeACUAAAAAAAAAAAAfACUAAAAAAAAAAAAgACUAAAAAAAAAAAAhACUAAAAAAAAAAAAiACUAAAAAAAAAAAAjACUAAAAAAAAAAAAkACIAAAAAAAAAAAAkACMAAAAAAAAAAAAkACQAAAAAAAAAAAAkACUAAAAAAAAAAAAXACIAAAAAAAAAAAAXACMAAAAAAAAAAAAXACQAAAAAAAAAAAAXACUAAAAAAAAAAAA=")
 tile_set = SubResource("TileSet_4nkqq")

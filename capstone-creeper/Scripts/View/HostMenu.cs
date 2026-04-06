@@ -15,6 +15,7 @@ public partial class HostMenu : CanvasLayer
 	}
 	public void OnHostStarted(string ipAddress) { 
 		ip.Text= "Hosting at: " + ipAddress;
+		GD.Print(ipAddress); 
 	}
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
