@@ -16,6 +16,7 @@
 [ext_resource type="Script" uid="uid://ba62dx88famst" path="res://Scripts/View/Clouds01.cs" id="14_moh1u"]
 [ext_resource type="Texture2D" uid="uid://dwcjx2p20usmp" path="res://Assets/Tiny Swords (Free Pack)/Terrain/Decorations/Clouds/Clouds_08.png" id="15_lwccl"]
 [ext_resource type="Script" uid="uid://cdgpxjljbugol" path="res://Scripts/View/Clouds02.cs" id="16_jprlx"]
+[ext_resource type="Texture2D" uid="uid://cd616hpmyoqtc" path="res://Assets/Tiny Swords (Free Pack)/UI Elements/UI Elements/Wood Table/WoodTable.png" id="17_jprlx"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_kyvm4"]
 texture = ExtResource("3_fujhq")
@@ -1581,3 +1582,7 @@ position = Vector2(1676, 77)
 scale = Vector2(1.081516, 1.1588287)
 texture = ExtResource("15_lwccl")
 script = ExtResource("16_jprlx")
+
+[node name="Box" type="Sprite2D" parent="." unique_id=1376229836]
+position = Vector2(-354, 502)
+texture = ExtResource("17_jprlx")

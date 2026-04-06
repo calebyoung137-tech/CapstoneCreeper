@@ -1860,6 +1860,7 @@ script = ExtResource("12_bpd5b")
 stream = ExtResource("13_j6454")
 volume_db = -20.0
 autoplay = true
+parameters/looping = true
 
 [node name="Rocks" type="Node2D" parent="." unique_id=213943592]
 
