@@ -128,10 +128,10 @@ public partial class Exit : TextureButton
 		if(GetTree().CurrentScene.SceneFilePath== "res://Scenes/Creeper.tscn")
 		{
 			//these methods should be safe to call even if there is no network game
-            var network = GetNode<NetworkManager>("/root/Network");
-            network.LeaveGame();
-            GetTree().ChangeSceneToFile("res://Scenes/online_multiplayer_menu.tscn");
-        }
+			var network = GetNode<NetworkManager>("/root/Network");
+			network.LeaveGame();
+			GetTree().ChangeSceneToFile("res://Scenes/online_multiplayer_menu.tscn");
+		}
 		GetTree().ChangeSceneToFile("res://Scenes/main_menu.tscn");
 	}
 
