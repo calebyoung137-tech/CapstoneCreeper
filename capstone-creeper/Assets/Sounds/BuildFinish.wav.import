@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://momr72h210bw"
-path="res://.godot/imported/Build Finish.wav-13ef663099d868d5a6ec0c4fbf2fd207.sample"
+path="res://.godot/imported/BuildFinish.wav-15ecdb2eede9d84c6fdd73e06eaf8402.sample"
 
 [deps]
 
-source_file="res://Assets/Sounds/Build Finish.wav"
-dest_files=["res://.godot/imported/Build Finish.wav-13ef663099d868d5a6ec0c4fbf2fd207.sample"]
+source_file="res://Assets/Sounds/BuildFinish.wav"
+dest_files=["res://.godot/imported/BuildFinish.wav-15ecdb2eede9d84c6fdd73e06eaf8402.sample"]
 
 [params]
 

@@ -442,6 +442,29 @@ public partial class BoardView : Node2D
 	private void towerGrowingAnimation(Tile tower)
 	{
 		// Here is where you will make a building sound effect. 
+		var sound = new AudioStreamPlayer2D();
+		sound.Position = tower.Position;
+
+		sound.Stream = GD.Load<AudioStream>("res://Assets/Sounds/BuildConstruction.wav");
+		sound.VolumeDb = -5;
+
+		AddChild(sound);
+		sound.Play();
+
+		// ⏱️ Random cutoff (e.g. 0.2s → 0.6s)
+		float cutTime = (float)GD.RandRange(0.2f, 0.6f);
+
+		// Create a timer to stop it early
+		var timer = GetTree().CreateTimer(cutTime);
+		timer.Timeout += () =>
+		{
+			if (IsInstanceValid(sound))
+				sound.Stop();
+			sound.QueueFree();
+		};
+
+		// Optional: auto-remove sound after playing
+		sound.Finished += () => sound.QueueFree();
 
 		tower.Scale = new Vector2(0.05f, 0.05f); // start very small
 
@@ -544,7 +567,14 @@ public partial class BoardView : Node2D
 
 		// Right here you should make a explosion sound effect and play it. 
 		// Use ChatGPT to help, and make sure that the sound only plays once. 
+		var sound = new AudioStreamPlayer2D();
+		sound.Position = towerPosition;
 
+		sound.Stream = GD.Load<AudioStream>("res://Assets/Sounds/Explosion.mp3");
+		sound.VolumeDb = -5; // optional tweak
+
+		AddChild(sound);
+		sound.Play();
 
 		Vector2[] offsetsA =
 		{
