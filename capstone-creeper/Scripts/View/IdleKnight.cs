@@ -87,8 +87,21 @@ public partial class IdleKnight : Node2D
     public void PlayDustEffect(Vector2 position)
     {
 
-        // Here you can play a sound effect first 
-        // 1️⃣ Create the dust AnimatedSprite2D
+		// Here you can play a sound effect first 
+		// 1️⃣ Create the dust AnimatedSprite2D
+		// 🔊 1️⃣ Create and play the sound
+		var sound = new AudioStreamPlayer2D();
+		sound.Position = position;
+
+		sound.Stream = GD.Load<AudioStream>("res://Assets/Sounds/Woosh.mp3");
+		sound.VolumeDb = -5; // optional tweak
+
+		AddChild(sound);
+		sound.Play();
+
+		// Optional: auto-remove sound after playing
+		sound.Finished += () => sound.QueueFree();
+		
         var dust = new AnimatedSprite2D();
         dust.ZIndex = 5; 
         // 2️⃣ Load the sprite sheet texture
