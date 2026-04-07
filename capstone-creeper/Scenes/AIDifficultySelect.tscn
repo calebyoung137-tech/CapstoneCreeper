@@ -17,7 +17,6 @@
 [ext_resource type="Script" uid="uid://m54lmcte743i" path="res://Scripts/View/Clouds03.cs" id="12_qoyug"]
 [ext_resource type="Texture2D" uid="uid://hf8uqypbl5yy" path="res://Assets/Tiny Swords (Free Pack)/UI Elements/UI Elements/Icons/Icon_08.png" id="13_frmm4"]
 [ext_resource type="Script" uid="uid://cm8vv0ii3wpyk" path="res://Scripts/buttons/BackDifficultyPlay.cs" id="14_klbah"]
-[ext_resource type="Script" uid="uid://b23bhi2bwqgp6" path="res://Scripts/View/MusicManager.cs" id="18_qoyug"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_r3eea"]
 texture = ExtResource("2_rknw4")
@@ -1951,6 +1950,3 @@ script = ExtResource("14_klbah")
 
 [node name="Click" type="AudioStreamPlayer" parent="." unique_id=1062502102]
 stream = SubResource("AudioStreamMP3_tn1hk")
-
-[node name="Music Manager" type="StatusIndicator" parent="." unique_id=938693908]
-script = ExtResource("18_qoyug")
