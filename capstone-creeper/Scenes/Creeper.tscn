@@ -28,6 +28,7 @@
 [ext_resource type="Texture2D" uid="uid://d3lohg3ceaq3e" path="res://Assets/Tiny Swords (Free Pack)/UI Elements/UI Elements/Ribbons/BigRibbons.png" id="26_n3f0c"]
 [ext_resource type="Script" uid="uid://guoicjmdcwb6" path="res://Scripts/GameEnd/BlueWin.cs" id="27_wefx8"]
 [ext_resource type="Script" uid="uid://4n32r7ojucnl" path="res://Scripts/GameEnd/BlueLose.cs" id="28_gpir6"]
+[ext_resource type="Script" uid="uid://b2dxi4t232sjm" path="res://Scripts/buttons/MusicMute.cs" id="29_rbayh"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_n3f0c"]
 texture = ExtResource("10_rj2hg")
@@ -2289,3 +2290,16 @@ theme_override_styles/pressed = SubResource("StyleBoxEmpty_wefx8")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_gpir6")
 text = "Force Red Win"
 script = ExtResource("28_gpir6")
+
+[node name="Music Button" type="TextureButton" parent="." unique_id=1106124643]
+visible = false
+offset_left = 1.0
+offset_top = 7.0
+offset_right = 65.0
+offset_bottom = 71.0
+scale = Vector2(1.9, 1.9)
+texture_normal = ExtResource("16_xewuo")
+texture_pressed = ExtResource("16_xewuo")
+texture_hover = ExtResource("16_xewuo")
+texture_disabled = ExtResource("16_xewuo")
+script = ExtResource("29_rbayh")

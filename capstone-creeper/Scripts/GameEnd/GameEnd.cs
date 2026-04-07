@@ -9,6 +9,20 @@ public partial class GameEnd : CanvasLayer
 	public override void _Ready()
 	{
 		// Here is where you would put a victory sound
+		var sound = new AudioStreamPlayer();
+
+		sound.Stream = GD.Load<AudioStream>("res://Assets/Sounds/Victory.wav");
+		sound.VolumeDb = -5;
+
+		AddChild(sound);
+		sound.Play();
+
+		// Auto cleanup
+		sound.Finished += () => sound.QueueFree();
+
+		// Optional: auto-remove sound after playing
+		sound.Finished += () => sound.QueueFree();
+		
 		var overlay = new ColorRect();
 		overlay.Color = new Color(0, 0, 0, 0); // start fully transparent
 		overlay.SetAnchorsPreset(LayoutPreset.FullRect);

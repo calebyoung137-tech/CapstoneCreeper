@@ -447,7 +447,7 @@ public partial class BoardView : Node2D
 
 		sound.Stream = GD.Load<AudioStream>("res://Assets/Sounds/BuildConstruction.wav");
 		sound.VolumeDb = -5;
-
+			
 		AddChild(sound);
 		sound.Play();
 
