@@ -15,6 +15,6 @@ public partial class BackTutorialPlay : TextureButton
 	}
 	public void goToPlay()
 	{
-		GetTree().ChangeSceneToFile("res://Scenes/play_menu.tscn");
+		//GetTree().ChangeSceneToFile("res://Scenes/play_menu.tscn");
 	}
    }
