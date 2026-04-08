@@ -16,7 +16,7 @@ public partial class PlayMenu : Control
 		_localMultiplayerButton = GetNode<Button>("HBoxContainer/LocalMultiplayerButton");
 		_onlineMultiplayerButton = GetNode<Button>("HBoxContainer/OnlineMultiplayerButton");
 
-		_clickSound = GetNode<AudioStreamPlayer>("HBoxContainer/Click"); // <-- get the node
+		//_clickSound = GetNode<AudioStreamPlayer>("HBoxContainer/Click"); // <-- get the node
 
 		_aiVAIButton.Text = "AI vs AI";
 		_singlePlayerButton.Text = "Single Player";
@@ -32,7 +32,7 @@ public partial class PlayMenu : Control
 	// Helper method to play the click sound from the node
 	private void PlayClickSound()
 	{
-		_clickSound?.Play();
+		//_clickSound?.Play();
 	}
 
 	private void OnAIVAI()
