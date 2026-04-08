@@ -2131,9 +2131,9 @@ texture_normal = ExtResource("14_e7how")
 [node name="HBoxContainer" type="HBoxContainer" parent="info/paperBackground" unique_id=547583266]
 custom_minimum_size = Vector2(600, 0)
 offset_left = -446.24988
-offset_top = 608.74994
+offset_top = 598.7499
 offset_right = 459.25012
-offset_bottom = 676.74994
+offset_bottom = 666.7499
 
 [node name="Instruction" type="Label" parent="info/paperBackground/HBoxContainer" unique_id=1339713737]
 custom_minimum_size = Vector2(630, 0)
@@ -2145,14 +2145,6 @@ custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 60
 text = "Replay Tutorial"
-
-[node name="Music" type="TextureButton" parent="." unique_id=1102317440]
-offset_left = -2.0
-offset_top = 2.0
-offset_right = 68.5
-offset_bottom = 71.5
-scale = Vector2(2, 2)
-texture_normal = ExtResource("16_xewuo")
 
 [node name="NonLogicVisuals" type="Node" parent="." unique_id=1080157668]
 
