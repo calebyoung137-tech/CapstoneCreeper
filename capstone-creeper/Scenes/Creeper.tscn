@@ -2146,6 +2146,15 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 60
 text = "Replay Tutorial"
 
+[node name="Music" type="TextureButton" parent="." unique_id=1102317440]
+visible = false
+offset_left = -2.0
+offset_top = 2.0
+offset_right = 68.5
+offset_bottom = 71.5
+scale = Vector2(2, 2)
+texture_normal = ExtResource("16_xewuo")
+
 [node name="NonLogicVisuals" type="Node" parent="." unique_id=1080157668]
 
 [node name="rock5" type="AnimatedSprite2D" parent="NonLogicVisuals" unique_id=704447162]
