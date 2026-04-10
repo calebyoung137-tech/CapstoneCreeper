@@ -205,12 +205,12 @@ public partial class GameController : Node
 						Move aiMove;
 						if (GameSettings.Difficulty == AIDifficulty.Easy)
 						{
-                            aiMove = ai.GetEasyMove(state);
+                            aiMove = await Task.Run(() => ai.GetEasyMove(state));
 							GD.Print("Difficulty: easy");
                         }
 						else
 						{
-							aiMove = ai.GetBestMove(state);
+							aiMove = await Task.Run(() => ai.GetBestMove(state));
                             GD.Print("Difficulty: hard");
                         }
 
