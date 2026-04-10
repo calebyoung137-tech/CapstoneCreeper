@@ -1,6 +1,10 @@
 using Godot;
+using Model;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
+using View;
+using static GameController;
 
 public enum MultiplayerRole
 {
@@ -22,7 +26,7 @@ public partial class NetworkManager : Node
 	public string HostIp;
 	private int _playersLoaded = 0;
 	private bool _cleanedUp = false;
-
+	
 	public bool connectedToHost = false;
 	//private UdpServer discoveryServer;
 	//private PacketPeerUdp discoveryPeer;
@@ -216,14 +220,51 @@ public partial class NetworkManager : Node
     public void ReceiveMove(Vector2I from, Vector2I to)
     {// call this on peer, controller handles logic to apply move locally
         var controller = GameController.Controller;
+        if (controller.IsGameOver())
+        {
+
+            GameResult winner = controller.gameBoard.checkWin();
+
+            if (winner == GameResult.BlackWin)
+            {
+                //client win
+                GetTree().ChangeSceneToFile("res://Scenes/game_end.tscn");
+            }
+            else if (winner == GameResult.WhiteWin)
+            { //host win
+                GetTree().ChangeSceneToFile("res://Scenes/game_end.tscn");
+
+            }
+            else if (controller.gameBoard.checkDraw() == GameResult.Draw)
+            {
+                GetTree().ChangeSceneToFile("res://Scenes/Creeper.tscn");
+            }
+        }
 
         controller.ApplyMove(from, to);
 
         if (controller.IsGameOver())
         {
-            LeaveGame();
+
+            GameResult winner = controller.gameBoard.checkWin();
+
+            if (winner == GameResult.BlackWin)
+            {
+                //client win
+                GetTree().ChangeSceneToFile("res://Scenes/game_end.tscn");
+            }
+            else if (winner == GameResult.WhiteWin)
+            { //host win
+                GetTree().ChangeSceneToFile("res://Scenes/game_end.tscn");
+
+            }
+            else if (controller.gameBoard.checkDraw() == GameResult.Draw)
+            {
+                GetTree().ChangeSceneToFile("res://Scenes/Creeper.tscn");
+            }
         }
+    }
 
     }
 
-}
+
