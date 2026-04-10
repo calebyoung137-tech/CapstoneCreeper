@@ -41,7 +41,22 @@ public partial class GameEnd : CanvasLayer
 			0.4f,
 			2.0f
 		);
-		
+		//GameEndReason reason= GameController.LastGameEndReason;
+		//if (reason == GameEndReason.None)
+		//{
+		//	result = "BlackSword";
+		//}
+		//else if (reason == GameEndReason.HostWin)
+		//{
+		//	result = "RedSword";
+		//}
+		//else if (reason == GameEndReason.ClientWin)
+		//{
+		//	result = "BlueSword";
+		//}
+		//else if (reason == GameEndReason.Draw) {
+		//	result = "PurpleSword";
+		//}
 
 		if (result == "")
 		{
