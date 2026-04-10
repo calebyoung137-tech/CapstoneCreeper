@@ -228,22 +228,28 @@ public partial class NetworkManager : Node
 
         if (controller.IsGameOver())
         {
-            GameResult winner = controller.gameBoard.checkWin();
-            GameEndReason reason = GameEndReason.None;
-            if (winner == GameResult.BlackWin)
-                reason = GameEndReason.ClientWin;
-            else if (winner == GameResult.WhiteWin)
-                reason = GameEndReason.HostWin;
-            else if (controller.gameBoard.checkDraw() == GameResult.Draw)
-                reason = GameEndReason.Draw;
+            //GameResult winner = controller.gameBoard.checkWin();
+          //  GameEndReason reason = GameEndReason.None;
+			GameResult result = controller.gameBoard.checkWin();
+			if (result == GameResult.NotOver) {
+				result = GameResult.Draw;
+			}
+			//if (winner == GameResult.BlackWin)
+            //    reason = GameEndReason.ClientWin;
+            //else if (winner == GameResult.WhiteWin)
+            //    reason = GameEndReason.HostWin;
+            //else if (controller.gameBoard.checkDraw() == GameResult.Draw)
+            //    reason = GameEndReason.Draw;
 
             // Notify all peers of the result as an integer
-            
-            Rpc(nameof(NotifyGameEnd), (int)reason);
+
+            //Rpc(nameof(NotifyGameEnd), (int)reason);
 
             // Also set locally for the host
-            GameController.LastGameEndReason = reason;
-            GetTree().ChangeSceneToFile("res://Scenes/game_end.tscn");
+           // GameController.LastGameEndReason = reason;
+			//GetTree().ChangeSceneToFile("res://Scenes/game_end.tscn");
+
+			boardView.gameOver(result);
         }
     }
 
