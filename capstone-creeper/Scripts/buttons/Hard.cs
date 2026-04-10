@@ -3,21 +3,20 @@ using System;
 
 public partial class Hard : Button
 {
-	// Called when the node enters the scene tree for the first time.
+	private AudioStreamPlayer _clickSound;
+
 	public override void _Ready()
 	{
-		Pressed += goToHard;
+		_clickSound = GetNode<AudioStreamPlayer>("Click");
+		Pressed += GoToHard;
 	}
 
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
-	public override void _Process(double delta)
-	{
-	}
-	public void goToHard()
+	private void GoToHard()
 	{
 		GameSettings.Mode = GameMode.SinglePlayer;
 		GameSettings.Difficulty = AIDifficulty.Hard;
 
+		_clickSound.Play();
 		GetTree().ChangeSceneToFile("res://Scenes/Creeper.tscn");
 	}
 }

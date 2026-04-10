@@ -3,21 +3,20 @@ using System;
 
 public partial class Easy : Button
 {
-	// Called when the node enters the scene tree for the first time.
+	private AudioStreamPlayer _clickSound;
+
 	public override void _Ready()
 	{
-		Pressed += goToEasy; 
+		_clickSound = GetNode<AudioStreamPlayer>("Click");
+		Pressed += GoToEasy; 
 	}
 
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
-	public override void _Process(double delta)
-	{
-	}
-	public void goToEasy()
+	private void GoToEasy()
 	{
 		GameSettings.Mode = GameMode.SinglePlayer;
 		GameSettings.Difficulty = AIDifficulty.Easy;
 
+		_clickSound.Play();
 		GetTree().ChangeSceneToFile("res://Scenes/Creeper.tscn");
 	}
-   }
+}
