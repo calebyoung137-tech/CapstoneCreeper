@@ -4,6 +4,8 @@ using static Godot.Control;
 
 public partial class GameEnd : CanvasLayer
 {
+    public string result { get; set; } // Add this property to store the game result
+
     public override void _Ready()
     {
         // Play victory sound
@@ -26,8 +28,8 @@ public partial class GameEnd : CanvasLayer
         var tween = CreateTween();
         tween.TweenProperty(overlay, "color:a", 0.4f, 2.0f);
 
-        // Determine the result based on GameController.LastGameEndReason
-        string resultNode = GetResultNode(GameController.LastGameEndReason);
+        // Determine the result based on the Result property
+        string resultNode = GetResultNode(result);
 
         if (!string.IsNullOrEmpty(resultNode))
         {
@@ -42,14 +44,14 @@ public partial class GameEnd : CanvasLayer
         }
     }
 
-    private string GetResultNode(GameEndReason reason)
+    private string GetResultNode(string result)
     {
-        // Map GameEndReason to the corresponding node name
-        return reason switch
+        // Map result string to the corresponding node name
+        return result switch
         {
-            GameEndReason.HostWin => "RedSword",
-            GameEndReason.ClientWin => "BlueSword",
-            GameEndReason.Draw => "PurpleSword",
+            "Red" => "RedSword",
+            "Blue" => "BlueSword",
+            "Purple" => "PurpleSword",
             _ => "BlackSword", // Default case
         };
     }
