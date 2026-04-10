@@ -4,86 +4,139 @@ using static Godot.Control;
 
 public partial class GameEnd : CanvasLayer
 {
-	public string result { get; set; } // Add this property to store the game result
+    public string result = "";
+    // Called when the node enters the scene tree for the first time.
+    public override void _Ready()
+    {
+        // Here is where you would put a victory sound
+        var sound = new AudioStreamPlayer();
 
-	public override void _Ready()
-	{
-		// Play victory sound
-		var sound = new AudioStreamPlayer();
-		sound.Stream = GD.Load<AudioStream>("res://Assets/Sounds/Victory.wav");
-		sound.VolumeDb = -5;
-		AddChild(sound);
-		sound.Play();
-		sound.Finished += () => sound.QueueFree();
+        sound.Stream = GD.Load<AudioStream>("res://Assets/Sounds/Victory.wav");
+        sound.VolumeDb = -5;
 
-		// Create overlay
-		var overlay = new ColorRect();
-		overlay.Color = new Color(0, 0, 0, 0); // Start fully transparent
-		overlay.SetAnchorsPreset(LayoutPreset.FullRect);
-		overlay.MouseFilter = Control.MouseFilterEnum.Stop;
-		AddChild(overlay);
-		MoveChild(overlay, 0);
+        AddChild(sound);
+        sound.Play();
 
-		// Fade overlay
-		var tween = CreateTween();
-		tween.TweenProperty(overlay, "color:a", 0.4f, 2.0f);
+        // Auto cleanup
+        sound.Finished += () => sound.QueueFree();
 
-		// Determine the result based on the Result property
-		string resultNode = GetResultNode(result);
+        // Optional: auto-remove sound after playing
+        sound.Finished += () => sound.QueueFree();
 
-		if (!string.IsNullOrEmpty(resultNode))
-		{
-			TileMapLayer sword = GetNode<TileMapLayer>(resultNode);
-			sword.ZIndex = 100;
-			sword.Modulate = new Color(1, 1, 1, 0);
-			sword.Position += new Vector2(0, -swordPosChange(resultNode));
+        var overlay = new ColorRect();
+        overlay.Color = new Color(0, 0, 0, 0); // start fully transparent
+        overlay.SetAnchorsPreset(LayoutPreset.FullRect);
+        overlay.MouseFilter = Control.MouseFilterEnum.Stop;
 
-			// Fade in the sword
-			var swordTween = CreateTween();
-			swordTween.TweenProperty(sword, "modulate:a", 1.0f, 2.0f);
-		}
-	}
-	private string GetResultNode(object result)
-	{
-		// Handle GameEndReason input
-		if (result is GameEndReason reason)
-		{
-			return reason switch
-			{
-				GameEndReason.HostWin => "RedSword",
-				GameEndReason.ClientWin => "BlueSword",
-				GameEndReason.Draw => "PurpleSword",
-				_ => "BlackSword",
-			};
-		}
 
-		// Handle string input
-		if (result is string resultString)
-		{
-			return resultString switch
-			{
-				"Red" => "RedSword",
-				"Blue" => "BlueSword",
-				"Purple" => "PurpleSword",
-				_ => "BlackSword", // Default case
-			};
-		}
+        AddChild(overlay);
 
-		// Default case for unsupported input types
-		return "BlackSword";
-	}
-   
+        MoveChild(overlay, 0);// Create tween
+        var tween = CreateTween();
 
-	public int swordPosChange(string gameResult)
-	{
-		// Adjust sword position based on the result
-		return gameResult switch
-		{
-			"BlackSword" => 770 + 3 * 285,
-			"RedSword" => 770 + 1 * 285,
-			"BlueSword" => 770 + 0 * 285,
-			"PurpleSword" => 770 + 2 * 285,
-			_ => 0,
-		};
-	}
+        // Fade alpha from 0 → 0.5 over 2 seconds
+        tween.TweenProperty(
+            overlay,
+            "color:a",
+            0.4f,
+            2.0f
+        );
+        GameEndReason reason= GameController.LastGameEndReason;
+        if (reason == GameEndReason.None)
+        {
+            result = "BlackSword";
+        }
+        else if (reason == GameEndReason.HostWin)
+        {
+            result = "RedSword";
+        }
+        else if (reason == GameEndReason.ClientWin)
+        {
+            result = "BlueSword";
+        }
+        else if (reason == GameEndReason.Draw) {
+            result = "PurpleSword";
+        }
+
+        if (result == "")
+        {
+            result = "BlackSword";
+        }
+        else if (result == "Red")
+        {
+            result = "RedSword";
+        }
+        else if (result == "Blue")
+        {
+            result = "BlueSword";
+        }
+        else if (result == "Purple")
+        {
+            result = "PurpleSword";
+
+        }
+        TileMapLayer sword = GetNode<TileMapLayer>(result);
+        sword.ZIndex = 100;
+        sword.Modulate = new Color(1, 1, 1, 0);
+        sword.Position = sword.Position + new Vector2(0, -swordPosChange(result));
+        // Create tween
+        var tween2 = CreateTween();
+
+        // Fade to fully visible over 2 seconds
+        tween2.TweenProperty(
+            sword,
+            "modulate:a",
+            1.0f,
+            2.0f
+        );
+
+
+
+        TileMapLayer home = GetNode<TileMapLayer>("RedBanner");
+
+        home.Modulate = new Color(1, 1, 1, 0);
+
+        // Create tween
+        var tween3 = CreateTween();
+
+        // Fade to fully visible over 2 seconds
+        tween3.TweenProperty(
+            home,
+            "modulate:a",
+            1.0f,
+            2.0f
+        );
+    }
+
+    // Called every frame. 'delta' is the elapsed time since the previous frame.
+    public override void _Process(double delta)
+    {
+    }
+    public int swordPosChange(string gameResult)
+    {
+
+        if (gameResult == "BlackSword")
+        {
+            return 770 + 3 * 285;
+        }
+        else if (gameResult == "RedSword")
+        {
+            return 770 + 1 * 285;
+
+        }
+        else if (gameResult == "BlueSword")
+        {
+            return 770 + 0 * 285;
+
+
+        }
+        else if (gameResult == "PurpleSword")
+        {
+            return 770 + 2 * 285;
+        }
+        else
+        {
+            return 0;
+        }
+    }
 }
