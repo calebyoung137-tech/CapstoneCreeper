@@ -57,7 +57,6 @@ public partial class GameEnd : CanvasLayer
 		else if (reason == GameEndReason.Draw) {
 			result = "PurpleSword";
 		}
-
 		if (result == "")
 		{
 			result = "BlackSword";
