@@ -84,7 +84,19 @@ public partial class GameController : Node
 
 	private async void HandlePinClicked(Vector2I boardPos)
 	{
-		if (controllerState == ControllerState.SelectingPin)
+		if (
+			(gameBoard.Pins[boardPos.X, boardPos.Y] == PinType.White && turn == Turn.White
+			|| gameBoard.Pins[boardPos.X, boardPos.Y] == PinType.Black && turn == Turn.Black)
+			&& controllerState == ControllerState.MakingMove
+			&& boardPos != selectedPin)
+		{
+			selectedPin = new Vector2I(-1, -1);
+			controllerState = ControllerState.SelectingPin;
+            gameBoard.clearPossibleMoves();
+            boardView.updateBoard(gameBoard);
+            HandlePinClicked(boardPos); 
+		}
+		else if (controllerState == ControllerState.SelectingPin)
 		{
 			if (gameBoard.Pins[boardPos.X, boardPos.Y] == PinType.White && turn == Turn.White)
 			{
