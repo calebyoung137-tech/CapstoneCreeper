@@ -26,7 +26,7 @@ public partial class NetworkManager : Node
 	public string HostIp;
 	private int _playersLoaded = 0;
 	private bool _cleanedUp = false;
-    GameController controller = GameController.Controller;
+   
     public bool connectedToHost = false;
     
     //private UdpServer discoveryServer;
@@ -223,7 +223,7 @@ public partial class NetworkManager : Node
     [Rpc(MultiplayerApi.RpcMode.AnyPeer)]
     public void ReceiveMove(Vector2I from, Vector2I to)
     {
-       
+        GameController controller = GameController.Controller;
         controller.ApplyMove(from, to);
 
         if (controller.IsGameOver())
