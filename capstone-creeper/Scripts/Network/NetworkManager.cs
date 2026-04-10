@@ -28,6 +28,7 @@ public partial class NetworkManager : Node
 	private bool _cleanedUp = false;
 	
 	public bool connectedToHost = false;
+    
 	//private UdpServer discoveryServer;
 	//private PacketPeerUdp discoveryPeer;
 
@@ -218,53 +219,45 @@ public partial class NetworkManager : Node
 
     [Rpc(MultiplayerApi.RpcMode.AnyPeer)]
     public void ReceiveMove(Vector2I from, Vector2I to)
-    {// call this on peer, controller handles logic to apply move locally
+    {
         var controller = GameController.Controller;
-        if (controller.IsGameOver())
-        {
-
-            GameResult winner = controller.gameBoard.checkWin();
-
-            if (winner == GameResult.BlackWin)
-            {
-                //client win
-                GetTree().ChangeSceneToFile("res://Scenes/game_end.tscn");
-            }
-            else if (winner == GameResult.WhiteWin)
-            { //host win
-                GetTree().ChangeSceneToFile("res://Scenes/game_end.tscn");
-
-            }
-            else if (controller.gameBoard.checkDraw() == GameResult.Draw)
-            {
-                GetTree().ChangeSceneToFile("res://Scenes/Creeper.tscn");
-            }
-        }
-
         controller.ApplyMove(from, to);
 
         if (controller.IsGameOver())
         {
-
             GameResult winner = controller.gameBoard.checkWin();
+            GameEndReason reason = GameEndReason.None;
 
             if (winner == GameResult.BlackWin)
-            {
-                //client win
-                GetTree().ChangeSceneToFile("res://Scenes/game_end.tscn");
-            }
+                reason = GameEndReason.ClientWin;
             else if (winner == GameResult.WhiteWin)
-            { //host win
-                GetTree().ChangeSceneToFile("res://Scenes/game_end.tscn");
-
-            }
+                reason = GameEndReason.HostWin;
             else if (controller.gameBoard.checkDraw() == GameResult.Draw)
-            {
-                GetTree().ChangeSceneToFile("res://Scenes/Creeper.tscn");
-            }
+                reason = GameEndReason.Draw;
+
+            // Notify all peers of the result as an integer
+            Rpc(nameof(NotifyGameEnd), (int)reason);
+
+            // Also set locally for the host
+            GameController.LastGameEndReason = reason;
+            GetTree().ChangeSceneToFile("res://Scenes/game_end.tscn");
         }
     }
 
+    [Rpc(MultiplayerApi.RpcMode.AnyPeer)]
+    public void NotifyGameEnd(int reason)
+    {
+        // Convert the integer back to the GameEndReason enum
+        GameController.LastGameEndReason = (GameEndReason)reason;
+        GetTree().ChangeSceneToFile("res://Scenes/game_end.tscn");
     }
+    }
+public enum GameEndReason
+{
+    None,
+    HostWin,
+    ClientWin,
+    Draw
+}
 
 
