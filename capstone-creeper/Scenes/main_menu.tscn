@@ -14,7 +14,6 @@
 [ext_resource type="Texture2D" uid="uid://bp6pult3120k1" path="res://Assets/Tiny Swords (Free Pack)/Terrain/Decorations/Clouds/Clouds_06.png" id="11_mkpwh"]
 [ext_resource type="Texture2D" uid="uid://dxpukc7agpesp" path="res://Assets/Tiny Swords (Free Pack)/UI Elements/UI Elements/Icons/Icon_12.png" id="11_t1dhk"]
 [ext_resource type="Script" uid="uid://m54lmcte743i" path="res://Scripts/View/Clouds03.cs" id="12_4nkqq"]
-[ext_resource type="AudioStream" uid="uid://dof30cxxvb570" path="res://Assets/Sounds/Music/Main Theme.mp3" id="13_5egv6"]
 [ext_resource type="Texture2D" uid="uid://dreqjlc2g8tkd" path="res://Assets/Tiny Swords (Free Pack)/Terrain/Tileset/summer water sparkles B 16x16.png" id="16_m3bi6"]
 [ext_resource type="Texture2D" uid="uid://couume0sav0qw" path="res://Assets/Tiny Swords (Free Pack)/Terrain/Tileset/Water Foam.png" id="16_wyh8j"]
 [ext_resource type="Texture2D" uid="uid://di6bjftkok2f0" path="res://Assets/Tiny Swords (Free Pack)/Terrain/Decorations/Rocks in the Water/Water Rocks_02.png" id="17_mkpwh"]
@@ -2192,17 +2191,6 @@ position = Vector2(582, 695)
 scale = Vector2(0.7673611, 0.86328125)
 texture = ExtResource("11_mkpwh")
 script = ExtResource("12_4nkqq")
-
-[node name="Music Button2" type="Sprite2D" parent="." unique_id=1281850806]
-visible = false
-position = Vector2(1849, 60)
-scale = Vector2(1.90625, 1.828125)
-texture = ExtResource("11_t1dhk")
-
-[node name="Background Music" type="AudioStreamPlayer" parent="Music Button2" unique_id=1871322835]
-stream = ExtResource("13_5egv6")
-volume_db = -10.0
-autoplay = true
 
 [node name="Music Button" type="TextureButton" parent="." unique_id=1592688235]
 layout_mode = 0

@@ -8,7 +8,6 @@
 [ext_resource type="Texture2D" uid="uid://d2sym0adx36j4" path="res://Assets/Tiny Swords (Free Pack)/UI Elements/UI Elements/Human Avatars/Avatars_06.png" id="6_o4ias"]
 [ext_resource type="Texture2D" uid="uid://l4s81aycbwxt" path="res://Assets/Tiny Swords (Free Pack)/UI Elements/UI Elements/Human Avatars/Avatars_22.png" id="7_wnq3u"]
 [ext_resource type="Texture2D" uid="uid://d1o27xbnaw81" path="res://Assets/Tiny Swords (Free Pack)/UI Elements/UI Elements/Human Avatars/Avatars_19.png" id="10_3138q"]
-[ext_resource type="AudioStream" uid="uid://cakkv41vah2cg" path="res://Assets/Sounds/Music/Menu Music.mp3" id="10_o4ias"]
 [ext_resource type="Texture2D" uid="uid://dwcjx2p20usmp" path="res://Assets/Tiny Swords (Free Pack)/Terrain/Decorations/Clouds/Clouds_08.png" id="10_wxhtu"]
 [ext_resource type="Texture2D" uid="uid://dreqjlc2g8tkd" path="res://Assets/Tiny Swords (Free Pack)/Terrain/Tileset/summer water sparkles B 16x16.png" id="11_6hlfh"]
 [ext_resource type="Script" uid="uid://cdgpxjljbugol" path="res://Scripts/View/Clouds02.cs" id="11_qqcxt"]
@@ -1548,8 +1547,3 @@ theme_override_styles/pressed = SubResource("StyleBoxEmpty_wkydc")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_r03p2")
 text = "Tutorial"
 script = ExtResource("17_ch2x5")
-
-[node name="Background Music" type="AudioStreamPlayer" parent="." unique_id=1251225282]
-stream = ExtResource("10_o4ias")
-volume_db = -20.0
-autoplay = true

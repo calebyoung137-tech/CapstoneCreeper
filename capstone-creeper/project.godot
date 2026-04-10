@@ -22,6 +22,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 Network="*uid://beraphv7f37kf"
+MusicController="*res://Scripts/Controller/MusicController.cs"
 
 [display]
 
@@ -33,6 +34,10 @@ window/stretch/mode="canvas_items"
 [dotnet]
 
 project/assembly_name="CapstoneCreeper"
+
+[editor]
+
+version_control/autoload_on_startup=true
 
 [gui]
 

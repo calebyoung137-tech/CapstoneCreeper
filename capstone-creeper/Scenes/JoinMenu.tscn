@@ -14,7 +14,6 @@
 [ext_resource type="Script" uid="uid://b16ifqi7bxhly" path="res://Scripts/buttons/BackJoinOnline.cs" id="12_bpd5b"]
 [ext_resource type="Texture2D" uid="uid://di6bjftkok2f0" path="res://Assets/Tiny Swords (Free Pack)/Terrain/Decorations/Rocks in the Water/Water Rocks_02.png" id="12_tliuu"]
 [ext_resource type="Script" uid="uid://3oy7jyrsyoh5" path="res://Scripts/View/Shrubs/Rock.cs" id="13_848nu"]
-[ext_resource type="AudioStream" uid="uid://cakkv41vah2cg" path="res://Assets/Sounds/Music/Menu Music.mp3" id="13_j6454"]
 [ext_resource type="Texture2D" uid="uid://cfq70mpoddb7y" path="res://Assets/Tiny Swords (Free Pack)/Terrain/Decorations/Rocks in the Water/Water Rocks_04.png" id="14_nc1gr"]
 [ext_resource type="Texture2D" uid="uid://couume0sav0qw" path="res://Assets/Tiny Swords (Free Pack)/Terrain/Tileset/Water Foam.png" id="17_av4j3"]
 
@@ -1899,12 +1898,6 @@ offset_bottom = 65.0
 scale = Vector2(2, 2)
 texture_normal = ExtResource("6_e66c1")
 script = ExtResource("12_bpd5b")
-
-[node name="Background Music" type="AudioStreamPlayer" parent="." unique_id=1949277317]
-stream = ExtResource("13_j6454")
-volume_db = -20.0
-autoplay = true
-parameters/looping = true
 
 [node name="Rocks" type="Node2D" parent="." unique_id=213943592]
 

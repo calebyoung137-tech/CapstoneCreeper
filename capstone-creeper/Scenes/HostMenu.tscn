@@ -9,7 +9,6 @@
 [ext_resource type="Texture2D" uid="uid://di6bjftkok2f0" path="res://Assets/Tiny Swords (Free Pack)/Terrain/Decorations/Rocks in the Water/Water Rocks_02.png" id="9_b536v"]
 [ext_resource type="Script" uid="uid://3oy7jyrsyoh5" path="res://Scripts/View/Shrubs/Rock.cs" id="10_fujhq"]
 [ext_resource type="Texture2D" uid="uid://dgqopc72gcwdo" path="res://Assets/Tiny Swords (Free Pack)/Buildings/Red Buildings/Castle.png" id="10_jprlx"]
-[ext_resource type="AudioStream" uid="uid://cakkv41vah2cg" path="res://Assets/Sounds/Music/Menu Music.mp3" id="11_b536v"]
 [ext_resource type="Texture2D" uid="uid://cfq70mpoddb7y" path="res://Assets/Tiny Swords (Free Pack)/Terrain/Decorations/Rocks in the Water/Water Rocks_04.png" id="11_rsxax"]
 [ext_resource type="Texture2D" uid="uid://ht84rk02tdwc" path="res://Assets/Tiny Swords (Free Pack)/Terrain/Tileset/Tilemap_color4.png" id="12_fujhq"]
 [ext_resource type="Texture2D" uid="uid://3vmw0kvy4bhk" path="res://Assets/Tiny Swords (Free Pack)/Terrain/Decorations/Clouds/Clouds_01.png" id="13_btds8"]
@@ -1849,11 +1848,6 @@ position = Vector2(1700, 996.00006)
 scale = Vector2(4.218751, 2.5078115)
 sprite_frames = SubResource("SpriteFrames_moh1u")
 script = ExtResource("10_fujhq")
-
-[node name="Background Music" type="AudioStreamPlayer" parent="." unique_id=1582487122]
-stream = ExtResource("11_b536v")
-volume_db = -20.0
-autoplay = true
 
 [node name="Clouds1" type="Sprite2D" parent="." unique_id=318084259]
 z_index = -10
