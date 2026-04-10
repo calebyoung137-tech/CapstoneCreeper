@@ -8,7 +8,7 @@ public partial class MainMenu : Control
 	public override void _Ready()
 	{
 		_playButton = GetNode<Button>("VBoxContainer/PlayButton");
-		_clickSound = GetNode<AudioStreamPlayer>("VBoxContainer/Click");
+		//_clickSound = GetNode<AudioStreamPlayer>("VBoxContainer/Click");
 
 		_playButton.Text = "Start";
 		_playButton.Pressed += OnPlayPressed;
@@ -34,7 +34,7 @@ public partial class MainMenu : Control
 	private void OnPlayPressed()
 	{
 		// Play click sound
-		_clickSound?.Play();
+		//_clickSound?.Play();
 
 		// Change scene
 		GetTree().ChangeSceneToFile("res://scenes/play_menu.tscn");
