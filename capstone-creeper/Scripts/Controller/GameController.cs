@@ -27,6 +27,7 @@ public partial class GameController : Node
 	public Vector2I selectedPin { get; private set; }
 	public string NetworkGameOver = ""; 
 	public static GameController Controller { get; set; }
+    public static GameEndReason LastGameEndReason { get; set; } = GameEndReason.None;
 	public override void _Ready()
 	{
 		gameBoard = new GameBoard();
@@ -84,7 +85,19 @@ public partial class GameController : Node
 
 	private async void HandlePinClicked(Vector2I boardPos)
 	{
-		if (controllerState == ControllerState.SelectingPin)
+		if (
+			(gameBoard.Pins[boardPos.X, boardPos.Y] == PinType.White && turn == Turn.White
+			|| gameBoard.Pins[boardPos.X, boardPos.Y] == PinType.Black && turn == Turn.Black)
+			&& controllerState == ControllerState.MakingMove
+			&& boardPos != selectedPin)
+		{
+			selectedPin = new Vector2I(-1, -1);
+			controllerState = ControllerState.SelectingPin;
+            gameBoard.clearPossibleMoves();
+            boardView.updateBoard(gameBoard);
+            HandlePinClicked(boardPos); 
+		}
+		else if (controllerState == ControllerState.SelectingPin)
 		{
 			if (gameBoard.Pins[boardPos.X, boardPos.Y] == PinType.White && turn == Turn.White)
 			{

@@ -1,6 +1,10 @@
 using Godot;
+using Model;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
+using View;
+using static GameController;
 
 public enum MultiplayerRole
 {
@@ -22,14 +26,15 @@ public partial class NetworkManager : Node
 	public string HostIp;
 	private int _playersLoaded = 0;
 	private bool _cleanedUp = false;
+   
+    public bool connectedToHost = false;
+    
+    //private UdpServer discoveryServer;
+    //private PacketPeerUdp discoveryPeer;
 
-	public bool connectedToHost = false;
-	//private UdpServer discoveryServer;
-	//private PacketPeerUdp discoveryPeer;
+    //private const int DiscoveryPort = 9998;
 
-	//private const int DiscoveryPort = 9998;
-
-	public override void _Ready()
+    public override void _Ready()
 	{
 		//Instantiate Network manager
 		// set the peerconnected, connectedtoserver, and Connection failed properties of multiplayer
@@ -44,19 +49,22 @@ public partial class NetworkManager : Node
 
 	public override void _Process(double delta)
 	{
-		if (Role == MultiplayerRole.Client && connectedToHost && Multiplayer.MultiplayerPeer != null)
+		if (connectedToHost)
 		{
-			if (Multiplayer.MultiplayerPeer == null)
-				return;
+			if (Role == MultiplayerRole.Client && Multiplayer.MultiplayerPeer != null)
+			{
+				if (Multiplayer.MultiplayerPeer == null)
+					return;
 
-			var status = Multiplayer.MultiplayerPeer.GetConnectionStatus();
+				var status = Multiplayer.MultiplayerPeer.GetConnectionStatus();
 
-			//if (status != MultiplayerPeer.ConnectionStatus.Connected)
-			//{
-			//	GD.Print("Lost connection to host!");
-			//	Cleanup();
-			//	GetTree().ChangeSceneToFile("res://Scenes/main_menu.tscn");
-			//}
+				//if (status != MultiplayerPeer.ConnectionStatus.Connected)
+				//{
+				//	GD.Print("Lost connection to host!");
+				//	Cleanup();
+				//	GetTree().ChangeSceneToFile("res://Scenes/main_menu.tscn");
+				//}
+			}
 		}
 	}
 
@@ -141,12 +149,12 @@ public partial class NetworkManager : Node
 		GD.Print("Player disconnected: " + id.ToString());
 		//Cleanup();
 		//if (IsInsideTree()) // for whatever reason, this is being executed in some instances where the tree has been disposed of ?
-		//	GetTree().ChangeSceneToFile("res://Scenes/main_menu.tscn");
+		//	GetTree().ChangeSceneToFile("res://Scenes/game_end.tscn");
 		if (!Multiplayer.IsServer())
 			return;
 		Cleanup();
-		CallDeferred(nameof(ReturnToMenu));
-	}
+        GetTree().ChangeSceneToFile("res://Scenes/game_end.tscn");
+    }
 	private void ReturnToMenu() {
 		if (IsInsideTree()) { 
 			GetTree().ChangeSceneToFile("res://Scenes/main_menu.tscn");
@@ -157,7 +165,7 @@ public partial class NetworkManager : Node
 
 		GD.Print("SERVER DISCONNECTED");
 		Cleanup();
-        CallDeferred(nameof(ReturnToMenu));
+        GetTree().ChangeSceneToFile("res://Scenes/game_end.tscn"); 
     }
 	private void OnPeerConnected(long id)
 	{
@@ -214,16 +222,46 @@ public partial class NetworkManager : Node
 
     [Rpc(MultiplayerApi.RpcMode.AnyPeer)]
     public void ReceiveMove(Vector2I from, Vector2I to)
-    {// call this on peer, controller handles logic to apply move locally
-        var controller = GameController.Controller;
-
+    {
+        GameController controller = GameController.Controller;
         controller.ApplyMove(from, to);
 
         if (controller.IsGameOver())
         {
-            LeaveGame();
-        }
+            GameResult winner = controller.gameBoard.checkWin();
+            GameEndReason reason = GameEndReason.None;
+            if (winner == GameResult.BlackWin)
+                reason = GameEndReason.ClientWin;
+            else if (winner == GameResult.WhiteWin)
+                reason = GameEndReason.HostWin;
+            else if (controller.gameBoard.checkDraw() == GameResult.Draw)
+                reason = GameEndReason.Draw;
 
+            // Notify all peers of the result as an integer
+            
+            Rpc(nameof(NotifyGameEnd), (int)reason);
+
+            // Also set locally for the host
+            GameController.LastGameEndReason = reason;
+            GetTree().ChangeSceneToFile("res://Scenes/game_end.tscn");
+        }
     }
 
+    [Rpc(MultiplayerApi.RpcMode.AnyPeer)]
+    public void NotifyGameEnd(int reason)
+    {
+		// Convert the integer back to the GameEndReason enum
+		GD.Print("Reason: " + reason);
+        GameController.LastGameEndReason = (GameEndReason)reason;
+        GetTree().ChangeSceneToFile("res://Scenes/game_end.tscn");
+    }
+    }
+public enum GameEndReason
+{
+    None,
+    HostWin,
+    ClientWin,
+    Draw
 }
+
+

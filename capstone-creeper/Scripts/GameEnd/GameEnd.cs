@@ -4,7 +4,7 @@ using static Godot.Control;
 
 public partial class GameEnd : CanvasLayer
 {
-	public string result = ""; 
+	public string result = "";
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
@@ -22,12 +22,12 @@ public partial class GameEnd : CanvasLayer
 
 		// Optional: auto-remove sound after playing
 		sound.Finished += () => sound.QueueFree();
-		
+
 		var overlay = new ColorRect();
 		overlay.Color = new Color(0, 0, 0, 0); // start fully transparent
 		overlay.SetAnchorsPreset(LayoutPreset.FullRect);
 		overlay.MouseFilter = Control.MouseFilterEnum.Stop;
-		
+
 
 		AddChild(overlay);
 
@@ -41,12 +41,29 @@ public partial class GameEnd : CanvasLayer
 			0.4f,
 			2.0f
 		);
+		GameEndReason reason= GameController.LastGameEndReason;
+		if (reason == GameEndReason.None)
+		{
+			result = "BlackSword";
+		}
+		else if (reason == GameEndReason.HostWin)
+		{
+			result = "RedSword";
+		}
+		else if (reason == GameEndReason.ClientWin)
+		{
+			result = "BlueSword";
+		}
+		else if (reason == GameEndReason.Draw) {
+			result = "PurpleSword";
+		}
 
 		if (result == "")
 		{
 			result = "BlackSword";
 		}
-		else if (result == "Red") {
+		else if (result == "Red")
+		{
 			result = "RedSword";
 		}
 		else if (result == "Blue")
@@ -59,9 +76,9 @@ public partial class GameEnd : CanvasLayer
 
 		}
 		TileMapLayer sword = GetNode<TileMapLayer>(result);
-		sword.ZIndex = 100; 
+		sword.ZIndex = 100;
 		sword.Modulate = new Color(1, 1, 1, 0);
-		sword.Position = sword.Position + new Vector2(0, -swordPosChange(result)); 
+		sword.Position = sword.Position + new Vector2(0, -swordPosChange(result));
 		// Create tween
 		var tween2 = CreateTween();
 
@@ -72,13 +89,13 @@ public partial class GameEnd : CanvasLayer
 			1.0f,
 			2.0f
 		);
-		
+
 
 
 		TileMapLayer home = GetNode<TileMapLayer>("RedBanner");
-		
+
 		home.Modulate = new Color(1, 1, 1, 0);
-		
+
 		// Create tween
 		var tween3 = CreateTween();
 
@@ -100,7 +117,7 @@ public partial class GameEnd : CanvasLayer
 
 		if (gameResult == "BlackSword")
 		{
-			return 770 + 3 * 285; 
+			return 770 + 3 * 285;
 		}
 		else if (gameResult == "RedSword")
 		{
@@ -119,7 +136,7 @@ public partial class GameEnd : CanvasLayer
 		}
 		else
 		{
-			return 0; 
+			return 0;
 		}
 	}
 }
