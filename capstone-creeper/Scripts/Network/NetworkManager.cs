@@ -26,8 +26,8 @@ public partial class NetworkManager : Node
 	public string HostIp;
 	private int _playersLoaded = 0;
 	private bool _cleanedUp = false;
-	
-	public bool connectedToHost = false;
+    GameController controller = GameController.Controller;
+    public bool connectedToHost = false;
     
     //private UdpServer discoveryServer;
     //private PacketPeerUdp discoveryPeer;
@@ -49,19 +49,22 @@ public partial class NetworkManager : Node
 
 	public override void _Process(double delta)
 	{
-		if (Role == MultiplayerRole.Client && connectedToHost && Multiplayer.MultiplayerPeer != null)
+		if (connectedToHost)
 		{
-			if (Multiplayer.MultiplayerPeer == null)
-				return;
+			if (Role == MultiplayerRole.Client && Multiplayer.MultiplayerPeer != null)
+			{
+				if (Multiplayer.MultiplayerPeer == null)
+					return;
 
-			var status = Multiplayer.MultiplayerPeer.GetConnectionStatus();
+				var status = Multiplayer.MultiplayerPeer.GetConnectionStatus();
 
-			//if (status != MultiplayerPeer.ConnectionStatus.Connected)
-			//{
-			//	GD.Print("Lost connection to host!");
-			//	Cleanup();
-			//	GetTree().ChangeSceneToFile("res://Scenes/main_menu.tscn");
-			//}
+				//if (status != MultiplayerPeer.ConnectionStatus.Connected)
+				//{
+				//	GD.Print("Lost connection to host!");
+				//	Cleanup();
+				//	GetTree().ChangeSceneToFile("res://Scenes/main_menu.tscn");
+				//}
+			}
 		}
 	}
 
@@ -220,7 +223,7 @@ public partial class NetworkManager : Node
     [Rpc(MultiplayerApi.RpcMode.AnyPeer)]
     public void ReceiveMove(Vector2I from, Vector2I to)
     {
-        var controller = GameController.Controller;
+       
         controller.ApplyMove(from, to);
 
         if (controller.IsGameOver())
@@ -235,6 +238,7 @@ public partial class NetworkManager : Node
                 reason = GameEndReason.Draw;
 
             // Notify all peers of the result as an integer
+            
             Rpc(nameof(NotifyGameEnd), (int)reason);
 
             // Also set locally for the host

@@ -83,8 +83,13 @@ public partial class AIvAi : CanvasLayer
 		var statusCode = response.StatusCode;
 
 		//deserialize response
+		
 		var jsonResponse = await response.Content.ReadAsStringAsync();
-		playState = JsonSerializer.Deserialize<PlayState>(jsonResponse);
+
+		if (statusCode == System.Net.HttpStatusCode.OK) {
+            playState = JsonSerializer.Deserialize<PlayState>(jsonResponse);
+        }
+            
 		GD.Print("Request Playstate Response: " + jsonResponse);
 
 		//return
@@ -166,6 +171,11 @@ public partial class AIvAi : CanvasLayer
 			   //500
 				await Task.Delay(3000);
 			}
+			else if(playStateResponse.Item2 != System.Net.HttpStatusCode.OK)
+			{
+				GD.Print("Error: " + playStateResponse.Item2);
+				await Task.Delay(3000);
+            }
 			else
 			{
 				//GD.Print(playStateResponse.Item2);
