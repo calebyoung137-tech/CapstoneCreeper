@@ -27,7 +27,7 @@ public partial class GameController : Node
 	public Vector2I selectedPin { get; private set; }
 	public string NetworkGameOver = ""; 
 	public static GameController Controller { get; set; }
-    public static GameEndReason LastGameEndReason { get; set; } = GameEndReason.None;
+    
 	public override void _Ready()
 	{
 		gameBoard = new GameBoard();
