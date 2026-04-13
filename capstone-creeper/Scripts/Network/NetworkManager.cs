@@ -34,7 +34,7 @@ public partial class NetworkManager : Node
     //private PacketPeerUdp discoveryPeer;
 
     //private const int DiscoveryPort = 9998;
-
+    private bool GameOver = false;
     public override void _Ready()
     {
         //Instantiate Network manager
@@ -160,11 +160,10 @@ public partial class NetworkManager : Node
             return;
         Cleanup();
         GameController controller = GameController.Controller;
-        if (GetTree().CurrentScene.Name != "GameEnd")
+        if (!GameOver)
         {
             GD.Print("I don't care about your feelings!");
             boardView.gameOver(GameResult.NotOver);
-
         }
 
     }
@@ -251,13 +250,14 @@ public partial class NetworkManager : Node
 
         if (controller.IsGameOver())
         {
-
+            GameOver = true;
             GameResult result = controller.gameBoard.checkWin();
             if (result == GameResult.NotOver)
             {
                 result = GameResult.Draw;
             }
-            boardView.gameOver(result);
+            
+                 boardView.gameOver(result);
         }
     }
 
