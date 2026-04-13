@@ -36,11 +36,16 @@ public partial class NetworkManager : Node
 
     public override void _Ready()
 	{
-		//Instantiate Network manager
-		// set the peerconnected, connectedtoserver, and Connection failed properties of multiplayer
-		// The on connected to server is used to set the game into progress once a player has connected
-
-		Multiplayer.ServerDisconnected += ServerDisconnected;
+        //Instantiate Network manager
+        // set the peerconnected, connectedtoserver, and Connection failed properties of multiplayer
+        // The on connected to server is used to set the game into progress once a player has connected
+        
+		Multiplayer.ServerDisconnected -= ServerDisconnected;
+        Multiplayer.PeerDisconnected -= PeerDisconnected;
+        Multiplayer.PeerConnected -= OnPeerConnected;
+        Multiplayer.ConnectedToServer -= OnConnectedToServer;
+        Multiplayer.ConnectionFailed -= OnConnectionFailed;
+        Multiplayer.ServerDisconnected += ServerDisconnected;
 		Multiplayer.PeerDisconnected += PeerDisconnected;
 		Multiplayer.PeerConnected += OnPeerConnected;
 		Multiplayer.ConnectedToServer += OnConnectedToServer;
@@ -67,7 +72,14 @@ public partial class NetworkManager : Node
 			}
 		}
 	}
-
+    public override void _ExitTree()
+    {
+        if (Multiplayer != null && Multiplayer.MultiplayerPeer != null)
+        {
+            Multiplayer.MultiplayerPeer.Close();
+            Multiplayer.MultiplayerPeer = null;
+        }
+    }
 	public void LeaveGame()
 	{
 		if (Multiplayer.MultiplayerPeer != null)

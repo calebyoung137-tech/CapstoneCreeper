@@ -247,7 +247,7 @@ public partial class GameController : Node
                             controllerState = ControllerState.GameOver;
 
                             await Task.Delay(4000);
-                            boardView.gameOver(winner); 
+                            boardView.gameOver(GameResult.BlackWin); 
                         }
 						else if (gameBoard.checkDraw() == GameResult.Draw)
 						{
