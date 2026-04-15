@@ -24,6 +24,8 @@ public partial class BlueLose : Button
 
 	public async void forceRedWin()
 	{
+		TextureButton Exit = GetParent().GetParent().GetParent().GetNode<TextureButton>("exit");
+		Exit.Disabled = true; 
 		GameController.Controller.eraseTowers(Model.TileType.Black);
 		GameController.Controller.updateBoard();
 		await Task.Delay(2500);
