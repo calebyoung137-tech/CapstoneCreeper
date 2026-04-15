@@ -27,7 +27,7 @@ public partial class GameController : Node
 	public Vector2I selectedPin { get; private set; }
 	public string NetworkGameOver = ""; 
 	public static GameController Controller { get; set; }
-    public static GameEndReason LastGameEndReason { get; set; } = GameEndReason.None;
+    
 	public override void _Ready()
 	{
 		gameBoard = new GameBoard();
@@ -205,12 +205,12 @@ public partial class GameController : Node
 						Move aiMove;
 						if (GameSettings.Difficulty == AIDifficulty.Easy)
 						{
-                            aiMove = ai.GetEasyMove(state);
+                            aiMove = await Task.Run(() => ai.GetEasyMove(state));
 							GD.Print("Difficulty: easy");
                         }
 						else
 						{
-							aiMove = ai.GetBestMove(state);
+							aiMove = await Task.Run(() => ai.GetBestMove(state));
                             GD.Print("Difficulty: hard");
                         }
 
