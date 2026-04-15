@@ -452,8 +452,8 @@ public partial class BoardView : Node2D
 		sound.Play();
 
 		// ⏱️ Random cutoff (e.g. 0.2s → 0.6s)
-		float cutTime = (float)GD.RandRange(0.2f, 0.6f);
-
+		//float cutTime = (float)GD.RandRange(0.2f, 0.6f);
+		float cutTime = 0.5f; 
 		// Create a timer to stop it early
 		var timer = GetTree().CreateTimer(cutTime);
 		timer.Timeout += () =>
@@ -464,7 +464,7 @@ public partial class BoardView : Node2D
 		};
 
 		// Optional: auto-remove sound after playing
-		sound.Finished += () => sound.QueueFree();
+		//sound.Finished += () => sound.QueueFree();
 
 		tower.Scale = new Vector2(0.05f, 0.05f); // start very small
 
