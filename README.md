@@ -8,6 +8,7 @@ ChatGPT was used extensively, for asking questions about C# and Godot, and many 
 ChatGPT generated much of the spriteframe logic
 ChatGPT helped use MVC properly. 
 ChatGPT helped diagnose error messages. 
+ChatGPT created the entire shader file, to make the knight outlined in yellow when selected. 
 
 
 NetworkManager Inspired by godot docs - https://docs.godotengine.org/en/stable/tutorials/networking/high_level_multiplayer.html
